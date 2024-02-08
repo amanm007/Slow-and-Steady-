@@ -3,27 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+
+public class PlayerAimWeapon : MonoBehaviour
 {
+    public float shootingRange = 100f;
+    public LayerMask shootingLayerMask;
+    private Camera mainCamera;
     private Transform aimTransform;
     private Transform aimGunEndPointTransform;
+    public Material tracerMaterial;
+    /*
+        public event EventHandler<OnShootEventARgs> OnShoot;
 
-    public event EventHandler<OnShootEventARgs> OnShoot;
-
-    public class OnShootEventARgs: EventArgs
-    {
-        public Vector3 gunEndPointPosition;
-        public Vector3 shootPosition;
+        public class OnShootEventARgs: EventArgs
+        {
+            public Vector3 gunEndPointPosition;
+            public Vector3 shootPosition;
 
 
-    }
-
+        }
+    */
 
 
     private void Awake()
     {
+        mainCamera = Camera.main;
         aimTransform = transform.Find("Aim");
         aimGunEndPointTransform = aimTransform.Find("GunEndPointPosition");
+       // tracerMaterial = Resources.Load<Material>("Assets/BulletTrace/Materials/WeaponTracer.mat");
 
 
     }
@@ -41,17 +48,26 @@ public class NewBehaviourScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
-            //we can call an firing animation
-            OnShoot?.Invoke(this, new OnShootEventARgs
-                {
-                gunEndPointPosition=aimGunEndPointTransform.position,
-                shootPosition= mousePosition,
-            });
-            
+            Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
+            float distanceToMouse = Vector2.Distance(aimGunEndPointTransform.position, mousePosition);
 
-            
+            // Use the distance to the mouse for the raycast distance
+            RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, distanceToMouse, shootingLayerMask);
+
+            if (hit.collider != null)
+            {
+                // Hit something
+                OnShoot(hit.point, hit.collider.gameObject);
+                Debug.Log("Raycast hit: " + hit.collider.name);
+                Destroy(hit.collider.gameObject);
+            }
+            else
+            {
+                // Hit nothing or it hit something beyond the mouse cursor
+                OnShoot(mousePosition, null); // Pass the mouse position instead of the hit point
+                Debug.Log("Raycast did not hit anything.");
+            }
         }
-
     }
 
     private void HandleAiming()
@@ -73,11 +89,11 @@ public class NewBehaviourScript : MonoBehaviour
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
     }
 
-    public static Vector3 GetMouseWorldPosition()
+    private Vector3 GetMouseWorldPosition()
     {
-        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
-        vec.z = 0f;
-        return vec;
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        mouseScreenPosition.z = -mainCamera.transform.position.z; // Set the distance to the camera
+        return mainCamera.ScreenToWorldPoint(mouseScreenPosition);
     }
 
     public static Vector3 GetMouseWorldPositionWithZ()
@@ -95,5 +111,47 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     }
-    
+    private void OnShoot(Vector3 hitPosition, GameObject hitObject)
+    {
+        StartCoroutine(ShakeCamera(0.1f, 0.2f));
+        // Check if the tracerMaterial has been assigned
+        if (tracerMaterial != null)
+        {
+            // Call the Create function of the WeaponTracer to create a line from the gun to the hit position
+            WeaponTracer.Create(aimGunEndPointTransform.position, hitPosition, tracerMaterial);
+        }
+        else
+        {
+            // If the tracerMaterial is not assigned, log an error message
+            Debug.LogError("Tracer Material is not assigned.");
+        }
+
+        // If you hit an object, handle logic like damaging an enemy here
+        if (hitObject != null)
+        {
+            // Damage logic or other effects can be applied to the hitObject
+            // Example: hitObject.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+        }
+
+        // Optionally, you can add visual feedback for the hit position, like a hit impact effect
+        // Example: Instantiate(hitImpactPrefab, hitPosition, Quaternion.identity);
+    }
+    private IEnumerator ShakeCamera(float intensity, float duration)
+    {
+        CameraController cameraController = Camera.main.GetComponent<CameraController>();
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = Mathf.Clamp(UnityEngine.Random.Range(-1f, 1f) * intensity, -intensity, intensity);
+            float y = Mathf.Clamp(UnityEngine.Random.Range(-1f, 1f) * intensity, -intensity, intensity);
+            cameraController.ApplyShake(new Vector3(x, y, 0));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraController.ResetShake();
+    }
+
+
 }
