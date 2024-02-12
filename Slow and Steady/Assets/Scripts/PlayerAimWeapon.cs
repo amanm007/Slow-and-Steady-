@@ -59,7 +59,10 @@ public class PlayerAimWeapon : MonoBehaviour
                 // Hit something
                 OnShoot(hit.point, hit.collider.gameObject);
                 Debug.Log("Raycast hit: " + hit.collider.name);
-                Destroy(hit.collider.gameObject);
+                if (hit.collider.gameObject.CompareTag("Enemy"))
+                {
+                    Destroy(hit.collider.gameObject);
+                }
             }
             else
             {
@@ -117,7 +120,7 @@ public class PlayerAimWeapon : MonoBehaviour
         // Check if the tracerMaterial has been assigned
         if (tracerMaterial != null)
         {
-            // Call the Create function of the WeaponTracer to create a line from the gun to the hit position
+            
             WeaponTracer.Create(aimGunEndPointTransform.position, hitPosition, tracerMaterial);
         }
         else
@@ -130,11 +133,10 @@ public class PlayerAimWeapon : MonoBehaviour
         if (hitObject != null)
         {
             // Damage logic or other effects can be applied to the hitObject
-            // Example: hitObject.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+            ;
         }
 
-        // Optionally, you can add visual feedback for the hit position, like a hit impact effect
-        // Example: Instantiate(hitImpactPrefab, hitPosition, Quaternion.identity);
+        
     }
     private IEnumerator ShakeCamera(float intensity, float duration)
     {
