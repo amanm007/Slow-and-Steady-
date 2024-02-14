@@ -15,8 +15,8 @@ TagManager:
   - UI
   - BulletTraceLayer
   - Obstacle
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

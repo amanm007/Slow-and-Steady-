@@ -7,6 +7,6 @@ public class SceneController : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Factory");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 }
