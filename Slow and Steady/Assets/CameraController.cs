@@ -6,10 +6,12 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform crttv;
     private Vector3 shakeOffset = Vector3.zero;
+    public float maxShakeMagnitude = 0.5f;
 
     private void Update()
     {
         Vector3 basePosition = new Vector3(crttv.position.x, crttv.position.y, transform.position.z);
+        shakeOffset = Vector3.ClampMagnitude(shakeOffset, maxShakeMagnitude);
         transform.position = basePosition + shakeOffset;
     }
 

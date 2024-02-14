@@ -19,6 +19,8 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 roamPosition;
     private State state;
+  //  public float pathUpdateCooldown = 1f; // Time in seconds between path updates
+  // private float pathUpdateTimer;
 
     private enum State
     {
@@ -33,7 +35,8 @@ public class EnemyAI : MonoBehaviour
         startingPosition = transform.position;
         state = State.Roaming;
         roamPosition = GetRoamingPosition();
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        InvokeRepeating("UpdatePath", 0f, 0.1f);
+       // pathUpdateTimer = pathUpdateCooldown;
     }
 
     void UpdatePath()
@@ -56,7 +59,17 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
+    /*
+    private void Update()
+    {
+        pathUpdateTimer -= Time.deltaTime;
+        if (pathUpdateTimer <= 0f)
+        {
+            UpdatePath();
+            pathUpdateTimer = pathUpdateCooldown;
+        }
+    }
+    */
     private Vector3 GetRoamingPosition()
     {
         Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
