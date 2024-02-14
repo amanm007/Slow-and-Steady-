@@ -106821,6 +106821,63 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &453750799
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.40615025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082692390811425225, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266837516241364502, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
+      propertyPath: m_Name
+      value: CRT TV
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8a4db70ecbd9bb40ac48966ae8cd530, type: 3}
 --- !u!1 &702369612
 GameObject:
   m_ObjectHideFlags: 0
@@ -115756,3 +115813,4 @@ SceneRoots:
   - {fileID: 788598566}
   - {fileID: 1585970170}
   - {fileID: 346012770}
+  - {fileID: 453750799}
