@@ -19,8 +19,9 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 roamPosition;
     private State state;
-  //  public float pathUpdateCooldown = 1f; // Time in seconds between path updates
-  // private float pathUpdateTimer;
+    private SpriteRenderer spriteRenderer;
+    //  public float pathUpdateCooldown = 1f; // Time in seconds between path updates
+    // private float pathUpdateTimer;
 
     private enum State
     {
@@ -30,6 +31,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
