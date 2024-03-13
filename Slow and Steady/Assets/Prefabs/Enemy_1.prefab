@@ -166,9 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f2fcc943d98e740a9f33633df201fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BeastDamage: 2
-  Pool_TendrilDamage: 1
-  playerHealth: {fileID: 0}
+  damageAmount: 1
+  continuousDamageInterval: 2.5
 --- !u!1 &6735564671462250420
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,9 +238,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 36
+  m_SortingLayerID: -1369585289
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1697694522, guid: fe2f773f3cb4de34eae73f45bc1fab73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
