@@ -35,6 +35,9 @@ public class ShootingEnemyAI : MonoBehaviour
 
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        projectilePrefab = GameObject.FindGameObjectWithTag("Bullet");
+
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;

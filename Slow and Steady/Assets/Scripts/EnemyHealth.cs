@@ -44,6 +44,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene
+        if (waveSpawner != null)
+        {
+            waveSpawner.spawnedEnemies.Remove(gameObject);
+        }
         // TODO: Add any death effects or animations here
         Destroy(gameObject);
     }
