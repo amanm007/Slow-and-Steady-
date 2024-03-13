@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour
     //  public Image[] healthpoints;
     public Image healthbar;
     float lerpSpeed;
-   // AudioManager audioManager;
+    public SpriteRenderer spriteRenderer;
+    // AudioManager audioManager;
 
 
 
@@ -62,17 +63,20 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-      //  audioManager.PlaySFX(audioManager.hurt);
+        //  audioManager.PlaySFX(audioManager.hurt);
 
-
+        StartCoroutine(FlashColor()); // Flash the player sprite
         health = Mathf.Clamp(health, 0, maxHealth);
-        // healthBar.SetHealth(health);
         if (health <= 0)
         {
-
             Die();
-
         }
+    }
+    IEnumerator FlashColor()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
     private void Die()
     {
