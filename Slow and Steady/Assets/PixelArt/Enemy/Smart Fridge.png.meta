@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d853b12e32b3453479a698bfe50bba50
+guid: 6f098445e8211e944b417b8c398ef869
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy2_0
+      name: Smart Fridge_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 30
+        width: 29
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c779eb1bb88714e418804dafa1815457
-      internalID: 1884387144
+      spriteID: 8e02d80258a235047afdf52ce3cfa185
+      internalID: 676277832
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy2_0: 1884387144
+      Smart Fridge_0: 676277832
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

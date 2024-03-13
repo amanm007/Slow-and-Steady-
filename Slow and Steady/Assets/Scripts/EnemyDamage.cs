@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    public float damageAmount = 1f; 
+    public float damageAmount = 1f;
+    public float bulletdamage = 1f;
     public float continuousDamageInterval = 2.5f; 
     private Coroutine damageCoroutine; // To track the continuous damage coroutine
 
@@ -39,6 +40,7 @@ public class EnemyDamage : MonoBehaviour
             Debug.Log("Player enters continuous damage area.");
             damageCoroutine = StartCoroutine(ApplyContinuousDamage(collider.gameObject));
         }
+     
     }
 
     private void OnTriggerExit2D(Collider2D collider)

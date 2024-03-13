@@ -12,93 +12,92 @@ public class PlayerAimWeapon : MonoBehaviour
     private Transform aimTransform;
     private Transform aimGunEndPointTransform;
     public Material tracerMaterial;
-    /*
-        public event EventHandler<OnShootEventARgs> OnShoot;
 
-        public class OnShootEventARgs: EventArgs
-        {
-            public Vector3 gunEndPointPosition;
-            public Vector3 shootPosition;
-
-
-        }
-    */
-
+    public float shootingCooldown = 0.5f; // Cooldown period in seconds
+    private bool isCooldown = false; // To track if we are in cooldown
 
     private void Awake()
     {
         mainCamera = Camera.main;
         aimTransform = transform.Find("Aim");
         aimGunEndPointTransform = aimTransform.Find("GunEndPointPosition");
-       // tracerMaterial = Resources.Load<Material>("Assets/BulletTrace/Materials/WeaponTracer.mat");
-
-
     }
 
     private void Update()
     {
         HandleAiming();
         HandleShooting();
-
-
     }
 
     private void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isCooldown)
         {
-            Vector3 mousePosition = GetMouseWorldPosition();
-            Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
-            float distanceToMouse = Vector2.Distance(aimGunEndPointTransform.position, mousePosition);
+            StartCoroutine(Shoot());
+        }
+    }
 
-            // Use the distance to the mouse for the raycast distance
-            RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, distanceToMouse, shootingLayerMask);
+    private IEnumerator Shoot()
+    {
+        isCooldown = true; // Start cooldown
 
-            if (hit.collider != null)
+        Vector3 mousePosition = GetMouseWorldPosition();
+        Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
+        float distanceToMouse = Vector2.Distance(aimGunEndPointTransform.position, mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, distanceToMouse, shootingLayerMask);
+
+        if (hit.collider != null)
+        {
+            Debug.Log("Raycast hit: " + hit.collider.name);
+            if (hit.collider.gameObject.CompareTag("Enemy"))
             {
-                // Hit something
-                OnShoot(hit.point, hit.collider.gameObject);
-                Debug.Log("Raycast hit: " + hit.collider.name);
-                if (hit.collider.gameObject.CompareTag("Enemy"))
+                var enemyHealth = hit.collider.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
                 {
-                    Destroy(hit.collider.gameObject);
+                    enemyHealth.TakeDamage(1); // Assuming each bullet deals 1 damage
+                    
                 }
             }
-            else
-            {
-                // Hit nothing or it hit something beyond the mouse cursor
-                OnShoot(mousePosition, null); // Pass the mouse position instead of the hit point
-                Debug.Log("Raycast did not hit anything.");
-            }
         }
+        else
+        {
+            Debug.Log("Raycast did not hit anything.");
+        }
+
+        StartCoroutine(ShakeCamera(0.1f, 0.2f));
+
+        if (tracerMaterial != null)
+        {
+            WeaponTracer.Create(aimGunEndPointTransform.position, mousePosition, tracerMaterial);
+        }
+        else
+        {
+            Debug.LogError("Tracer Material is not assigned.");
+        }
+
+        yield return new WaitForSeconds(shootingCooldown); // Wait for cooldown period
+
+        isCooldown = false; // End cooldown
     }
 
     private void HandleAiming()
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 aimDirection = (mousePosition - transform.position).normalized;
-
-        
         bool isLeft = mousePosition.x < transform.position.x;
-
-        
         SpriteRenderer sniperSpriteRenderer = aimTransform.Find("Sniper").GetComponent<SpriteRenderer>();
-
-        
         sniperSpriteRenderer.flipY = isLeft;
-
-      
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
     }
 
+
     private Vector3 GetMouseWorldPosition()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition.z = -mainCamera.transform.position.z; // Set the distance to the camera
+        mouseScreenPosition.z = -mainCamera.transform.position.z;
         return mainCamera.ScreenToWorldPoint(mouseScreenPosition);
     }
-
     public static Vector3 GetMouseWorldPositionWithZ()
     {
         return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
@@ -114,30 +113,8 @@ public class PlayerAimWeapon : MonoBehaviour
 
 
     }
-    private void OnShoot(Vector3 hitPosition, GameObject hitObject)
-    {
-        StartCoroutine(ShakeCamera(0.1f, 0.2f));
-        // Check if the tracerMaterial has been assigned
-        if (tracerMaterial != null)
-        {
-            
-            WeaponTracer.Create(aimGunEndPointTransform.position, hitPosition, tracerMaterial);
-        }
-        else
-        {
-            // If the tracerMaterial is not assigned, log an error message
-            Debug.LogError("Tracer Material is not assigned.");
-        }
 
-        // If you hit an object, handle logic like damaging an enemy here
-        if (hitObject != null)
-        {
-            // Damage logic or other effects can be applied to the hitObject
-            ;
-        }
 
-        
-    }
     private IEnumerator ShakeCamera(float intensity, float duration)
     {
         CameraController cameraController = Camera.main.GetComponent<CameraController>();
@@ -154,6 +131,4 @@ public class PlayerAimWeapon : MonoBehaviour
 
         cameraController.ResetShake();
     }
-
-
 }

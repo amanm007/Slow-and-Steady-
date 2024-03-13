@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d853b12e32b3453479a698bfe50bba50
+guid: 192217c86a2e64b4a97e2b2d1beaadc4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy2_0
+      name: Smart Speaker_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 30
+        width: 22
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c779eb1bb88714e418804dafa1815457
-      internalID: 1884387144
+      spriteID: 2e7eaba323eecb346966856000d6c917
+      internalID: 1088626982
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy2_0: 1884387144
+      Smart Speaker_0: 1088626982
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
