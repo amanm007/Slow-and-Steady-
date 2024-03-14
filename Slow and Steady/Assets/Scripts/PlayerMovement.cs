@@ -1,9 +1,7 @@
-
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class PlayerMovementHandler : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     public  float SPEED = 20f;

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerAimWeapon : MonoBehaviour
 {
@@ -15,6 +15,10 @@ public class PlayerAimWeapon : MonoBehaviour
 
     public float shootingCooldown = 0.5f; // Cooldown period in seconds
     private bool isCooldown = false; // To track if we are in cooldown
+
+    private bool aimCooldownBool = false;
+    private float aimCooldown = 5000f;
+    private float aimTimer = 3000f;
 
     private void Awake()
     {
@@ -29,13 +33,16 @@ public class PlayerAimWeapon : MonoBehaviour
         HandleShooting();
     }
 
+
     private void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0) && !isCooldown)
+        if (Input.GetMouseButtonDown(0) && !isCooldown && (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory_Simon")))
         {
             StartCoroutine(Shoot());
         }
     }
+
+
 
     private IEnumerator Shoot()
     {
@@ -75,7 +82,14 @@ public class PlayerAimWeapon : MonoBehaviour
             Debug.LogError("Tracer Material is not assigned.");
         }
 
-        yield return new WaitForSeconds(shootingCooldown); // Wait for cooldown period
+        if (SlowMotionAbility.isSlowMotionActive)
+        {
+            yield return new WaitForSeconds(0.1f); // Wait for cooldown period
+        }
+        else
+        {
+            yield return new WaitForSeconds(shootingCooldown); // Wait for cooldown period
+        }
 
         isCooldown = false; // End cooldown
     }
