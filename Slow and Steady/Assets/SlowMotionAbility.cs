@@ -4,21 +4,21 @@ public class SlowMotionAbility : MonoBehaviour
 {
     public float slowMotionFactor = 0.2f;
     public float slowMotionDuration = 5f;
-    public Camera playerCamera; 
-    public float zoomedSize = 9f; 
-    public float zoomSpeed = 10f; 
+    public Camera playerCamera;
+    public float zoomedSize = 9f;
+    public float zoomSpeed = 10f;
 
     private float normalTimeScale = 1f;
-    private bool isSlowMotionActive = false;
+    public static bool isSlowMotionActive = false;
     private float slowMotionTimer = 0f;
-    private float defaultSize; 
+    private float defaultSize;
 
     void Start()
     {
-        
+
         if (!playerCamera) playerCamera = Camera.main;
 
-        
+
         defaultSize = playerCamera.orthographicSize;
     }
 

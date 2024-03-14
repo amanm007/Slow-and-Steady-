@@ -56,6 +56,8 @@ public class PlayerHealth : MonoBehaviour
 
 
     }
+
+
     bool DisplayHealthPoint(float health, float pointNumber)
     {
         return ((pointNumber * 3) >= health);

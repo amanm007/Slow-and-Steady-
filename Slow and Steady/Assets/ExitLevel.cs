@@ -7,6 +7,10 @@ public class ExitLevel : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneController.instance.NextLevel();
+        }
+
     }
 }
