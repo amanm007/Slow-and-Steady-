@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/Level_Screens/Main Menu.unity
     guid: f78185c0cf9bc0848b3171d7b20b1cf2
   - enabled: 1
-    path: Assets/Scenes/Factory_Simon.unity
+    path: Assets/Scenes/Level_0/Factory.unity
     guid: 8c03d787327724845b02be378c96f47a
   - enabled: 1
-    path: Assets/Scenes/Level 1 Silicon Valley.unity
+    path: Assets/Scenes/Level_1/Silicon Valley.unity
     guid: cc82101b8c2e72d40ae7b3f601a55d3c
   - enabled: 1
-    path: Assets/Scenes/Level 1 Hoard City Backup.unity
+    path: Assets/Scenes/Level_1/Hoard City.unity
     guid: bc7a58bdc42887d479d0e87ce1656bfa
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6881a46f2d56b14c85928f8be011901, type: 2}
