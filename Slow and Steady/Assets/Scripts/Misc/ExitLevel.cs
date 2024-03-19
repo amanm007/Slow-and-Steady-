@@ -9,7 +9,10 @@ public class ExitLevel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneController.instance.NextLevel("Door Room");
+            if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Silicon Valley"))
+            {
+                SceneController.instance.NextLevel("Hoard City");
+            }
         }
 
     }
