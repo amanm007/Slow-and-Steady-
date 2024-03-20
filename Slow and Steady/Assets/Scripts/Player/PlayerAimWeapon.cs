@@ -68,7 +68,7 @@ public class PlayerAimWeapon : MonoBehaviour
         }
         else
         {
-            Debug.Log("Raycast did not hit anything.");
+            //Debug.Log("Raycast did not hit anything.");
         }
 
         StartCoroutine(ShakeCamera(0.1f, 0.2f));

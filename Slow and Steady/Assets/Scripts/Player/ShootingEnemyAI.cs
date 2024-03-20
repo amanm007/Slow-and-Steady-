@@ -109,16 +109,20 @@ public class ShootingEnemyAI : MonoBehaviour
         }
 
         // Check for state transition
-        float distanceToPlayer = Vector2.Distance(rb.position, target.position);
-        if (distanceToPlayer <= detectionRange)
+        if (target != null)
         {
-            state = State.Chasing;
-        }
-        else if (state == State.Chasing && distanceToPlayer > detectionRange)
-        {
-            state = State.Roaming;
-            currentWayPoint = 0; // Reset path following
-            roamPosition = GetRoamingPosition(); // Get a new roaming position
+            float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+
+            if (distanceToPlayer <= detectionRange)
+            {
+                state = State.Chasing;
+            }
+            else if (state == State.Chasing && distanceToPlayer > detectionRange)
+            {
+                state = State.Roaming;
+                currentWayPoint = 0; // Reset path following
+                roamPosition = GetRoamingPosition(); // Get a new roaming position
+            }
         }
     }
 

@@ -43,12 +43,16 @@ public class SceneController : MonoBehaviour
 
     public void City()
     {
-        Debug.Log("Load city");
         StartCoroutine(LoadLevel("Silicon Valley"));
     }
 
     public void MainMenu()
     {
         StartCoroutine(LoadLevel("Main Menu"));
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
