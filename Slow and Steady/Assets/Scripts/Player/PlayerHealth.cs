@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory_Simon"))
+        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
         {
             lerpSpeed = 3f * Time.deltaTime;
             if (health > maxHealth)
@@ -93,7 +93,9 @@ public class PlayerHealth : MonoBehaviour
         {
             Destroy(transform.GetChild(0).gameObject); // Destroy the child object
         }
-        Invoke("ReloadScene", 2f);
+        //Invoke("ReloadScene", 2f);
+
+        SceneController.instance.MainMenu();
 
     }
     public void IncreaseHealth(float amount)

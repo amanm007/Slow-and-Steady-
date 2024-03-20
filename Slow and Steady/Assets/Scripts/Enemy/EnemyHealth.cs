@@ -13,11 +13,19 @@ public class EnemyHealth : MonoBehaviour
     private Color originalColor;
     private bool isFlashing = false;
 
+    private ScrapManager scrapManager;
+    [SerializeField] private int value;
+
     private void Awake()
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color; // Store the original color
+    }
+
+    private void Start()
+    {
+        scrapManager = ScrapManager.instance;
     }
 
     public void TakeDamage(int damageAmount)
@@ -44,6 +52,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        scrapManager.ChangeScraps(value);
         WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene
         if (waveSpawner != null)
         {

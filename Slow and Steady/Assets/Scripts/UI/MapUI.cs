@@ -10,10 +10,11 @@ public class MapUI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         mapAnim.SetTrigger("Start");
-        Debug.Log("start");
+        Cursor.visible = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        Cursor.visible = false;
         mapAnim.SetTrigger("End");
     }
 }

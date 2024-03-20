@@ -14,7 +14,7 @@ public class SceneController : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour
     private IEnumerator LoadLevel(string level)
     {
         transitionAnim.SetTrigger("End");
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadSceneAsync(level);
         transitionAnim.SetTrigger("Start");
     }
@@ -38,7 +38,13 @@ public class SceneController : MonoBehaviour
 
     public void PlayGame()
     {
-        StartCoroutine(LoadLevel("Intro Cutscene"));
+        StartCoroutine(LoadLevel("Factory"));
+    }
+
+    public void City()
+    {
+        Debug.Log("Load city");
+        StartCoroutine(LoadLevel("Silicon Valley"));
     }
 
     public void MainMenu()
