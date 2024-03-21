@@ -106,7 +106,7 @@ public class PlayerAimWeapon : MonoBehaviour
     }
 
 
-    private Vector3 GetMouseWorldPosition()
+    public Vector3 GetMouseWorldPosition()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = -mainCamera.transform.position.z;
