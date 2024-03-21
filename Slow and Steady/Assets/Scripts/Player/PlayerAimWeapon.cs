@@ -55,7 +55,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log("Raycast hit: " + hit.collider.name);
+            //Debug.Log("Raycast hit: " + hit.collider.name);
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
                 var enemyHealth = hit.collider.GetComponent<EnemyHealth>();

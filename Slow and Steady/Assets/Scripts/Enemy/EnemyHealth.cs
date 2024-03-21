@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        scrapManager.ChangeScraps(value);
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
+        {
+            scrapManager.ChangeScraps(value);
+        }
         WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene
         if (waveSpawner != null)
         {

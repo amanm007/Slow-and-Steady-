@@ -13,6 +13,10 @@ public class ExitLevel : MonoBehaviour
             {
                 SceneController.instance.NextLevel("Hoard City");
             }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range"))
+            {
+                SceneController.instance.NextLevel("Factory");
+            }
         }
 
     }

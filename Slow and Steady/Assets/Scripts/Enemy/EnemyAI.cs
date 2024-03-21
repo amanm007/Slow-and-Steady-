@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -105,7 +106,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Check for state transition
-        if (target != null)
+        if (target != null && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
             float distanceToPlayer = Vector2.Distance(rb.position, target.position);
 
