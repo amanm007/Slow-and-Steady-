@@ -10,9 +10,12 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 basePosition = new Vector3(crttv.position.x, crttv.position.y, transform.position.z);
-        shakeOffset = Vector3.ClampMagnitude(shakeOffset, maxShakeMagnitude);
-        transform.position = basePosition + shakeOffset;
+        if (crttv != null)
+        {
+            Vector3 basePosition = new Vector3(crttv.position.x, crttv.position.y, transform.position.z);
+            shakeOffset = Vector3.ClampMagnitude(shakeOffset, maxShakeMagnitude);
+            transform.position = basePosition + shakeOffset;
+        }
     }
 
     public void ApplyShake(Vector3 offset)

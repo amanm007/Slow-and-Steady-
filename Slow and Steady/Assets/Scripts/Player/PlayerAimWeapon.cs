@@ -55,7 +55,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log("Raycast hit: " + hit.collider.name);
+            //Debug.Log("Raycast hit: " + hit.collider.name);
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
                 var enemyHealth = hit.collider.GetComponent<EnemyHealth>();
@@ -68,7 +68,7 @@ public class PlayerAimWeapon : MonoBehaviour
         }
         else
         {
-            Debug.Log("Raycast did not hit anything.");
+            //Debug.Log("Raycast did not hit anything.");
         }
 
         StartCoroutine(ShakeCamera(0.1f, 0.2f));

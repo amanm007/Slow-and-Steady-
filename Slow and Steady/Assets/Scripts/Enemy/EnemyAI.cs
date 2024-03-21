@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -44,21 +45,24 @@ public class EnemyAI : MonoBehaviour
 
     void UpdatePath()
     {
-        if (seeker.IsDone())
+        if(target != null)
         {
-            switch (state)
+            if (seeker.IsDone())
             {
-                case State.Roaming:
-                    float distanceToRoamPosition = Vector2.Distance(transform.position, roamPosition);
-                    if (distanceToRoamPosition < nextWaypointDistance)
-                    {
-                        roamPosition = GetRoamingPosition();
-                    }
-                    seeker.StartPath(rb.position, roamPosition, OnPathComplete);
-                    break;
-                case State.Chasing:
-                    seeker.StartPath(rb.position, target.position, OnPathComplete);
-                    break;
+                switch (state)
+                {
+                    case State.Roaming:
+                        float distanceToRoamPosition = Vector2.Distance(transform.position, roamPosition);
+                        if (distanceToRoamPosition < nextWaypointDistance)
+                        {
+                            roamPosition = GetRoamingPosition();
+                        }
+                        seeker.StartPath(rb.position, roamPosition, OnPathComplete);
+                        break;
+                    case State.Chasing:
+                        seeker.StartPath(rb.position, target.position, OnPathComplete);
+                        break;
+                }
             }
         }
     }
@@ -102,18 +106,23 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Check for state transition
-        float distanceToPlayer = Vector2.Distance(rb.position, target.position);
-        if (distanceToPlayer <= detectionRange)
+        if (target != null && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
-            state = State.Chasing;
+            float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+
+            if (distanceToPlayer <= detectionRange)
+            {
+                state = State.Chasing;
+            }
+            else if (state == State.Chasing && distanceToPlayer > detectionRange)
+            {
+                // Optionally switch back to Roaming when the player is lost
+                state = State.Roaming;
+                currentWayPoint = 0; // Reset path following
+                roamPosition = GetRoamingPosition(); // Get a new roaming position
+            }
         }
-        else if (state == State.Chasing && distanceToPlayer > detectionRange)
-        {
-            // Optionally switch back to Roaming when the player is lost
-            state = State.Roaming;
-            currentWayPoint = 0; // Reset path following
-            roamPosition = GetRoamingPosition(); // Get a new roaming position
-        }
+
     }
 
     void OnPathComplete(Path p)

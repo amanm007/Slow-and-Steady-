@@ -37,7 +37,7 @@ public class EnemyDamage : MonoBehaviour
         // Check for player entering the continuous damage area
         if (collider.CompareTag("Player") && damageCoroutine == null)
         {
-            Debug.Log("Player enters continuous damage area.");
+            //Debug.Log("Player enters continuous damage area.");
             damageCoroutine = StartCoroutine(ApplyContinuousDamage(collider.gameObject));
         }
      
@@ -48,7 +48,7 @@ public class EnemyDamage : MonoBehaviour
         // Check for player exiting the continuous damage area
         if (collider.CompareTag("Player") && damageCoroutine != null)
         {
-            Debug.Log("Player exits continuous damage area.");
+            //Debug.Log("Player exits continuous damage area.");
             StopCoroutine(damageCoroutine);
             damageCoroutine = null;
         }
