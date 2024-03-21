@@ -13,12 +13,12 @@ public class SlowMotionAbility : MonoBehaviour
     public static bool isSlowMotionActive = false;
     private float slowMotionTimer = 0f;
     private float defaultSize;
-    private Vector3 defaultPosition; 
+    private Vector3 defaultPosition;
 
     public Image energyBar;
     public float maxEnergy = 100f;
     public float energyDepletionRate = 20f; // energy depletion  per second when slow motion is active
-    public float energyRecoveryRate = 10f; //  energy recovery per second when slow motion is not active
+    public float energyRecoveryRate = 5f; //  energy recovery per second when slow motion is not active
     private float currentEnergy;
 
     private PlayerAimWeapon playerAimWeapon;
@@ -39,7 +39,7 @@ public class SlowMotionAbility : MonoBehaviour
 
     void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(1) && !isSlowMotionActive && currentEnergy > 0)
         {
             ActivateSlowMotion();
@@ -50,7 +50,7 @@ public class SlowMotionAbility : MonoBehaviour
             DeactivateSlowMotion();
         }
 
-       
+
         if (isSlowMotionActive)
         {
             slowMotionTimer -= Time.unscaledDeltaTime;
