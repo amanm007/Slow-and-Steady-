@@ -18,7 +18,7 @@ public class SlowMotionAbility : MonoBehaviour
     public Image energyBar;
     public float maxEnergy = 100f;
     public float energyDepletionRate = 20f; // energy depletion  per second when slow motion is active
-    public float energyRecoveryRate = 5f; //  energy recovery per second when slow motion is not active
+    public float energyRecoveryRate = 10f; //  energy recovery per second when slow motion is not active
     private float currentEnergy;
 
     private PlayerAimWeapon playerAimWeapon;
@@ -73,7 +73,7 @@ public class SlowMotionAbility : MonoBehaviour
         else
         {
             playerCamera.orthographicSize = Mathf.Lerp(playerCamera.orthographicSize, defaultSize, Time.unscaledDeltaTime * zoomSpeed);
-            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, defaultPosition, Time.unscaledDeltaTime * zoomSpeed);
+          //  playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, defaultPosition, Time.unscaledDeltaTime * zoomSpeed);
         }
     }
 
