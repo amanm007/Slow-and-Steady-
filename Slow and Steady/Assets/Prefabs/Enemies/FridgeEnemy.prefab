@@ -295,7 +295,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 350
   nextWaypointDistance: 4
-  detectionRange: 25
+  detectionRange: 70
   roamRadius: 7
 --- !u!50 &7981500723300444765
 Rigidbody2D:
