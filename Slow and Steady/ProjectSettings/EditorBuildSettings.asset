@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_1/Hoard City.unity
     guid: bc7a58bdc42887d479d0e87ce1656bfa
+  - enabled: 1
+    path: Assets/Scenes/Level_2/Best Buy.unity
+    guid: 12798f9864d23144fb5bf9b3591dad1e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d6881a46f2d56b14c85928f8be011901, type: 2}

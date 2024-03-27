@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6223931633449560407}
   - component: {fileID: 1958243334926979313}
+  - component: {fileID: 6596852511923497673}
+  - component: {fileID: 4906575343296228715}
+  - component: {fileID: 2400943295547387595}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -45,3 +48,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrapDisplay: {fileID: 0}
+--- !u!114 &6596852511923497673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389938664828697873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35fa816a94c9c954e9fb752c3ea257ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDisplay: {fileID: 0}
+--- !u!114 &4906575343296228715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389938664828697873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c4ae8128dfa964eafabbd20f301779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveDisplay: {fileID: 0}
+--- !u!114 &2400943295547387595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389938664828697873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f07d33727cca9c46976df9aa58556fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extractionUI: {fileID: 0}
+  waveUI: {fileID: 0}

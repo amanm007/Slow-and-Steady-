@@ -46,6 +46,11 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadLevel("Silicon Valley"));
     }
 
+    public void BestBuy()
+    {
+        StartCoroutine(LoadLevel("Best Buy"));
+    }
+
     public void MainMenu()
     {
         StartCoroutine(LoadLevel("Main Menu"));

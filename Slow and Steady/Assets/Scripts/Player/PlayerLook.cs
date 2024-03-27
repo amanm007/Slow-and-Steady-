@@ -7,8 +7,8 @@ public class PlayerLook : MonoBehaviour
 {
 
     [SerializeField] private Transform tvBody;
-    [SerializeField] private float _topAngleLimit = 40f;
-    [SerializeField] private float _bottomAngleLimit = -20f;
+/*    [SerializeField] private float _topAngleLimit = 40f;
+    [SerializeField] private float _bottomAngleLimit = -20f;*/
     [SerializeField] bool _flipTowardsMouse;
 
     private Vector2 _mouseWorldPos;

@@ -16,21 +16,28 @@ public class PlayerAimWeapon : MonoBehaviour
     public float shootingCooldown = 0.5f; // Cooldown period in seconds
     private bool isCooldown = false; // To track if we are in cooldown
 
-    private bool aimCooldownBool = false;
+/*    private bool aimCooldownBool = false;
     private float aimCooldown = 5000f;
-    private float aimTimer = 3000f;
+    private float aimTimer = 3000f;*/
 
     private void Awake()
     {
         mainCamera = Camera.main;
-        aimTransform = transform.Find("Aim");
-        aimGunEndPointTransform = aimTransform.Find("GunEndPointPosition");
+        if(transform.Find("Aim") != null)
+        {
+            aimTransform = transform.Find("Aim");
+            aimGunEndPointTransform = aimTransform.Find("GunEndPointPosition");
+        }
+
     }
 
     private void Update()
     {
-        HandleAiming();
-        HandleShooting();
+        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
+        {
+            HandleAiming();
+            HandleShooting();
+        }
     }
 
 
