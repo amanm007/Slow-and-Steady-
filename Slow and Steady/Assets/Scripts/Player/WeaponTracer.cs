@@ -15,8 +15,8 @@ public class WeaponTracer
         lineRenderer.material = tracerMaterial;
 
         // Set the width of the LineRenderer
-        lineRenderer.startWidth = 0.05f; // Start width of the line
-        lineRenderer.endWidth = 0.05f;   // End width of the line
+        lineRenderer.startWidth = 0.2f; // Start width of the line
+        lineRenderer.endWidth = 0.2f;   // End width of the line
 
         // Set the positions
         lineRenderer.SetPosition(0, fromPosition);
