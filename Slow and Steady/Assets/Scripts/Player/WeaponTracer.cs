@@ -21,12 +21,12 @@ public class WeaponTracer
         // Set the positions
         lineRenderer.SetPosition(0, fromPosition);
         lineRenderer.SetPosition(1, targetPosition);
+
         lineRenderer.sortingLayerName = "BulletTraceLayer"; // Make sure this sorting layer exists
         lineRenderer.sortingOrder = 100; // Adjust this value to ensure it's rendered above other objects
 
-
         // Optional: Add a script to fade out and destroy the line after a short duration
-        tracerGameObject.AddComponent<BulletTracerBehaviour>().BeginFadeOut(0.1f); // Adjust time as needed
+        tracerGameObject.AddComponent<BulletTracerBehaviour>().BeginFadeOut(0.4f); // Adjust time as needed
     }
 }
 
