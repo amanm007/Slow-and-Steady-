@@ -4,37 +4,43 @@ using UnityEngine;
 
 public class SlowDownPlayer : MonoBehaviour
 {
-    public float slowdownRadius = 5f;
-    public LayerMask playerLayer;
-    public CircleCollider2D slowDownCollider;
+    public float slowdownRadius = 5f; 
+    public PlayerMovement playerMovementScript; 
 
-    private void Awake()
+    private void Start()
     {
-
-        slowDownCollider = GetComponent<CircleCollider2D>();
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
+        
+      
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            PlayerMovement playerMovement = collision.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
-            {
-                playerMovement.ModifySpeed(0.5f);
-            }
+            playerMovementScript = player.GetComponent<PlayerMovement>();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void Update()
     {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
+        if (playerMovementScript != null)
         {
-            PlayerMovement playerMovement = collision.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
+            float distanceToPlayer = Vector2.Distance(transform.position, playerMovementScript.transform.position);
+
+
+            if (distanceToPlayer <= slowdownRadius)
             {
-                playerMovement.ModifySpeed(1f);
+
+                playerMovementScript.ModifySpeed(0.5f);
+            }
+            else
+            {
+
+                playerMovementScript.ModifySpeed(1f);
             }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue; // You can change this to any color you like
+        Gizmos.DrawWireSphere(transform.position, slowdownRadius);
     }
 
 }
