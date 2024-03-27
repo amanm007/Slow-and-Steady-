@@ -48,7 +48,7 @@ public class SceneController : MonoBehaviour
 
     public void BestBuy()
     {
-        StartCoroutine(LoadLevel("Best Buy"));
+        StartCoroutine(LoadLevel("Best Buy2"));
     }
 
     public void MainMenu()

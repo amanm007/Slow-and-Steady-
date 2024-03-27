@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City"))
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2"))
         {
             if (WaveSpawner.instance.currWave < 3)
             {

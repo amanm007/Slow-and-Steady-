@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
         {
             objectiveDisplay.text = levelObjective;
         }
-        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City")) {
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2")) {
             if (WaveSpawner.instance.currWave < 3)
             {
                 objectiveDisplay.text = waveObjective;
