@@ -16,8 +16,12 @@ public class EnemyHealth : MonoBehaviour
     private bool isFlashing = false;
 
     private ScrapManager scrapManager;
+    private EnemyManager enemyManager;
+
     [SerializeField] private int value;
     [SerializeField] private Sprite damageSprite;
+
+    private int enemiesKilled;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         scrapManager = ScrapManager.instance;
+        enemyManager = EnemyManager.instance;
     }
 
     public void TakeDamage(int damageAmount)
@@ -59,9 +64,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        enemiesKilled++;
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
             scrapManager.ChangeScraps(value);
+            enemyManager.ChangeCount(enemiesKilled);
         }
         WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene
         if (waveSpawner != null)

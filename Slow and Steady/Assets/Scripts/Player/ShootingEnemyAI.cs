@@ -53,20 +53,24 @@ public class ShootingEnemyAI : MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            switch (state)
+            if ((target != null))
             {
-                case State.Roaming:
-                    float distanceToRoamPosition = Vector2.Distance(transform.position, roamPosition);
-                    if (distanceToRoamPosition < nextWaypointDistance)
-                    {
-                        roamPosition = GetRoamingPosition();
-                    }
-                    seeker.StartPath(rb.position, roamPosition, OnPathComplete);
-                    break;
-                case State.Chasing:
-                    seeker.StartPath(rb.position, target.position, OnPathComplete);
-                    break;
+                switch (state)
+                {
+                    case State.Roaming:
+                        float distanceToRoamPosition = Vector2.Distance(transform.position, roamPosition);
+                        if (distanceToRoamPosition < nextWaypointDistance)
+                        {
+                            roamPosition = GetRoamingPosition();
+                        }
+                        seeker.StartPath(rb.position, roamPosition, OnPathComplete);
+                        break;
+                    case State.Chasing:
+                        seeker.StartPath(rb.position, target.position, OnPathComplete);
+                        break;
+                }
             }
+              
         }
     }
 
@@ -74,11 +78,14 @@ public class ShootingEnemyAI : MonoBehaviour
     {
         if (state == State.Chasing)
         {
-            shootingTimer -= Time.deltaTime;
-            if (shootingTimer <= 0f && Vector2.Distance(transform.position, target.position) <= shootingRange)
+            if ((target!= null))
             {
-                ShootProjectile();
-                shootingTimer = shootingCooldown; // Reset the timer
+                shootingTimer -= Time.deltaTime;
+                if (shootingTimer <= 0f && Vector2.Distance(transform.position, target.position) <= shootingRange)
+                {
+                    ShootProjectile();
+                    shootingTimer = shootingCooldown; // Reset the timer
+                }
             }
         }
     }
