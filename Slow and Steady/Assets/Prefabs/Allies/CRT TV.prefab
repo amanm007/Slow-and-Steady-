@@ -542,7 +542,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 10
   healthbar: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 399455457788135632}
 --- !u!114 &615554637232757844
 MonoBehaviour:
   m_ObjectHideFlags: 0

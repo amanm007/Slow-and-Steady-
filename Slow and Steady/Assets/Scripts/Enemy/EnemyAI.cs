@@ -20,9 +20,10 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 roamPosition;
     private State state;
-    private SpriteRenderer spriteRenderer;
     //  public float pathUpdateCooldown = 1f; // Time in seconds between path updates
     // private float pathUpdateTimer;
+    private Transform flipTransform;
+    private SpriteRenderer spriteRenderer;
 
     private enum State
     {
@@ -32,7 +33,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -96,6 +97,15 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
+
+        if (direction.x > 0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (direction.x < 0f)
+        {
+            spriteRenderer.flipX = true;
+        }
 
         rb.AddForce(force);
 
