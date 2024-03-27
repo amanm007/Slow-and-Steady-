@@ -172,3 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128

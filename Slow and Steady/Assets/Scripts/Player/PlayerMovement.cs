@@ -4,7 +4,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public  float SPEED = 20f;
+    public float SPEED = 20f;
+    private float originalSpeed;
+    private bool isSlowedDown = false;
 
     private PlayerMain playerMain;
 
@@ -76,6 +78,20 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetLastMoveDir()
     {
         return lastMoveDir;
+    }
+    public void ModifySpeed(float modifier)
+    {
+        if (!isSlowedDown && modifier < 1f) // Applying slowdown
+        {
+            originalSpeed = SPEED; // Store the original speed
+            SPEED *= modifier;
+            isSlowedDown = true;
+        }
+        else if (isSlowedDown && modifier == 1f) // Exiting slowdown area, reset to original speed
+        {
+            SPEED = originalSpeed;
+            isSlowedDown = false;
+        }
     }
 
 }
