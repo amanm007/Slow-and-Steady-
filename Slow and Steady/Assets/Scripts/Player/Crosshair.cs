@@ -12,7 +12,7 @@ public class Crosshair : MonoBehaviour
      void Update()
     {
         Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mouseCursorPos;
+        transform.position = new Vector3((float)(mouseCursorPos.x + 0.063), (float)(mouseCursorPos.y - 0.1228));
 
     }
 }

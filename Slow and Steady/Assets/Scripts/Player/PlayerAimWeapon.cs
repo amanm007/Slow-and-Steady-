@@ -51,7 +51,8 @@ public class PlayerAimWeapon : MonoBehaviour
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
         float distanceToMouse = Vector2.Distance(aimGunEndPointTransform.position, mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, distanceToMouse, shootingLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, 960, shootingLayerMask);
+        Ray2D shot = new(aimGunEndPointTransform.position, shootingDirection);
 
         if (hit.collider != null)
         {
@@ -75,7 +76,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
         if (tracerMaterial != null)
         {
-            WeaponTracer.Create(aimGunEndPointTransform.position, mousePosition, tracerMaterial);
+            WeaponTracer.Create(aimGunEndPointTransform.position, shot.GetPoint(960), tracerMaterial);
         }
         else
         {
@@ -106,7 +107,7 @@ public class PlayerAimWeapon : MonoBehaviour
     }
 
 
-    private Vector3 GetMouseWorldPosition()
+    public Vector3 GetMouseWorldPosition()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = -mainCamera.transform.position.z;

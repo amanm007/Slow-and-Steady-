@@ -14,7 +14,7 @@ public class PlayerLook : MonoBehaviour
     private Vector2 _mouseWorldPos;
     private SpriteRenderer character;
     [SerializeField] private Sprite state;
-    [SerializeField] private Sprite tvFront, tvBack, tvLeft, tvRight;
+    [SerializeField] private Sprite tvFront, tvBack, tvLeft, tvRight, tvBackLeft, tvBackRight;
 
 
     // Start is called before the first frame update
@@ -37,8 +37,7 @@ public class PlayerLook : MonoBehaviour
     private void LookAtMouse()
     {
         var dir = (_mouseWorldPos - (Vector2)tvBody.position).normalized;
-
-        if (state == tvBack)
+        if (state == tvBack || state == tvBackLeft || state == tvBackRight)
         {
             character.sortingOrder = 20;
         }
@@ -47,20 +46,27 @@ public class PlayerLook : MonoBehaviour
             character.sortingOrder = 9;
         }
 
-        if (dir.x > -0.45 && dir.x < 0.45 && dir.y > 0)
+        if (dir.x > -0.33 && dir.x < 0.33 && dir.y > 0)
         {
             state = tvBack;
         }
-        else if (dir.x > -0.45 && dir.x < 0.45 && dir.y < 0)
+        else if (dir.x > -1 && dir.x < -0.33 && dir.y > 0)
+        {
+            state = tvBackLeft;
+        }
+        else if (dir.x > 0.33 && dir.x < 1 && dir.y > 0)
+        {
+            state = tvBackRight;
+        }
+        else if (dir.x > -0.33 && dir.x < 0.33 && dir.y < 0)
         {
             state = tvFront;
         }
-
-        else if (dir.x < 0 && dir.y < 0.45 && dir.y > -0.45)
+        else if (dir.x > -1 && dir.x < -0.33 && dir.y < 0)
         {
             state = tvLeft;
         }
-        else if (dir.x > 0 && dir.y < 0.45 && dir.y > -0.45)
+        else if (dir.x > 0.33 && dir.x < 1 && dir.y < 0)
         {
             state = tvRight;
         }

@@ -27,6 +27,7 @@ public class ShootingEnemyAI : MonoBehaviour
     private float shootingTimer;
     private State state;
 
+    private SpriteRenderer spriteRenderer;
     private enum State
     {
         Roaming,
@@ -35,6 +36,7 @@ public class ShootingEnemyAI : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         projectilePrefab = GameObject.FindGameObjectWithTag("Bullet");
 
@@ -100,6 +102,15 @@ public class ShootingEnemyAI : MonoBehaviour
             Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
             Vector2 force = direction * speed * Time.deltaTime;
             rb.AddForce(force);
+
+            if (direction.x > 0f)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (direction.x < 0f)
+            {
+                spriteRenderer.flipX = true;
+            }
 
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
             if (distance < nextWaypointDistance)
