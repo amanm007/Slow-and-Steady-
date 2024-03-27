@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SlowDownPlayer : MonoBehaviour
 {
-    public float slowdownRadius = 5f; 
-    public PlayerMovement playerMovementScript; 
+    public float slowdownRadius = 5f;
+    public PlayerMovement playerMovementScript;
+    private Transform playerTransform;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class SlowDownPlayer : MonoBehaviour
         if (player != null)
         {
             playerMovementScript = player.GetComponent<PlayerMovement>();
+            playerTransform = player.transform;
         }
     }
 
@@ -22,7 +24,7 @@ public class SlowDownPlayer : MonoBehaviour
     {
         if (playerMovementScript != null)
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, playerMovementScript.transform.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
 
             if (distanceToPlayer <= slowdownRadius)
@@ -39,7 +41,7 @@ public class SlowDownPlayer : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue; // You can change this to any color you like
+        Gizmos.color = Color.blue; 
         Gizmos.DrawWireSphere(transform.position, slowdownRadius);
     }
 
