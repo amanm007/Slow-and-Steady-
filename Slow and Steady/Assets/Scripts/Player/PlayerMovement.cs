@@ -81,13 +81,13 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ModifySpeed(float modifier)
     {
-        if (!isSlowedDown && modifier < 1f) // Applying slowdown
+        if (!isSlowedDown && modifier < 1f) 
         {
-            originalSpeed = SPEED; // Store the original speed
+            originalSpeed = SPEED; 
             SPEED *= modifier;
             isSlowedDown = true;
         }
-        else if (isSlowedDown && modifier == 1f) // Exiting slowdown area, reset to original speed
+        else if (isSlowedDown && modifier == 1f) 
         {
             SPEED = originalSpeed;
             isSlowedDown = false;
