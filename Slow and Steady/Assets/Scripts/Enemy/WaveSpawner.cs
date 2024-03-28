@@ -90,7 +90,7 @@ public class WaveSpawner : MonoBehaviour
             return; // Uncomment this line to stop spawning
         }
 
-        if (currWave < 3)
+        if (currWave < 2)
         {
             waveAnim.SetTrigger("Start");
         }
@@ -121,18 +121,18 @@ public class WaveSpawner : MonoBehaviour
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 5); // 2 enemies of type 1
                 AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
-                AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
+                AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
 
                 break;
-            case 2:
+/*            case 2:
                 // Mix of all enemy types
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 6);
                 AddEnemiesToSpawn(enemies[2].enemyPrefab, 8);
                 AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
-                break;
+                break;*/
 
-            case 3:
+            case 2:
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 5);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 5);
                 break;

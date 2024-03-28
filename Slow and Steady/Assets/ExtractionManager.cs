@@ -16,8 +16,8 @@ public class ExtractionManager : MonoBehaviour
 
     void Start()
     {
-        timeToExtract = 30f;
-        elapsedTime = 4f;
+        timeToExtract = 10f;
+        elapsedTime = 3f;
     }
 
     private void Update()
@@ -61,7 +61,7 @@ public class ExtractionManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
         Debug.Log(seconds);
-        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, seconds / 30f, lerpSpeed);
+        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, seconds / 10f, lerpSpeed);
     }
 
 }

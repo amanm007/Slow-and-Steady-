@@ -275,7 +275,7 @@ MonoBehaviour:
   flashDuration: 0.1
   damageDuration: 0.2
   value: 15
-  damageSprite: {fileID: -2056347463, guid: 02a2139ff1781454795db44d4a90debc, type: 3}
+  damageSprite: {fileID: -233007344, guid: 6abc2ce4cd6132a4196bd1914a5d0e6d, type: 3}
 --- !u!212 &4988358016092458594
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownRadius: 5
   playerMovementScript: {fileID: 0}
+  playerh: {fileID: 0}
 --- !u!1 &6505592799012031739
 GameObject:
   m_ObjectHideFlags: 0
@@ -5139,7 +5140,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 153
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
