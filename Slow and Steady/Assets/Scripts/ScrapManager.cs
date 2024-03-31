@@ -5,7 +5,7 @@ public class ScrapManager : MonoBehaviour
 {
     public static ScrapManager instance;
 
-    private int scrap = 1000;
+    private int scrap;
     [SerializeField] private TMP_Text scrapDisplay;
 
     private void Awake()
@@ -18,7 +18,7 @@ public class ScrapManager : MonoBehaviour
 
     private void Start()
     {
-        //scrap = PlayerPrefs.GetInt("scraps");
+        scrap = PlayerPrefs.GetInt("scraps");
     }
 
     private void OnGUI()

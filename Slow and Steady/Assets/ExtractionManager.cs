@@ -12,11 +12,10 @@ public class ExtractionManager : MonoBehaviour
 
     [SerializeField] private Image extractBar;
     private float lerpSpeed;
-    private bool inExtractionZone;
 
     void Start()
     {
-        timeToExtract = 10f;
+        timeToExtract = 30f;
         elapsedTime = 3f;
     }
 
@@ -29,10 +28,11 @@ public class ExtractionManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            WaveBarFiller();
+
             timeToExtract -= Time.deltaTime;
             int timeLeftUntilExtract = Mathf.FloorToInt(timeToExtract % 60);
 
-            WaveBarFiller();
 
             if (timeLeftUntilExtract >= 0)
             {
@@ -51,7 +51,6 @@ public class ExtractionManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            inExtractionZone = false;
             Debug.Log("player has left the extraction zone");
         }
     }
@@ -61,7 +60,7 @@ public class ExtractionManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
         Debug.Log(seconds);
-        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, seconds / 10f, lerpSpeed);
+        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, seconds / 30f, lerpSpeed);
     }
 
 }
