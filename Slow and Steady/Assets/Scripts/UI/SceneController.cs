@@ -16,12 +16,12 @@ public class SceneController : MonoBehaviour
             instance = this;
             //DontDestroyOnLoad(gameObject);
         }
-        else
+/*        else
         {
             Destroy(gameObject);
-        }
-
+        }*/
     }
+
     public void NextLevel(string level)
     {
         StartCoroutine(LoadLevel(level));

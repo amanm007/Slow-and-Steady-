@@ -5,15 +5,20 @@ public class ScrapManager : MonoBehaviour
 {
     public static ScrapManager instance;
 
-    private int scrap;
+    private int scrap = 1000;
     [SerializeField] private TMP_Text scrapDisplay;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
+    }
+
+    private void Start()
+    {
+        //scrap = PlayerPrefs.GetInt("scraps");
     }
 
     private void OnGUI()
@@ -24,5 +29,11 @@ public class ScrapManager : MonoBehaviour
     public void ChangeScraps(int amount)
     {
         scrap += amount;
+        PlayerPrefs.SetInt("scraps", scrap);
+    }
+
+    public int GetScrapAmount()
+    {
+        return scrap;
     }
 }
