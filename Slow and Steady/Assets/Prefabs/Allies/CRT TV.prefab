@@ -298,8 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tvBody: {fileID: 6316531172353493357}
-  _topAngleLimit: 40
-  _bottomAngleLimit: -20
   _flipTowardsMouse: 0
   state: {fileID: -796945887, guid: 130bc6e06272b714993f520a0bcb268a, type: 3}
   tvFront: {fileID: -1986566576, guid: 130bc6e06272b714993f520a0bcb268a, type: 3}
@@ -540,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 10
+  maxHealth: 50
   healthbar: {fileID: 0}
   spriteRenderer: {fileID: 399455457788135632}
 --- !u!114 &615554637232757844

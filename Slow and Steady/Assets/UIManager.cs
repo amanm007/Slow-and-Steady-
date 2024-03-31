@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject extractionUI, waveUI;
+    [SerializeField] private GameObject extractionUI, waveUI, extractionZone;
 
     void Start()
     {
         waveUI.SetActive(false);
         extractionUI.SetActive(false);
+        extractionZone.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,14 +19,15 @@ public class UIManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2"))
         {
-            if (WaveSpawner.instance.currWave < 3)
+            if (WaveSpawner.instance.currWave < 2)
             {
                 waveUI.SetActive(true);
             }
-            else if (WaveSpawner.instance.currWave == 3)
+            else if (WaveSpawner.instance.currWave == 2)
             {
                 waveUI.SetActive(false);
                 extractionUI.SetActive(true);
+                extractionZone.SetActive(true);
             }
         }
     }

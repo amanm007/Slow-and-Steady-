@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownRadius: 5
   playerMovementScript: {fileID: 0}
+  playerh: {fileID: 0}
 --- !u!1 &6505592799012031739
 GameObject:
   m_ObjectHideFlags: 0
@@ -5139,7 +5140,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 86
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
