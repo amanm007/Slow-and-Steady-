@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -36,15 +37,30 @@ public class UpgradeManager : MonoBehaviour
     private int upgradeCost;
     private string insufficientFunds = "insufficient funds";
     private string upgradePurchased = "enjoy the new upgrade";
+    private string selectMessage = "please select an upgrade";
+
+    [SerializeField] private GameObject buy;
 
     private void Start()
     {
         title.text = emptyText;
         info.text = emptyText;
         cost.text = emptyText;
+        buy.SetActive(false);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        title.text = emptyText;
+        info.text = emptyText;
+        cost.text = emptyText;
+        ShowSelectMessage();
+        buy.SetActive(false);
+    }
+
     public void HealthUpgrade()
     {
+        buy.SetActive(true);
         title.text = health_title;
         info.text = health_info + health_upgrade_value.ToString() + "%";
         cost.text = health_cost.ToString() + " scraps";
@@ -53,6 +69,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void RechargeUpgrade()
     {
+        buy.SetActive(true);
         title.text = recharge_title;
         info.text = recharge_info + recharge_upgrade_value.ToString() + " seconds";
         cost.text = recharge_cost.ToString() + " scraps";
@@ -61,6 +78,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void AmmoUpgrade()
     {
+        buy.SetActive(true);
         title.text = ammo_title;
         info.text = ammo_info + ammo_upgrade_value.ToString() + " rounds";
         cost.text = ammo_cost.ToString() + " scraps";
@@ -147,9 +165,20 @@ public class UpgradeManager : MonoBehaviour
 
     private IEnumerator ShowPurchaseMessage()
     {
+        buy.SetActive(false);
         title.text = emptyText;
         info.text = upgradePurchased;
         cost.text = emptyText;
         yield return new WaitForSeconds(2f);
+        ShowSelectMessage();
+    }
+
+    private void ShowSelectMessage()
+    {
+        Debug.Log("select");
+        buy.SetActive(false);
+        title.text = emptyText;
+        info.text = selectMessage;
+        cost.text = emptyText;
     }
 }
