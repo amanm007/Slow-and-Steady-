@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
         if(instance == null)
         {
             instance = this;
@@ -29,8 +30,9 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadLevel(string level)
     {
+        Cursor.visible = false;
         transitionAnim.SetTrigger("End");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadSceneAsync(level);
         transitionAnim.SetTrigger("Start");
     }

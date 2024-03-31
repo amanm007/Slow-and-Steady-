@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private float originalSpeed;
     private bool isSlowedDown = false;
 
+    private float dirX = 0;
+    private float dirY = 0;
+
     private PlayerMain playerMain;
 
     private Vector3 moveDir;
@@ -25,10 +28,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        float moveX = 0f;
-        float moveY = 0f;
+        dirX = Input.GetAxisRaw("Horizontal");    //Raw sets the axis back to '0' after key release
+        dirY = Input.GetAxisRaw("Vertical");    //Raw sets the axis back to '0' after key release
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        moveDir = new Vector3(dirX, dirY).normalized;
+       
+        bool isIdle = dirX == 0 && dirY == 0;
+
+        if (isIdle)
+        {
+            //playerMain.PlayerSwapAimNormal.PlayIdleAnim();
+        }
+        else
+        {
+            lastMoveDir = moveDir;
+            // playerMain.PlayerSwapAimNormal.PlayMoveAnim(moveDir);
+        }
+
+        /*      float moveX = 0f;
+        float moveY = 0f;*/
+
+        /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             moveY = +1f;
         }
@@ -44,19 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = +1f;
         }
-
-        moveDir = new Vector3(moveX, moveY).normalized;
-
-        bool isIdle = moveX == 0 && moveY == 0;
-        if (isIdle)
-        {
-            //playerMain.PlayerSwapAimNormal.PlayIdleAnim();
-        }
-        else
-        {
-            lastMoveDir = moveDir;
-            // playerMain.PlayerSwapAimNormal.PlayMoveAnim(moveDir);
-        }
+        */
     }
 
     private void FixedUpdate()

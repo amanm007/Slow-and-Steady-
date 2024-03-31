@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
+    public static UpgradeManager instance;
+
     private string emptyText = " ";
     private string initialTitle, initialInfo, initialCost;
 
@@ -41,20 +43,37 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private GameObject buy;
 
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
         title.text = emptyText;
-        info.text = emptyText;
+        info.text = selectMessage;
+        cost.text = emptyText;
+        buy.SetActive(false);
+
+    }
+
+    public void OpenMenu()
+    {
+        title.text = emptyText;
+        info.text = selectMessage;
         cost.text = emptyText;
         buy.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CloseMenu()
     {
         title.text = emptyText;
-        info.text = emptyText;
+        info.text = selectMessage;
         cost.text = emptyText;
-        ShowSelectMessage();
         buy.SetActive(false);
     }
 
@@ -165,20 +184,10 @@ public class UpgradeManager : MonoBehaviour
 
     private IEnumerator ShowPurchaseMessage()
     {
-        buy.SetActive(false);
         title.text = emptyText;
         info.text = upgradePurchased;
         cost.text = emptyText;
-        yield return new WaitForSeconds(2f);
-        ShowSelectMessage();
-    }
-
-    private void ShowSelectMessage()
-    {
-        Debug.Log("select");
         buy.SetActive(false);
-        title.text = emptyText;
-        info.text = selectMessage;
-        cost.text = emptyText;
+        yield return new WaitForSeconds(3f);
     }
 }
