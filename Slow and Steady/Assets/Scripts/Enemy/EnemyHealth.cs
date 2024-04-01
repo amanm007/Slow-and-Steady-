@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
     public float damageDuration = 0.2f;
 
     private Color originalColor;
-    private bool isFlashing = false;
 
     private ScrapManager scrapManager;
     private EnemyManager enemyManager;

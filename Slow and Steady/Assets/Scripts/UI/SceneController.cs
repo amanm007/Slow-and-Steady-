@@ -11,8 +11,6 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     [SerializeField] private Animator transitionAnim;
 
-    private static bool practiceComplete, cityComplete, bestbuyComplete;
-
     private void Awake()
     {
         Cursor.visible = false;
@@ -20,9 +18,6 @@ public class SceneController : MonoBehaviour
         {
             instance = this;
         }
-
-        practiceComplete = false;
-        cityComplete = false; 
 
     }
 
@@ -38,33 +33,36 @@ public class SceneController : MonoBehaviour
         Cursor.visible = false;
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadSceneAsync(level);
-        yield return new WaitForSeconds(1f);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
         transitionAnim.SetTrigger("Start");
     }
 
     private void CheckLevelCompletetion(string level)
     {
-        if(level == "Factory")
+        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu") && level == "Factory")
         {
-            //if the player returns from a level that is required to progress (unlock a new level), then add it to the players rewards
-            //booleans only allow entering the if statements once
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range") && practiceComplete == false)
+            //if the player is returning to the factory (mostly done after completing a level), reward them with a completion point,  which will unlock more levels in the MapUI
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range") && MapUI.instance.playerLevelCompletion == 0)
             {
                 MapUI.instance.playerLevelCompletion++;
-                practiceComplete = true;
             }
-            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") && cityComplete == false)
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") && MapUI.instance.playerLevelCompletion == 1)
             {
                 MapUI.instance.playerLevelCompletion++;
-                cityComplete = true;
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2") && MapUI.instance.playerLevelCompletion == 2)
+            {
+                MapUI.instance.playerLevelCompletion++;
             }
 
             PlayerPrefs.SetInt("levelsComplete", MapUI.instance.playerLevelCompletion);
         }
         else
         {
-            Debug.Log("non progression level");
             return;
         }
     }
@@ -83,6 +81,16 @@ public class SceneController : MonoBehaviour
     public void BestBuy()
     {
         StartCoroutine(LoadLevel("Best Buy2"));
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 
     public void MainMenu()

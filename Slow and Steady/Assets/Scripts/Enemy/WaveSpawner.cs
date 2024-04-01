@@ -141,7 +141,11 @@ public class WaveSpawner : MonoBehaviour
                 break;
         }
 
-        spawnInterval = waveDuration / enemiesToSpawn.Count; // Calculate the time between each spawn
+        if(waveDuration / enemiesToSpawn.Count != 0)
+        {
+            spawnInterval = waveDuration / enemiesToSpawn.Count; // Calculate the time between each spawn
+        }
+      
     }
 
     void AddEnemiesToSpawn(GameObject enemyPrefab, int count)

@@ -46,7 +46,6 @@ public class MapUI : MonoBehaviour
 
     private void CheckLevelCompletion()
     {
-        Debug.Log(playerLevelCompletion);
 
         if (playerLevelCompletion == 1)
         {

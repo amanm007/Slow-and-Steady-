@@ -138,7 +138,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 503.9649, y: 181.9093}
+  m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6749416246146655745
 CanvasRenderer:
@@ -170,8 +170,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WAVE STARTING
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cf6ccb51ca39f53419e78d9dd27d749b, type: 2}
-  m_sharedMaterial: {fileID: 7795835572186437966, guid: cf6ccb51ca39f53419e78d9dd27d749b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c067d8e9c3586e9498d480962f10a53e, type: 2}
+  m_sharedMaterial: {fileID: 7386671643370996187, guid: c067d8e9c3586e9498d480962f10a53e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 32
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -322,3 +322,4 @@ MonoBehaviour:
   waveDuration: 7
   spawnedEnemies: []
   waveAnim: {fileID: 6166362671059563061}
+  waveBar: {fileID: 0}
