@@ -8,9 +8,10 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text objectiveDisplay;
 
-    private string levelObjective = "Kill enemies and go to next zone";
+    private string factoryObjective = "Practice your skills in the shooting range";
+    private string levelObjective = "Kill enemies and go to the next zone";
     private string waveObjective = "Survive 3 Waves";
-    private string extractionObjective = "Go to extraction zone";
+    private string extractionObjective = "Go to the extraction zone";
     private string noObjective = "No current objectives";
 
     void Start()
@@ -26,10 +27,15 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateObjective()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Silicon Valley"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Factory"))
+        {
+            objectiveDisplay.text = factoryObjective;
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Silicon Valley"))
         {
             objectiveDisplay.text = levelObjective;
         }
+
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2")) {
             if (WaveSpawner.instance.currWave < 2)
             {
