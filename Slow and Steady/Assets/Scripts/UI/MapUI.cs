@@ -11,7 +11,6 @@ public class MapUI : MonoBehaviour
     [SerializeField] Animator mapAnim;
 
     [SerializeField] private GameObject cityLock, bestbuyLock, houseLock;
-    public int playerLevelCompletion;
 
     private void Awake()
     {
@@ -21,11 +20,6 @@ public class MapUI : MonoBehaviour
         }
 
         cityLock.SetActive(true); bestbuyLock.SetActive(true); houseLock.SetActive(true);
-    }
-    private void Start()
-    {
-        //PlayerPrefs.DeleteAll();
-        playerLevelCompletion = PlayerPrefs.GetInt("levelsComplete");
     }
 
     private void Update()
@@ -46,17 +40,16 @@ public class MapUI : MonoBehaviour
 
     private void CheckLevelCompletion()
     {
-
-        if (playerLevelCompletion == 1)
+        if (LevelManager.instance.playerLevelCompletion == 1)
         {
             cityLock.SetActive(false);
         }
-        else if (playerLevelCompletion >= 1 && playerLevelCompletion == 2)
+        else if (LevelManager.instance.playerLevelCompletion == 2)
         {
             cityLock.SetActive(false);
             bestbuyLock.SetActive(false);
         }
-        else if (playerLevelCompletion >= 2 && playerLevelCompletion == 3)
+        else if (LevelManager.instance.playerLevelCompletion == 3)
         {
             cityLock.SetActive(false);
             bestbuyLock.SetActive(false);

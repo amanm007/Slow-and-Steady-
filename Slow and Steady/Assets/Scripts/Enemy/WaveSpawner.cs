@@ -133,17 +133,21 @@ public class WaveSpawner : MonoBehaviour
                 break;*/
 
             case 2:
-                AddEnemiesToSpawn(enemies[0].enemyPrefab, 5);
-                AddEnemiesToSpawn(enemies[1].enemyPrefab, 5);
+                AddEnemiesToSpawn(enemies[0].enemyPrefab, 1);
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
                 break;
             default:
                 Debug.Log("Undefined wave number.");
                 break;
         }
 
-        if(waveDuration / enemiesToSpawn.Count != 0)
+        if(enemiesToSpawn.Count != 0)
         {
             spawnInterval = waveDuration / enemiesToSpawn.Count; // Calculate the time between each spawn
+        }
+        else
+        {
+            return;
         }
       
     }

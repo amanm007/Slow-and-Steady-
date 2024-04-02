@@ -21,5 +21,9 @@ public class BulletDamage : MonoBehaviour
             // Destroy the bullet after applying damage
             Destroy(gameObject);
         }
+/*        else if (collider.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }*/
     }
 }

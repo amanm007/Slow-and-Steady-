@@ -2,21 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ExtractionManager : MonoBehaviour
 {
+    public static ExtractionManager instance;
+
     [SerializeField] private TMP_Text extractionTimer;
-    private float timeToExtract;
-    private float elapsedTime;
+    private static int timeToExtract;
+    private float elapsedTime, elapsedTimeFill;
+    private float timeLeftUntilExtract;
 
     [SerializeField] private Image extractBar;
     private float lerpSpeed;
 
+    public bool levelOneComplete, levelTwoComplete;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+    }
     void Start()
     {
-        timeToExtract = 30f;
-        //elapsedTime = 3f;
+        timeToExtract = 15;
+        elapsedTime = timeToExtract;
+        elapsedTimeFill = 1;
+        extractionTimer.text = timeToExtract.ToString();
+        extractBar.fillAmount = 0.025f;
+
+        levelOneComplete = false; levelTwoComplete = false;
     }
 
     private void Update()
@@ -28,20 +46,33 @@ public class ExtractionManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            WaveBarFiller();
+            elapsedTime -= Time.deltaTime;
+            int seconds = Mathf.FloorToInt(elapsedTime % 60);
+            timeLeftUntilExtract = seconds;
 
-            timeToExtract -= Time.deltaTime;
-            int timeLeftUntilExtract = Mathf.FloorToInt(timeToExtract % 60);
-
+            elapsedTimeFill += Time.deltaTime;
+            int secondsFill = Mathf.FloorToInt(elapsedTimeFill % 60);
 
             if (timeLeftUntilExtract >= 0)
             {
+                LevelManager.instance.objectiveDisplay.text = LevelManager.instance.whileExtractingObjective;
+                ExtractionBarFiller((float)secondsFill);
                 extractionTimer.text = timeLeftUntilExtract.ToString();
             }
 
-
             else if (timeLeftUntilExtract <= 0)
             {
+                Debug.Log("extraction");
+
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") && levelOneComplete == false)
+                {
+                    levelOneComplete = true;
+                }
+                else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2") && levelTwoComplete == false)
+                {
+                    levelTwoComplete = true;
+                }
+
                 SceneController.instance.NextLevel("Factory");
             }
         }
@@ -55,11 +86,10 @@ public class ExtractionManager : MonoBehaviour
         }
     }
 
-    void WaveBarFiller()
+    private void ExtractionBarFiller(float seconds)
     {
-        elapsedTime += Time.deltaTime;
-        int seconds = Mathf.FloorToInt(elapsedTime % 60);
-        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, seconds / 30f, lerpSpeed);
+        extractBar.fillAmount += 0.000525f;
+        extractBar.fillAmount = Mathf.Lerp(extractBar.fillAmount, (float)seconds / timeToExtract, lerpSpeed);
     }
 
 }

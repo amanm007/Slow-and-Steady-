@@ -31,7 +31,7 @@ public class SlowDownPlayer : MonoBehaviour
             float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
 
-            if (distanceToPlayer <= slowdownRadius)
+            if (distanceToPlayer <= slowdownRadius && this != null)
             {
 
                 playerMovementScript.ModifySpeed(0.5f);
