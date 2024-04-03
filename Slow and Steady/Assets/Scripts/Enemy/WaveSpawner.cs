@@ -132,7 +132,7 @@ public class WaveSpawner : MonoBehaviour
                 AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
                 break;*/
 
-            case 2:
+            case 3:
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 1);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
                 break;

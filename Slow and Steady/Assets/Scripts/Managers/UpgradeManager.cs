@@ -82,7 +82,7 @@ public class UpgradeManager : MonoBehaviour
         buy.SetActive(true);
         title.text = health_title;
         info.text = health_info + health_upgrade_value.ToString() + "%";
-        cost.text = health_cost.ToString() + " scraps";
+        cost.text = health_cost.ToString();
         upgradeCost = (int)health_cost;
     }
 
@@ -91,7 +91,7 @@ public class UpgradeManager : MonoBehaviour
         buy.SetActive(true);
         title.text = recharge_title;
         info.text = recharge_info + recharge_upgrade_value.ToString() + " seconds";
-        cost.text = recharge_cost.ToString() + " scraps";
+        cost.text = recharge_cost.ToString();
         upgradeCost = (int)recharge_cost;
     }
 
@@ -100,7 +100,7 @@ public class UpgradeManager : MonoBehaviour
         buy.SetActive(true);
         title.text = ammo_title;
         info.text = ammo_info + ammo_upgrade_value.ToString() + " rounds";
-        cost.text = ammo_cost.ToString() + " scraps";
+        cost.text = ammo_cost.ToString();
         upgradeCost = (int)ammo_cost;
     }
 
@@ -173,6 +173,7 @@ public class UpgradeManager : MonoBehaviour
     }
     private IEnumerator ShowErrorMessage()
     {
+        buy.SetActive(false);
         title.text = emptyText;
         info.text = insufficientFunds;
         cost.text = emptyText;
@@ -180,6 +181,7 @@ public class UpgradeManager : MonoBehaviour
         title.text = initialTitle;
         info.text = initialInfo;
         cost.text = initialCost;
+        buy.SetActive(true);
     }
 
     private IEnumerator ShowPurchaseMessage()
