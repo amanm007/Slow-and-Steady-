@@ -156,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extractionTimer: {fileID: 1991860727}
   extractBar: {fileID: 816902762}
+  levelOneComplete: 0
+  levelTwoComplete: 0
 --- !u!58 &74540149
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -93827,8 +93829,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WAVE STARTING
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cf6ccb51ca39f53419e78d9dd27d749b, type: 2}
-  m_sharedMaterial: {fileID: 7795835572186437966, guid: cf6ccb51ca39f53419e78d9dd27d749b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c067d8e9c3586e9498d480962f10a53e, type: 2}
+  m_sharedMaterial: {fileID: 7386671643370996187, guid: c067d8e9c3586e9498d480962f10a53e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93963,7 +93965,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 503.9649, y: 181.9093}
+  m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8484436296888765257
 GameObject:

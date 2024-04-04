@@ -15,13 +15,14 @@ public class LevelManager : MonoBehaviour
     private string levelOneObjective = "Kill all the enemies and find the next zone";
     private string waveObjective = "Survive 3 Waves";
     private string extractionObjective = "Go to the Extraction Zone";
-    public string whileExtractingObjective = "Wait to be Extracted";
+    [HideInInspector] public string whileExtractingObjective = "Wait to be Extracted";
     private string noObjective = "No current objectives";
-    public int playerLevelCompletion;
+    [HideInInspector]public int playerLevelCompletion;
 
     private bool levelOneLocked;
     private bool levelTwoLocked;
     private bool levelThreeLocked;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,7 +33,6 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        //PlayerPrefs.DeleteAll();
         levelOneLocked = true;
         levelTwoLocked = true;
         levelThreeLocked = true;
@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Factory"))
         {
-            if(levelOneLocked == true)
+            if(playerLevelCompletion == 0)
             {
                 objectiveDisplay.text = factoryObjective;
             }

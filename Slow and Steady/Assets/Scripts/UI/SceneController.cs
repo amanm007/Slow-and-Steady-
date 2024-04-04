@@ -53,6 +53,11 @@ public class SceneController : MonoBehaviour
 
     public void PlayGame()
     {
+        StartCoroutine(LoadLevel("Intro Cutscene"));
+    }
+
+    public void Factory()
+    {
         StartCoroutine(LoadLevel("Factory"));
     }
 
@@ -83,6 +88,7 @@ public class SceneController : MonoBehaviour
 
     public void Quit()
     {
+        SaveSystem.instance.SaveData();
         Application.Quit();
     }
 }

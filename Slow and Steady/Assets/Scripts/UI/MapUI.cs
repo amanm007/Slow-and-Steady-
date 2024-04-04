@@ -9,18 +9,26 @@ public class MapUI : MonoBehaviour
 {
     public static MapUI instance;
 
-    [SerializeField] private GameObject cityLock, bestbuyLock, houseLock;
-    [SerializeField] private GameObject levelSelectMenu, levelInfoMenu;
+    [Header("Lock Icons")]
+    [SerializeField] private GameObject cityLock;
+    [SerializeField] private GameObject bestbuyLock;
+    [SerializeField] private GameObject houseLock;
 
-    [SerializeField] private string levelOne_title, levelTwo_title;
+    [Header("Menus")]
+    [SerializeField] private GameObject levelSelectMenu;
+    [SerializeField] private GameObject levelInfoMenu;
 
-    [SerializeField] private GameObject mapDisplay;
-    [SerializeField] private List<Sprite>[] map;
-    private Image mapSelection;
-
-    [SerializeField] private string levelOne_info, levelTwo_info;
-
+    [Header("Menu Info")]
+    [SerializeField] private string levelOne_title;
+    [SerializeField] private string levelTwo_title;
+    [SerializeField] private string levelOne_info;
+    [SerializeField] private string levelTwo_info;
     [SerializeField] private TMP_Text title, info;
+
+    [Header("Menu Icons")]
+    [SerializeField] private GameObject cityIcon;
+    [SerializeField] private GameObject bestbuyIcon;
+    [SerializeField] private GameObject houseIcon;
 
     private string levelSelection;
 
@@ -34,8 +42,8 @@ public class MapUI : MonoBehaviour
         levelSelectMenu.SetActive(false);
         levelInfoMenu.SetActive(false);
         cityLock.SetActive(true); bestbuyLock.SetActive(true); houseLock.SetActive(true);
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
 
-        mapSelection = mapDisplay.GetComponent<Image>();
     }
 
     private void Update()
@@ -82,19 +90,28 @@ public class MapUI : MonoBehaviour
     public void OpenLevelInfo(string level)
     {
         levelInfoMenu.SetActive(true);
-        
-        if(level == "Silicon Valley")
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
+
+        if (level == "Silicon Valley")
         {
             title.text = levelOne_title;
             info.text = levelOne_info;
+            cityIcon.SetActive(true);
         }
         else if (level == "Best Buy2")
         {
             title.text = levelTwo_title;
             info.text = levelTwo_info;
+            bestbuyIcon.SetActive(true);
         }
 
         levelSelection = level;
+    }
+
+    public void BackToLevelSelect()
+    {
+        levelSelectMenu.SetActive(true);
+        levelInfoMenu.SetActive(false);
     }
     public void PlayLevel()
     {

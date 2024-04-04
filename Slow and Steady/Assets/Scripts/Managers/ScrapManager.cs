@@ -5,7 +5,7 @@ public class ScrapManager : MonoBehaviour
 {
     public static ScrapManager instance;
 
-    private int scrap;
+    public int scrap;
     [SerializeField] private TMP_Text scrapDisplay;
 
     private void Awake()

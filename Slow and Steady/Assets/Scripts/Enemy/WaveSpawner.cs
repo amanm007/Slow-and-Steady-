@@ -23,6 +23,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private Image waveBar;
     private float lerpSpeed;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -54,6 +55,7 @@ public class WaveSpawner : MonoBehaviour
                 NextWave();
             }
         }
+        
     }
 
     private void Update()

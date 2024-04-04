@@ -28,7 +28,7 @@ public class ExtractionManager : MonoBehaviour
     }
     void Start()
     {
-        timeToExtract = 15;
+        timeToExtract = 30;
         elapsedTime = timeToExtract;
         elapsedTimeFill = 1;
         extractionTimer.text = timeToExtract.ToString();
