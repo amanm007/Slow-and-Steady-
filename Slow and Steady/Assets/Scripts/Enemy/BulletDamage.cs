@@ -6,7 +6,6 @@ public class BulletDamage : MonoBehaviour
 {
     public float bulletDamage = 1f;
 
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Check for collision with the player
@@ -22,6 +21,9 @@ public class BulletDamage : MonoBehaviour
             // Destroy the bullet after applying damage
             Destroy(gameObject);
         }
-
+/*        else if (collider.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }*/
     }
 }

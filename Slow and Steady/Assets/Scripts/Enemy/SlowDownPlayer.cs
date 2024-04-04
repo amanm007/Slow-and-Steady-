@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class SlowDownPlayer : MonoBehaviour
 {
-    public float slowdownRadius = 5f; 
-    public LayerMask playerLayer; 
-    public CircleCollider2D slowDownCollider;
+    public float slowdownRadius = 5f;
+    public PlayerMovement playerMovementScript;
+    public PlayerHealth playerh;
 
-    private void Awake()
+    private Transform playerTransform;
+
+    private void Start()
     {
-        
-        slowDownCollider = GetComponent<CircleCollider2D>();
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0) 
+
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            PlayerMovement playerMovement = collision.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
-            {
-                playerMovement.ModifySpeed(0.5f); 
-            }
+            playerMovementScript = player.GetComponent<PlayerMovement>();
+            playerh = player.GetComponent<PlayerHealth>();
+
+            playerTransform = player.transform;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void Update()
     {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0) 
+        if (playerMovementScript != null)
         {
-            PlayerMovement playerMovement = collision.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+
+
+            if (distanceToPlayer <= slowdownRadius && this != null)
             {
-                playerMovement.ModifySpeed(1f); 
+
+                playerMovementScript.ModifySpeed(0.5f);
+            }
+            else
+            {
+
+                playerMovementScript.ModifySpeed(1f);
             }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, slowdownRadius);
     }
 
 }

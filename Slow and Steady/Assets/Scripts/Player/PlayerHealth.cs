@@ -95,7 +95,7 @@ public class PlayerHealth : MonoBehaviour
         }
         //Invoke("ReloadScene", 2f);
 
-        SceneController.instance.MainMenu();
+        SceneController.instance.NextLevel("Factory");
 
     }
     public void IncreaseHealth(float amount)

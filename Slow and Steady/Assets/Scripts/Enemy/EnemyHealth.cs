@@ -10,12 +10,17 @@ public class EnemyHealth : MonoBehaviour
     public SpriteRenderer spriteRenderer; // Assign this in the Inspector to the child's SpriteRenderer
     public Color flashColor = Color.red;
     public float flashDuration = 0.1f;
+    public float damageDuration = 0.2f;
 
     private Color originalColor;
-    private bool isFlashing = false;
 
     private ScrapManager scrapManager;
+    private EnemyManager enemyManager;
+
     [SerializeField] private int value;
+    [SerializeField] private Sprite damageSprite;
+
+    private int enemiesKilled;
 
     private void Awake()
     {
@@ -27,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         scrapManager = ScrapManager.instance;
+        enemyManager = EnemyManager.instance;
     }
 
     public void TakeDamage(int damageAmount)
@@ -45,17 +51,23 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator FlashEffect()
     {
+        Sprite initialSprite = spriteRenderer.sprite;
+        spriteRenderer.sprite = damageSprite;
         Color originalColor = spriteRenderer.color;
         spriteRenderer.color = flashColor;
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.color = originalColor;
+        yield return new WaitForSeconds(damageDuration);
+        spriteRenderer.sprite = initialSprite;
     }
 
     private void Die()
     {
+        enemiesKilled++;
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
             scrapManager.ChangeScraps(value);
+            enemyManager.ChangeCount(enemiesKilled);
         }
         WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene
         if (waveSpawner != null)

@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public static WaveSpawner instance;
+
     public List<Enemy> enemies = new List<Enemy>();
     public int currWave = -1; // Start before the first wave
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
@@ -13,6 +17,19 @@ public class WaveSpawner : MonoBehaviour
     private float spawnInterval;
     private float spawnTimer;
     public List<GameObject> spawnedEnemies = new List<GameObject>();
+    private static int enemiesInWave;
+    private static int enemiesLeft;
+    [SerializeField] private Animator waveAnim;
+    [SerializeField] private Image waveBar;
+    private float lerpSpeed;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -39,6 +56,14 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        lerpSpeed = 3f * Time.deltaTime;
+        enemiesLeft = EnemyManager.instance.GetCount();
+
+        WaveBarFiller();
+    }
+
     void SpawnEnemy()
     {
         int spawnIndex = Random.Range(0, spawnLocation.Length); // Get a random spawn point
@@ -48,8 +73,15 @@ public class WaveSpawner : MonoBehaviour
         spawnTimer = spawnInterval;
     }
 
+    void WaveBarFiller()
+    {
+        waveBar.fillAmount = Mathf.Lerp(waveBar.fillAmount, (float)enemiesLeft / enemiesInWave, lerpSpeed);
+    }
+
     void NextWave()
     {
+        enemiesInWave = 0;
+        EnemyManager.instance.SetCount(enemiesInWave);
         currWave++; // Increase the wave index
         if (currWave >= enemies.Count) // If all waves are completed, restart or stop spawning
         {
@@ -58,7 +90,14 @@ public class WaveSpawner : MonoBehaviour
             return; // Uncomment this line to stop spawning
         }
 
+        if (currWave < 2)
+        {
+            waveAnim.SetTrigger("Start");
+        }
+
         GenerateWave();
+
+        EnemyManager.instance.SetCount(enemiesInWave);
     }
 
     void GenerateWave()
@@ -82,22 +121,35 @@ public class WaveSpawner : MonoBehaviour
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 5); // 2 enemies of type 1
                 AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
-                AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
+                AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
 
                 break;
-            case 2:
+/*            case 2:
                 // Mix of all enemy types
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
                 AddEnemiesToSpawn(enemies[1].enemyPrefab, 6);
                 AddEnemiesToSpawn(enemies[2].enemyPrefab, 8);
                 AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
+                break;*/
+
+            case 3:
+                AddEnemiesToSpawn(enemies[0].enemyPrefab, 1);
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
                 break;
             default:
                 Debug.Log("Undefined wave number.");
                 break;
         }
 
-        spawnInterval = waveDuration / enemiesToSpawn.Count; // Calculate the time between each spawn
+        if(enemiesToSpawn.Count != 0)
+        {
+            spawnInterval = waveDuration / enemiesToSpawn.Count; // Calculate the time between each spawn
+        }
+        else
+        {
+            return;
+        }
+      
     }
 
     void AddEnemiesToSpawn(GameObject enemyPrefab, int count)
@@ -105,6 +157,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             enemiesToSpawn.Add(enemyPrefab);
+            enemiesInWave++;
         }
     }
 }
