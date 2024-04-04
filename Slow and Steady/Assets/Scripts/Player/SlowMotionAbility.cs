@@ -20,6 +20,7 @@ public class SlowMotionAbility : MonoBehaviour
     public float energyDepletionRate = 20f; // energy depletion  per second when slow motion is active
     public float energyRecoveryRate = 10f; //  energy recovery per second when slow motion is not active
     private float currentEnergy;
+    private bool mustRecharge = false;
 
     private PlayerAimWeapon playerAimWeapon;
 
@@ -40,7 +41,7 @@ public class SlowMotionAbility : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(1) && !isSlowMotionActive && currentEnergy > 0)
+        if (Input.GetMouseButtonDown(1) && !isSlowMotionActive && currentEnergy > 0 && !mustRecharge)
         {
             ActivateSlowMotion();
         }
@@ -57,10 +58,17 @@ public class SlowMotionAbility : MonoBehaviour
             currentEnergy -= energyDepletionRate * Time.unscaledDeltaTime; // Deplete energy
             UpdateEnergyBar();
         }
-        else if (currentEnergy < maxEnergy)
+        else 
         {
-            currentEnergy += energyRecoveryRate * Time.unscaledDeltaTime; // Recover energy
-            UpdateEnergyBar();
+            if (currentEnergy < maxEnergy)
+            {
+                currentEnergy += energyRecoveryRate * Time.unscaledDeltaTime; // Recover energy
+                UpdateEnergyBar();
+            }
+            if (mustRecharge && currentEnergy >= maxEnergy * 0.25f)
+            {
+                mustRecharge = false;
+            }
         }
         // Adjusting camera zoom and position towards the crosshair
         if (isSlowMotionActive && playerAimWeapon != null)
@@ -90,6 +98,10 @@ public class SlowMotionAbility : MonoBehaviour
         Time.timeScale = normalTimeScale;
         Time.fixedDeltaTime = normalTimeScale * 0.02f;
         isSlowMotionActive = false;
+        if (currentEnergy <= 0)
+        {
+            mustRecharge = true; 
+        }
     }
     private void UpdateEnergyBar()
     {

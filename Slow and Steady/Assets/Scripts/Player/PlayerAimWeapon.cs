@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerAimWeapon : MonoBehaviour
 {
@@ -15,10 +16,12 @@ public class PlayerAimWeapon : MonoBehaviour
 
     public float shootingCooldown = 0.5f; // Cooldown period in seconds
     private bool isCooldown = false; // To track if we are in cooldown
+    private float currentCooldownTime = 0f;
+    public Image reloadBar;
 
-/*    private bool aimCooldownBool = false;
-    private float aimCooldown = 5000f;
-    private float aimTimer = 3000f;*/
+    /*    private bool aimCooldownBool = false;
+        private float aimCooldown = 5000f;
+        private float aimTimer = 3000f;*/
 
     private void Awake()
     {
@@ -37,6 +40,7 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             HandleAiming();
             HandleShooting();
+            UpdateReloadBar();
         }
     }
 
@@ -54,6 +58,7 @@ public class PlayerAimWeapon : MonoBehaviour
     private IEnumerator Shoot()
     {
         isCooldown = true; // Start cooldown
+        currentCooldownTime = shootingCooldown;
 
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
@@ -70,7 +75,7 @@ public class PlayerAimWeapon : MonoBehaviour
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(1); // Assuming each bullet deals 1 damage
-                    
+
                 }
             }
         }
@@ -98,8 +103,20 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             yield return new WaitForSeconds(shootingCooldown); // Wait for cooldown period
         }
-
+        yield return new WaitForSeconds(shootingCooldown);
         isCooldown = false; // End cooldown
+    }
+    private void UpdateReloadBar()
+    {
+        if (isCooldown)
+        {
+            currentCooldownTime -= Time.deltaTime; // Decrease cooldown time
+            reloadBar.fillAmount = (shootingCooldown - currentCooldownTime) / shootingCooldown;
+        }
+        else
+        {
+            reloadBar.fillAmount = 1; // Ready to shoot
+        }
     }
 
     private void HandleAiming()
