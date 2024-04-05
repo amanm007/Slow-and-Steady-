@@ -11,7 +11,7 @@ public class SceneController : MonoBehaviour
 
     public static SceneController instance;
     [SerializeField] private Animator transitionAnim;
-    public bool levelZeroComplete;
+    [HideInInspector] public bool levelZeroComplete;
 
     private void Awake()
     {

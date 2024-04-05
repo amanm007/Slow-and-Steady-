@@ -15,6 +15,9 @@ public class MapUI : MonoBehaviour
     [SerializeField] private GameObject houseLock;
 
     [Header("Menus")]
+    [SerializeField] private Animator mapSelectAnim;
+    [SerializeField] private Animator mapInfoAnim;
+
     [SerializeField] private GameObject levelSelectMenu;
     [SerializeField] private GameObject levelInfoMenu;
 
@@ -38,33 +41,24 @@ public class MapUI : MonoBehaviour
         {
             instance = this;
         }
-
-        levelSelectMenu.SetActive(false);
-        levelInfoMenu.SetActive(false);
         cityLock.SetActive(true); bestbuyLock.SetActive(true); houseLock.SetActive(true);
         cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
-
     }
 
     private void Update()
     {
         CheckLevelCompletion();
+        Debug.Log(mapSelectAnim);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        levelSelectMenu.SetActive(true);
+        mapSelectAnim.SetTrigger("Start");
         Cursor.visible = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        levelSelectMenu.SetActive(false);
-
-        if(levelInfoMenu.activeSelf == true)
-        {
-            levelInfoMenu.SetActive(false);
-        }
-        Cursor.visible = false;
+        Cursor.visible = false; 
     }
 
     private void CheckLevelCompletion()
@@ -89,7 +83,8 @@ public class MapUI : MonoBehaviour
 
     public void OpenLevelInfo(string level)
     {
-        levelInfoMenu.SetActive(true);
+        mapSelectAnim.SetTrigger("End");
+        mapInfoAnim.SetTrigger("Start");
         cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
 
         if (level == "Silicon Valley")
@@ -110,8 +105,13 @@ public class MapUI : MonoBehaviour
 
     public void BackToLevelSelect()
     {
-        levelSelectMenu.SetActive(true);
-        levelInfoMenu.SetActive(false);
+        mapInfoAnim.SetTrigger("End");
+        mapSelectAnim.SetTrigger("Start");
+    }
+
+    public void CloseMenu()
+    {
+        mapSelectAnim.SetTrigger("End");
     }
     public void PlayLevel()
     {

@@ -13,7 +13,7 @@ public class CutsceneManager : MonoBehaviour
 
     private IEnumerator PlayIntro()
     {
-        yield return new WaitForSeconds(17.5f);
+        yield return new WaitForSeconds(17f);
         cutscene.StopPlayback();
         SceneController.instance.NextLevel("Factory");
     }
