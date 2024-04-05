@@ -45,6 +45,6 @@ public class PauseManager : MonoBehaviour
     public void Quit()
     {
         SaveSystem.instance.SaveData();
-
+        Application.Quit();
     }
 }

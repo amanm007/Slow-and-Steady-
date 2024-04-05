@@ -48,7 +48,6 @@ public class MapUI : MonoBehaviour
     private void Update()
     {
         CheckLevelCompletion();
-        Debug.Log(mapSelectAnim);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,6 +81,7 @@ public class MapUI : MonoBehaviour
 
     public void OpenLevelInfo(string level)
     {
+        Cursor.visible = true;
         mapSelectAnim.SetTrigger("End");
         mapInfoAnim.SetTrigger("Start");
         cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
@@ -104,6 +104,7 @@ public class MapUI : MonoBehaviour
 
     public void BackToLevelSelect()
     {
+        Cursor.visible = true;
         mapInfoAnim.SetTrigger("End");
         mapSelectAnim.SetTrigger("Start");
     }
