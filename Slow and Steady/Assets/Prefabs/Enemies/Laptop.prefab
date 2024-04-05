@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 118166707093595948}
   - component: {fileID: 253677496757872285}
   - component: {fileID: 3060226913619231059}
+  - component: {fileID: 8163393198522354521}
   m_Layer: 9
   m_Name: Laptop
   m_TagString: Enemy
@@ -133,7 +134,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 1.5625}
+    oldSize: {x: 1.8125, y: 1.3125}
     newSize: {x: 1.375, y: 1.5625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,13 +182,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb093deb846f864c9727fd57b5a01d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 3
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
   value: 10
-  damageSprite: {fileID: 186065464, guid: 219bf2cf9020d5443b709701ef0dd24d, type: 3}
+  damageSprite: {fileID: -849930883, guid: 403b3bea1c7a9334d86a235c1e18f0a2, type: 3}
 --- !u!212 &3060226913619231059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -229,7 +230,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 1088626982, guid: 192217c86a2e64b4a97e2b2d1beaadc4, type: 3}
+  m_Sprite: {fileID: 487440733, guid: 403b3bea1c7a9334d86a235c1e18f0a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -240,6 +241,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8163393198522354521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968639492006474053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6a9431c161b844f800399edb9e8196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 450
+  shootSpeed: 15
+  nextWaypointDistance: 3
+  detectionRange: 50
+  roamRadius: 10
+  projectilePrefab: {fileID: 0}
+  shootPoint: {fileID: 6410218087721475563}
+  shootingRange: 15
+  shootingCooldown: 1.2
 --- !u!1 &8426113169731241967
 GameObject:
   m_ObjectHideFlags: 0
