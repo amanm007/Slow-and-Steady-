@@ -10,11 +10,9 @@ public class UpgradeUI : MonoBehaviour
     {
         upgradeAnim.SetTrigger("Start");
         UpgradeManager.instance.OpenMenu();
-        Cursor.visible = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Cursor.visible = false;
     }
 
     public void CloseMenu()

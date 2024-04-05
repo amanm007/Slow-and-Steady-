@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
 
 public class SceneController : MonoBehaviour
 {
@@ -15,7 +14,6 @@ public class SceneController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;
         if(instance == null)
         {
             instance = this;
@@ -31,7 +29,6 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadLevel(string level)
     {
-        Cursor.visible = false;
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level);

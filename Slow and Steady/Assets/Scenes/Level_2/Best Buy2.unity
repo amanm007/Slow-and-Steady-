@@ -80254,6 +80254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: User Interface
       objectReference: {fileID: 0}
+    - target: {fileID: 4941562419765811526, guid: 2beb08b85cf06364d96d01360bd85cd9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1710252126}
     - target: {fileID: 5078872467523440628, guid: 2beb08b85cf06364d96d01360bd85cd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -81001,6 +81005,11 @@ PrefabInstance:
 --- !u!4 &1710252125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7470228482559942536, guid: 03027ffa431e18843a6cd3b4b16b0ebd, type: 3}
+  m_PrefabInstance: {fileID: 1710252124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1710252126 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 757581290121223240, guid: 03027ffa431e18843a6cd3b4b16b0ebd, type: 3}
   m_PrefabInstance: {fileID: 1710252124}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1893025295 stripped

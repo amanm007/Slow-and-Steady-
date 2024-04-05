@@ -63,6 +63,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        Cursor.visible = true;
+
         title.text = emptyText;
         info.text = selectMessage;
         cost.text = emptyText;
@@ -71,9 +73,12 @@ public class UpgradeManager : MonoBehaviour
 
     public void CloseMenu()
     {
+        Cursor.visible = false;
+
         title.text = emptyText;
-        info.text = selectMessage;
+        info.text = emptyText;
         cost.text = emptyText;
+
         buy.SetActive(false);
     }
 

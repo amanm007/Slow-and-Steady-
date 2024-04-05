@@ -53,12 +53,11 @@ public class MapUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        mapSelectAnim.SetTrigger("Start");
         Cursor.visible = true;
+        mapSelectAnim.SetTrigger("Start");
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Cursor.visible = false; 
     }
 
     private void CheckLevelCompletion()
@@ -111,6 +110,7 @@ public class MapUI : MonoBehaviour
 
     public void CloseMenu()
     {
+        Cursor.visible = false;
         mapSelectAnim.SetTrigger("End");
     }
     public void PlayLevel()
