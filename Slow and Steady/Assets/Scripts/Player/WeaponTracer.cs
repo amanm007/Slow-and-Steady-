@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponTracer
 {
 
-    public static void Create(Vector3 fromPosition, Vector3 targetPosition, Material tracerMaterial)
+    public static void Create(Vector3 fromPosition, Vector3 targetPosition, Material tracerMaterial, float fadeOutTime)
     {
         // Create a new GameObject to hold the LineRenderer component
         GameObject tracerGameObject = new GameObject("BulletTracer");
@@ -26,7 +26,7 @@ public class WeaponTracer
         lineRenderer.sortingOrder = 100; // Adjust this value to ensure it's rendered above other objects
 
         // Optional: Add a script to fade out and destroy the line after a short duration
-        tracerGameObject.AddComponent<BulletTracerBehaviour>().BeginFadeOut(0.4f); // Adjust time as needed
+        tracerGameObject.AddComponent<BulletTracerBehaviour>().BeginFadeOut(fadeOutTime); // Adjust time as needed
     }
 }
 

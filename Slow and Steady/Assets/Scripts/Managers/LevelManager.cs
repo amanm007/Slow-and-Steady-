@@ -43,7 +43,6 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         UpdateObjective();
-        Debug.Log("Player Level = " + playerLevelCompletion);
     }
 
     private void UpdateObjective()

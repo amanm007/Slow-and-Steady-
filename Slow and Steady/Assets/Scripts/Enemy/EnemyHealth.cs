@@ -17,6 +17,8 @@ public class EnemyHealth : MonoBehaviour
     private ScrapManager scrapManager;
     private EnemyManager enemyManager;
 
+    public AudioManager audioManager;
+
     [SerializeField] private int value;
     [SerializeField] private Sprite damageSprite;
 
@@ -24,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         currentHealth = maxHealth;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color; // Store the original color
@@ -35,6 +38,20 @@ public class EnemyHealth : MonoBehaviour
         enemyManager = EnemyManager.instance;
     }
 
+    private void Update()
+    {
+        if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
+        {
+            flashDuration = 0.03f;
+            damageDuration = 0.06f;
+        }
+        else
+        {
+            flashDuration = 0.1f;
+            damageDuration = 0.2f;
+        }
+    }
+
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -42,8 +59,11 @@ public class EnemyHealth : MonoBehaviour
         // Start the flash effect
         StartCoroutine(FlashEffect());
 
+        audioManager.PlaySFX(audioManager.enemyDamage);
+
         if (currentHealth <= 0)
         {
+            audioManager.PlaySFX(audioManager.enemyDeath);
             // Delay the death to ensure the flash effect can be seen
             Invoke(nameof(Die), flashDuration);
         }
@@ -66,7 +86,7 @@ public class EnemyHealth : MonoBehaviour
         enemiesKilled++;
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
-            scrapManager.ChangeScraps(value);
+            //scrapManager.ChangeScraps(value);
             enemyManager.ChangeCount(enemiesKilled);
         }
         WaveSpawner waveSpawner = FindObjectOfType<WaveSpawner>(); // Find the WaveSpawner in the scene

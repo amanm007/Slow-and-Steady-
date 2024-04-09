@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Obstacle
   - Key
+  - Audio
   layers:
   - Default
   - TransparentFX

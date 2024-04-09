@@ -109932,6 +109932,75 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &486586884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.232819
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -45.089813
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.1198525
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408992510701603744, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915543346584224700, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: hubMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: db1a2d407ff385245beaed0d840230a6, type: 3}
+    - target: {fileID: 3915543346584224700, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: cityMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: afc218646900c274db1e6e7c424af837, type: 3}
+    - target: {fileID: 3915543346584224700, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: bestbuyMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 77ce3d81d48f6a740873ea0ceefe7334, type: 3}
+    - target: {fileID: 9162411113194372195, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27cd16afeb5378047b2b717137f0bc49, type: 3}
 --- !u!1 &702369612
 GameObject:
   m_ObjectHideFlags: 0
@@ -123082,6 +123151,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   zoomedSize: 9
   zoomSpeed: 10
+  isSlowMotionActive: 0
   energyBar: {fileID: 1582068078219739850}
   maxEnergy: 100
   energyDepletionRate: 20
@@ -125016,11 +125086,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingRange: 100
-  shootingLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   tracerMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   shootingCooldown: 0.35
+  aimedShootingCooldown: 0
+  reloadBar: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!223 &6895795845310720370
 Canvas:
   m_ObjectHideFlags: 0
@@ -125454,6 +125524,7 @@ MonoBehaviour:
   maxHealth: 10
   healthbar: {fileID: 7720979545354200685}
   spriteRenderer: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!114 &8681104410877136897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125603,3 +125674,4 @@ SceneRoots:
   - {fileID: 1008823407}
   - {fileID: 1210302720}
   - {fileID: 708557334}
+  - {fileID: 486586884}
