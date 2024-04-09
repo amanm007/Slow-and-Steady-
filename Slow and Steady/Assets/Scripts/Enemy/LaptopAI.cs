@@ -148,6 +148,8 @@ public class LaptopAI : MonoBehaviour
             proj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y);
 
             angle += angleStep;
+            Destroy(proj, 3f);
+
         }
     }
 }

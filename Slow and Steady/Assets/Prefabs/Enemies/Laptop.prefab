@@ -259,7 +259,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   detectionRange: 50
   roamRadius: 10
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1877321171848591702, guid: 0baa6f494cbb6a1449ba5fd8ef0eb41f, type: 3}
   shootPoint: {fileID: 6410218087721475563}
   shootingRange: 15
   shootingCooldown: 1.2
