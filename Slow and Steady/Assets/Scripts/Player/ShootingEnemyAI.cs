@@ -163,6 +163,7 @@ public class ShootingEnemyAI : MonoBehaviour
 
             float angle = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
             projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Destroy(projectile, 5f);
         }
     }
 }
