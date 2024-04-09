@@ -110,12 +110,12 @@ public class PlayerAimWeapon : MonoBehaviour
     {
         if (isCooldown)
         {
-            currentCooldownTime -= Time.deltaTime; // Decrease cooldown time
+            currentCooldownTime -= Time.deltaTime; 
             reloadBar.fillAmount = (shootingCooldown - currentCooldownTime) / shootingCooldown;
         }
         else
         {
-            reloadBar.fillAmount = 1; // Ready to shoot
+            reloadBar.fillAmount = 1; 
         }
     }
 

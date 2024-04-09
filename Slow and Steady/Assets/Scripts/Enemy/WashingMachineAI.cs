@@ -12,15 +12,16 @@ public class WashingMachineAI : MonoBehaviour
     public float detectionRange = 50f;
     private Vector3 startingPosition;
     public float roamRadius = 10f;
+    public float shootSpeed = 30f;
 
-    public GameObject projectilePrefab; 
-    public Transform shootPoint; 
-    public float shootingRange = 20f; 
-    public float shootingCooldown = 5f; 
+    public GameObject projectilePrefab;
+    public Transform shootPoint;
+    public float shootingRange = 20f;
+    public float shootingCooldown = 5f;
 
-    public LineRenderer pathLineRenderer; 
-    public LineRenderer shootLineRenderer; 
-    public float lineDisplayTime = 1f; 
+    public LineRenderer aimLineRenderer;
+    public LineRenderer shootLineRenderer;
+    public float lineDisplayTime = 1f;
 
     private Path path;
     private int currentWayPoint = 0;
@@ -31,6 +32,8 @@ public class WashingMachineAI : MonoBehaviour
     private float shootingTimer;
     private bool isPreparingToShoot = false;
     private SpriteRenderer spriteRenderer;
+    private Vector3 lockedPosition;
+    private Vector3 lockedAimPosition; // For storing locked aim position
 
     private enum State { Roaming, Chasing }
     private State state;
@@ -38,9 +41,14 @@ public class WashingMachineAI : MonoBehaviour
 
     private void Start()
     {
+        InitializeEnemy();
+
+    }
+    void InitializeEnemy()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        projectilePrefab = GameObject.FindGameObjectWithTag("Bullet");
+        projectilePrefab = GameObject.FindGameObjectWithTag("Laser");
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -49,10 +57,10 @@ public class WashingMachineAI : MonoBehaviour
         roamPosition = GetRoamingPosition();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         shootingTimer = shootingCooldown; // Initialize the shooting timer
-        pathLineRenderer.enabled = false;
+        aimLineRenderer.enabled = false;
         shootLineRenderer.enabled = false;
-    }
 
+    }
     void UpdatePath()
     {
         if (seeker.IsDone())
@@ -87,6 +95,7 @@ public class WashingMachineAI : MonoBehaviour
                 shootingTimer -= Time.deltaTime;
                 if (shootingTimer <= 0f && Vector2.Distance(transform.position, target.position) <= shootingRange)
                 {
+                    lockedPosition = target.position;
                     StartCoroutine(PrepareAndShoot());
                 }
                 shootingTimer -= Time.deltaTime;
@@ -142,8 +151,8 @@ public class WashingMachineAI : MonoBehaviour
             else if (state == State.Chasing && distanceToPlayer > detectionRange)
             {
                 state = State.Roaming;
-                currentWayPoint = 0; 
-                roamPosition = GetRoamingPosition(); 
+                currentWayPoint = 0;
+                roamPosition = GetRoamingPosition();
             }
         }
     }
@@ -161,44 +170,49 @@ public class WashingMachineAI : MonoBehaviour
 
     IEnumerator PrepareAndShoot()
     {
-        Vector2 direction = (target.position - shootPoint.position).normalized;
 
-        // path
-        pathLineRenderer.startColor = Color.red;
-        pathLineRenderer.endColor = Color.red;
-        pathLineRenderer.startWidth = 0.1f; 
-        pathLineRenderer.endWidth = 0.1f; 
-        pathLineRenderer.enabled = true;
-        pathLineRenderer.SetPosition(0, shootPoint.position);
-        pathLineRenderer.SetPosition(1, shootPoint.position + (Vector3)direction * shootingRange);
-
+        isPreparingToShoot = true;
        
+        // Display aim line
+        ShowAimLine(Color.red, 0.1f, lockedPosition);
+
         yield return new WaitForSeconds(lineDisplayTime);
 
-        pathLineRenderer.enabled = false;
+        // Hide aim line
+        aimLineRenderer.enabled = false;
 
-        //shooting lrendere
-        shootLineRenderer.startColor = Color.blue;
-        shootLineRenderer.endColor = Color.blue;
-        shootLineRenderer.startWidth = 0.3f; 
-        shootLineRenderer.endWidth = 0.3f; 
-        shootLineRenderer.enabled = true;
-        shootLineRenderer.SetPosition(0, shootPoint.position);
-        shootLineRenderer.SetPosition(1, shootPoint.position + (Vector3)direction * shootingRange);
+        ShootProjectile(lockedPosition);
 
-
-        yield return new WaitForSeconds(1f); 
-        shootLineRenderer.enabled = false;
+        isPreparingToShoot = false;
+        shootingTimer = shootingCooldown;
     }
-
-    void ShootProjectile(Vector2 direction)
+    void ShowAimLine(Color lineColor, float lineWidth, Vector3 lockedPosition)
     {
-        if (projectilePrefab != null && shootPoint != null)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-            projectile.GetComponent<Rigidbody2D>().velocity = direction * speed;
-        }
+        aimLineRenderer.startColor = lineColor;
+        aimLineRenderer.endColor = lineColor;
+        aimLineRenderer.startWidth = lineWidth;
+        aimLineRenderer.endWidth = lineWidth;
+        aimLineRenderer.SetPosition(0, shootPoint.position);
+        aimLineRenderer.SetPosition(1, lockedPosition);
+        aimLineRenderer.enabled = true;
     }
+    private void ShowAimLine(Vector2 direction)
+    {
+        aimLineRenderer.enabled = true;
+        aimLineRenderer.SetPosition(0, shootPoint.position);
+        aimLineRenderer.SetPosition(1, lockedAimPosition); // Use locked aim position
+    }
+    void ShootProjectile(Vector3 lockedPosition)
+    {
+        Vector2 direction = (lockedPosition - shootPoint.position).normalized;
+        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+        
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * shootSpeed;
 
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Destroy(projectile, .5f); 
+    }
 
 }
+    

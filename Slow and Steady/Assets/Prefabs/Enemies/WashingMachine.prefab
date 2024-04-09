@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1570526741772400094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72, y: 0, z: 0}
+  m_LocalPosition: {x: 0.99, y: 0.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 1.5625}
+    oldSize: {x: 2.125, y: 2.875}
     newSize: {x: 1.375, y: 1.5625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   flashDuration: 0.1
   damageDuration: 0.2
   value: 10
-  damageSprite: {fileID: 186065464, guid: 219bf2cf9020d5443b709701ef0dd24d, type: 3}
+  damageSprite: {fileID: -1962313760, guid: 07db26ff911138041ac1e793adecd1fc, type: 3}
 --- !u!212 &3060226913619231059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 1088626982, guid: 192217c86a2e64b4a97e2b2d1beaadc4, type: 3}
+  m_Sprite: {fileID: -1734272933, guid: 07db26ff911138041ac1e793adecd1fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -363,12 +363,14 @@ MonoBehaviour:
   nextWaypointDistance: 3
   detectionRange: 50
   roamRadius: 10
-  projectilePrefab: {fileID: 0}
+  shootSpeed: 30
+  projectilePrefab: {fileID: 1677416753767546818, guid: 5d8279dd2be168b4280984645908d7f2, type: 3}
   shootPoint: {fileID: 6410218087721475563}
-  shootingRange: 20
-  shootingCooldown: 5
-  lineRenderer: {fileID: 1954247355828756005}
-  lineDisplayTime: 1
+  shootingRange: 25
+  shootingCooldown: 2.5
+  aimLineRenderer: {fileID: 1954247355828756005}
+  shootLineRenderer: {fileID: 1954247355828756005}
+  lineDisplayTime: 3
 --- !u!1 &8426113169731241967
 GameObject:
   m_ObjectHideFlags: 0

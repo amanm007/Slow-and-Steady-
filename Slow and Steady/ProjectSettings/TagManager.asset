@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Obstacle
   - Key
+  - Laser
   layers:
   - Default
   - TransparentFX
