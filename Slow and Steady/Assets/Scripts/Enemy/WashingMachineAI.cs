@@ -12,7 +12,7 @@ public class WashingMachineAI : MonoBehaviour
     public float detectionRange = 50f;
     private Vector3 startingPosition;
     public float roamRadius = 10f;
-    public float shootSpeed = 30f;
+    public float shootSpeed = 5f;
 
     public GameObject projectilePrefab;
     public Transform shootPoint;
@@ -34,6 +34,7 @@ public class WashingMachineAI : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector3 lockedPosition;
     private Vector3 lockedAimPosition; // For storing locked aim position
+
 
     private enum State { Roaming, Chasing }
     private State state;
@@ -97,8 +98,9 @@ public class WashingMachineAI : MonoBehaviour
                 {
                     lockedPosition = target.position;
                     StartCoroutine(PrepareAndShoot());
+                    shootingTimer = shootingCooldown;
                 }
-                shootingTimer -= Time.deltaTime;
+                 shootingTimer -= Time.deltaTime;
             }
         }
     }
@@ -181,7 +183,11 @@ public class WashingMachineAI : MonoBehaviour
         // Hide aim line
         aimLineRenderer.enabled = false;
 
-        ShootProjectile(lockedPosition);
+        for (int i = 0; i < 2; i++)
+        {
+            ShootProjectile(lockedPosition);
+            yield return new WaitForSeconds(0.2f); // Wait for 0.2 seconds between shots
+        }
 
         isPreparingToShoot = false;
         shootingTimer = shootingCooldown;

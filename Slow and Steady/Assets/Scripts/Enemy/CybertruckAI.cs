@@ -88,9 +88,10 @@ public class CybertruckBossAI : MonoBehaviour
     void EnterStage2()
     {
         currentState = BossState.Stage2;
-        shootingCooldown *= 1.5f;
+        shootingCooldown = 1.5f;
         spawnCooldown = 2f;
-        shouldSpawnEnemies = true;
+       laserSpeed = 35f;
+    shouldSpawnEnemies = true;
       //  animator.SetTrigger("stage1");
     }
 
@@ -99,6 +100,8 @@ public class CybertruckBossAI : MonoBehaviour
         currentState = BossState.Stage3;
         spawnCooldown = 1f;
         shouldSpawnEnemies = true;
+        shootingCooldown = 1.5f;
+        laserSpeed = 40f;
         animator.SetTrigger("stage2");
     }
 
