@@ -83,9 +83,9 @@ public class SlowMotionAbility : MonoBehaviour
         if (isSlowMotionActive && playerAimWeapon != null)
         {
             playerCamera.orthographicSize = Mathf.Lerp(playerCamera.orthographicSize, zoomedSize, Time.unscaledDeltaTime * zoomSpeed);
-            Vector3 aimPosition = playerAimWeapon.GetMouseWorldPosition(); // Use the method from PlayerAimWeapon to get current aim position
-            Vector3 cameraTargetPosition = new Vector3(aimPosition.x, aimPosition.y, defaultPosition.z);
-            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, cameraTargetPosition, Time.unscaledDeltaTime * zoomSpeed);
+            //Vector3 aimPosition = playerAimWeapon.GetMouseWorldPosition(); // Use the method from PlayerAimWeapon to get current aim position
+            //Vector3 cameraTargetPosition = new Vector3(aimPosition.x, aimPosition.y, defaultPosition.z);
+            //playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, cameraTargetPosition, Time.unscaledDeltaTime * zoomSpeed);
         }
         else
         {

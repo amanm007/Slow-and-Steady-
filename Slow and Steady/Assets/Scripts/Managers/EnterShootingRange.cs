@@ -16,6 +16,10 @@ public class EnterShootingRange : MonoBehaviour
                 SceneController.instance.NextLevel("Shooting Range");
                 inFactory = true;
             }
+            else if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Outside Warehouse"))
+            {
+                SceneController.instance.NextLevel("Inside Warehouse");
+            }
         }
     }
 }

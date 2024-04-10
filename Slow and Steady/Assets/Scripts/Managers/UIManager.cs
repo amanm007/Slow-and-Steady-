@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2"))
         {
-            if (WaveSpawner.instance.currWave < 2)
+            if (WaveSpawner.instance.currWave < 2 && WaveZoneController.instance.enteredWaveZone == true)
             {
                 waveUI.SetActive(true);
             }

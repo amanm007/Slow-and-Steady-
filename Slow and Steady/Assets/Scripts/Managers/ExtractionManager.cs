@@ -17,7 +17,7 @@ public class ExtractionManager : MonoBehaviour
     [SerializeField] private Image extractBar;
     private float lerpSpeed;
 
-    public bool levelOneComplete, levelTwoComplete;
+    public bool levelOneComplete, levelTwoComplete, levelThreeComplete;
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +34,7 @@ public class ExtractionManager : MonoBehaviour
         extractionTimer.text = timeToExtract.ToString();
         extractBar.fillAmount = 0.025f;
 
-        levelOneComplete = false; levelTwoComplete = false;
+        levelOneComplete = false; levelTwoComplete = false; levelThreeComplete = false;
     }
 
     private void Update()
@@ -71,6 +71,10 @@ public class ExtractionManager : MonoBehaviour
                 else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2") && levelTwoComplete == false)
                 {
                     levelTwoComplete = true;
+                }
+                else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Warehouse") && levelThreeComplete == false)
+                {
+                    levelThreeComplete = true;
                 }
 
                 SceneController.instance.NextLevel("Factory");

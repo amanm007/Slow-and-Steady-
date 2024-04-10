@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     private string factoryObjective = "Go to the Shooting Range";
     private string shootingRangeObjective = "Use your sniper to take down the enemies";
     private string mapSelectObjective = "Select a level on the map";
-    private string levelOneObjective = "Kill all the enemies and find the next zone";
+    private string levelOneObjective = "Kill all the enemies and travel to the next zone";
     private string waveObjective = "Survive 3 Waves";
     private string extractionObjective = "Go to the Extraction Zone";
     [HideInInspector] public string whileExtractingObjective = "Wait to be Extracted";

@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_2/Best Buy2.unity
     guid: 709a47d4907199748aa2043ba81b96a5
+  - enabled: 1
+    path: Assets/Scenes/Level_3/Outside Warehouse.unity
+    guid: 66c2d4036c6ad8346880a778eade02b7
+  - enabled: 1
+    path: Assets/Scenes/Level_3/Inside Warehouse.unity
+    guid: c00a07dca6c205043a8fd718620f9263
   - enabled: 0
     path: Assets/Scenes/Level_0/Boss Battle.unity
     guid: 0cb599b4c980cd3428469c864d30b498

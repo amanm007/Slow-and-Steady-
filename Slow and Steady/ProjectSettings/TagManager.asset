@@ -11,6 +11,9 @@ TagManager:
   - Key
   - Laser
   - BossTrigger
+  - Audio
+  - Camo
+  - Zone
   layers:
   - Default
   - TransparentFX

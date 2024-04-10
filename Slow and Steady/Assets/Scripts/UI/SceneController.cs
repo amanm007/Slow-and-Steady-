@@ -38,8 +38,8 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
-        transitionAnim.SetTrigger("Start");
         audioManager.PlaySFX(audioManager.transitionIn, 0.3f);
+        transitionAnim.SetTrigger("Start");
     }
 
     private void CheckLevelCompletetion(string level) 

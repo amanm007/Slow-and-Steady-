@@ -10,8 +10,14 @@ public class CamosUI : MonoBehaviour
     {
         camoUI.SetTrigger("Start");
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Cursor.visible = true;
+    }
     public void CloseMenu()
     {
         camoUI.SetTrigger("End");
+        Cursor.visible = false;
     }
 }
