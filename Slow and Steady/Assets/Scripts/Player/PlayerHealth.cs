@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public Image healthbar;
     float lerpSpeed;
     public SpriteRenderer spriteRenderer;
-    // AudioManager audioManager;
+    public AudioManager audioManager;
 
     [SerializeField] private Animator deathAnim;
     private bool isDead;
@@ -25,9 +25,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         // healthBar.SetMaxHealth(maxHealth);
-        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         isDead = false;
-
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -66,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        //  audioManager.PlaySFX(audioManager.hurt);
+        audioManager.PlaySFX(audioManager.playerDamage);
 
         StartCoroutine(FlashColor()); // Flash the player sprite
         health = Mathf.Clamp(health, 0, maxHealth);
@@ -117,6 +116,7 @@ public class PlayerHealth : MonoBehaviour
         health += amount;
         health = Mathf.Clamp(health, 0, maxHealth);
         // Update health bar and other related UI elements if necessary
+        audioManager.PlaySFX(audioManager.healthPickup);
     }
     private void ReloadScene()
     {

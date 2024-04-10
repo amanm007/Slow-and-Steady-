@@ -302,3 +302,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a6e8ec4c8c6eb4b8d4abc338bb47c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSource: {fileID: 1892518740703998612}
+  sfxSource: {fileID: 8203063301329771536}
+  shot: {fileID: 8300000, guid: d7a1f5285f5c415479d854db0c935b94, type: 3}
+  rechamber: {fileID: 8300000, guid: 86505e21f84d39a4e81b34abbec9c22e, type: 3}
+  playerDamage: {fileID: 8300000, guid: 2dbe7e50ef833ad4c8b56525425eb832, type: 3}
+  enemyDamage: {fileID: 8300000, guid: cbda8c03b7168334e9921081381df3c2, type: 3}
+  enemyDeath: {fileID: 8300000, guid: cad65e3452a9fb24aa807ecfd54405a9, type: 3}
+  newWave: {fileID: 8300000, guid: c5401400afe63ae4fb4717dd52ab3150, type: 3}
+  transitionIn: {fileID: 8300000, guid: 572bc57598d7e524eac211b861501c58, type: 3}
+  transitionOut: {fileID: 8300000, guid: ac0aca1d6ffc9c244bf6b45fec926747, type: 3}
+  healthPickup: {fileID: 8300000, guid: 99592f81997998646b1125a0dd14b465, type: 3}
+  noteShot: {fileID: 8300000, guid: 18010c9fe2b176244877a7def7382b7e, type: 3}
+  keyShot: {fileID: 0}
+  hubMusic: {fileID: 8300000, guid: db1a2d407ff385245beaed0d840230a6, type: 3}
+  cityMusic: {fileID: 8300000, guid: 07faca6ceb2550e479051e6bce205654, type: 3}
+  bestbuyMusic: {fileID: 8300000, guid: afc218646900c274db1e6e7c424af837, type: 3}
+  factoryMusic: {fileID: 8300000, guid: 77ce3d81d48f6a740873ea0ceefe7334, type: 3}
