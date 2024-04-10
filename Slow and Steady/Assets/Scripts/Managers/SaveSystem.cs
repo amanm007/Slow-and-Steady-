@@ -22,6 +22,7 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.SetInt("scraps", ScrapManager.instance.scrap);
         PlayerPrefs.SetFloat("maxHealth", PlayerHealth.instance.maxHealth);
         PlayerPrefs.SetFloat("recharge", SlowMotionAbility.instance.energyRecoveryRate);
+        PlayerPrefs.SetFloat("speed", PlayerMovement.instance.SPEED);
     }
 
     public void LoadData()
@@ -30,6 +31,7 @@ public class SaveSystem : MonoBehaviour
         ScrapManager.instance.scrap = PlayerPrefs.GetInt("scraps");
         PlayerHealth.instance.maxHealth = PlayerPrefs.GetFloat("maxHealth");
         SlowMotionAbility.instance.energyRecoveryRate = PlayerPrefs.GetFloat("recharge");
+        PlayerMovement.instance.SPEED = PlayerPrefs.GetFloat("speed");
     }
 
     public void DeleteData()

@@ -19,6 +19,7 @@ public class ScrapManager : MonoBehaviour
     private void Start()
     {
         scrap = PlayerPrefs.GetInt("scraps");
+        scrap = 999;
     }
 
     private void OnGUI()
@@ -29,7 +30,10 @@ public class ScrapManager : MonoBehaviour
 
     public void ChangeScraps(int amount)
     {
-        scrap += amount;
+        if(scrap < 999)
+        {
+            scrap += amount;
+        }
         PlayerPrefs.SetInt("scraps", scrap);
     }
 

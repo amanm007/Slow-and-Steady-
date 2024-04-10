@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
 
     public float SPEED = 20f;
     private float originalSpeed;
@@ -16,9 +17,23 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDir;
     private Vector3 lastMoveDir;
 
+    public bool pauseMovement = false;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         playerMain = GetComponent<PlayerMain>();
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("speed"))
+        {
+            SPEED = PlayerPrefs.GetFloat("speed");
+        }
     }
 
     private void Update()
@@ -28,8 +43,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        dirX = Input.GetAxisRaw("Horizontal");    //Raw sets the axis back to '0' after key release
-        dirY = Input.GetAxisRaw("Vertical");    //Raw sets the axis back to '0' after key release
+        if(pauseMovement == false)
+        {
+            dirX = Input.GetAxisRaw("Horizontal");    //Raw sets the axis back to '0' after key release
+            dirY = Input.GetAxisRaw("Vertical");    //Raw sets the axis back to '0' after key release
+        }
+        else
+        {
+            dirX = 0;
+            dirY = 0;
+        }
 
         moveDir = new Vector3(dirX, dirY).normalized;
        
@@ -100,6 +123,12 @@ public class PlayerMovement : MonoBehaviour
             SPEED = originalSpeed;
             isSlowedDown = false;
         }
+    }
+
+    public void SetSpeedUpgrade(float upgradeValue)
+    {
+        SPEED += upgradeValue;
+        PlayerPrefs.SetFloat("speed", SPEED);
     }
 
 }

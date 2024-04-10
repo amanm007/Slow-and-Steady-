@@ -18,7 +18,7 @@ public class PlayerAimWeapon : MonoBehaviour
     public float shootingCooldown, aimedShootingCooldown; // Cooldown period in seconds'
     private bool isCooldown = false; // To track if we are in cooldown
     private float currentCooldownTime = 0f;
-    public Image reloadBar;
+    //public Image reloadBar;
 
     public AudioManager audioManager;
 
@@ -44,7 +44,7 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             HandleAiming();
             HandleShooting();
-            UpdateReloadBar();
+            //UpdateReloadBar();
         }
     }
 
@@ -109,7 +109,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
         isCooldown = false; // End cooldown
     }
-    private void UpdateReloadBar()
+/*    private void UpdateReloadBar()
     {
         if (isCooldown)
         {
@@ -120,7 +120,7 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             reloadBar.fillAmount = 1; // Ready to shoot
         }
-    }
+    }*/
 
     private void HandleAiming()
     {

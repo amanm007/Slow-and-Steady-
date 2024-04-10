@@ -12,7 +12,7 @@ public class MapUI : MonoBehaviour
     [Header("Lock Icons")]
     [SerializeField] private GameObject cityLock;
     [SerializeField] private GameObject bestbuyLock;
-    [SerializeField] private GameObject houseLock;
+    [SerializeField] private GameObject warehouseLock;
 
     [Header("Menus")]
     [SerializeField] private Animator mapSelectAnim;
@@ -26,12 +26,14 @@ public class MapUI : MonoBehaviour
     [SerializeField] private string levelTwo_title;
     [SerializeField] private string levelOne_info;
     [SerializeField] private string levelTwo_info;
+    [SerializeField] private string levelThree_title;
+    [SerializeField] private string levelThree_info;
     [SerializeField] private TMP_Text title, info;
 
     [Header("Menu Icons")]
     [SerializeField] private GameObject cityIcon;
     [SerializeField] private GameObject bestbuyIcon;
-    [SerializeField] private GameObject houseIcon;
+    [SerializeField] private GameObject warehouseIcon;
 
     private string levelSelection;
 
@@ -41,8 +43,8 @@ public class MapUI : MonoBehaviour
         {
             instance = this;
         }
-        cityLock.SetActive(true); bestbuyLock.SetActive(true); houseLock.SetActive(true);
-        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
+        cityLock.SetActive(true); bestbuyLock.SetActive(true); warehouseLock.SetActive(true);
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); warehouseIcon.SetActive(false);
     }
 
     private void Update()
@@ -54,9 +56,7 @@ public class MapUI : MonoBehaviour
     {
         Cursor.visible = true;
         mapSelectAnim.SetTrigger("Start");
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
+        PlayerMovement.instance.pauseMovement = true;
     }
 
     private void CheckLevelCompletion()
@@ -75,7 +75,7 @@ public class MapUI : MonoBehaviour
         {
             cityLock.SetActive(false);
             bestbuyLock.SetActive(false);
-            houseLock.SetActive(false);
+            warehouseLock.SetActive(false);
         }
     }
 
@@ -84,7 +84,7 @@ public class MapUI : MonoBehaviour
         Cursor.visible = true;
         mapSelectAnim.SetTrigger("End");
         mapInfoAnim.SetTrigger("Start");
-        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); warehouseIcon.SetActive(false);
 
         if (level == "Silicon Valley")
         {
@@ -97,6 +97,12 @@ public class MapUI : MonoBehaviour
             title.text = levelTwo_title;
             info.text = levelTwo_info;
             bestbuyIcon.SetActive(true);
+        }
+        else if (level == "Inside Warehouse")
+        {
+            title.text = levelThree_title;
+            info.text = levelThree_info;
+            warehouseIcon.SetActive(true);
         }
 
         levelSelection = level;
@@ -113,10 +119,12 @@ public class MapUI : MonoBehaviour
     {
         Cursor.visible = false;
         mapSelectAnim.SetTrigger("End");
+        PlayerMovement.instance.pauseMovement = false;
     }
     public void PlayLevel()
     {
         SceneController.instance.NextLevel(levelSelection);
         levelSelection = null;
+        PlayerMovement.instance.pauseMovement = false;
     }
 }

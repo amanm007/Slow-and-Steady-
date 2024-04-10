@@ -21,6 +21,7 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
         StartCoroutine(PauseMenu());
         transitionAnim.SetTrigger("Start");
+        PlayerMovement.instance.pauseMovement = true;
     }
 
     private IEnumerator PauseMenu()
@@ -34,6 +35,7 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
         transitionAnim.SetTrigger("End");
         Time.timeScale = 1f;
+        PlayerMovement.instance.pauseMovement = false;
     }
 
     public void MainMenu()
@@ -41,6 +43,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         //transitionAnim.SetTrigger("End");
         SceneController.instance.NextLevel("Main Menu");
+        PlayerMovement.instance.pauseMovement = false;
     }
 
     public void Quit()
