@@ -51,13 +51,16 @@ public class AudioManager : MonoBehaviour
     }
     public void Update()
     {
-        if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Intro Cutscene"))
         {
-            musicSource.pitch = 0.7f;
-        }
-        else
-        {
-            musicSource.pitch = 1f;
+            if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
+            {
+                musicSource.pitch = 0.7f;
+            }
+            else
+            {
+                musicSource.pitch = 1f;
+            }
         }
     }
 }

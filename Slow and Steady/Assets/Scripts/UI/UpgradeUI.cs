@@ -10,14 +10,13 @@ public class UpgradeUI : MonoBehaviour
     {
         upgradeAnim.SetTrigger("Start");
         UpgradeManager.instance.OpenMenu();
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
+        PlayerMovement.instance.pauseMovement = true;
     }
 
     public void CloseMenu()
     {
         upgradeAnim.SetTrigger("End");
         UpgradeManager.instance.CloseMenu();
+        PlayerMovement.instance.pauseMovement = false;
     }
 }

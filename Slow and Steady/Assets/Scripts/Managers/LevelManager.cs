@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
         }
         if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
         {
-            if (playerLevelCompletion == 0 && levelOneLocked == true)
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range") && playerLevelCompletion == 0 && levelOneLocked == true)
             {
                 playerLevelCompletion++;
                 levelOneLocked = false;

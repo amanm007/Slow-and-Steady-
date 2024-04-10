@@ -9,6 +9,7 @@ public class CamosUI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         camoUI.SetTrigger("Start");
+        PlayerMovement.instance.pauseMovement = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -19,5 +20,6 @@ public class CamosUI : MonoBehaviour
     {
         camoUI.SetTrigger("End");
         Cursor.visible = false;
+        PlayerMovement.instance.pauseMovement = false;
     }
 }

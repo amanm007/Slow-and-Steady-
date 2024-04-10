@@ -114,7 +114,7 @@ public class UpgradeManager : MonoBehaviour
     {
         buy.SetActive(true);
         title.text = health_title;
-        info.text = health_info + health_upgrade_value.ToString();
+        info.text = health_info + " " + health_upgrade_value.ToString();
         cost.text = healthCost.ToString();
         upgradeCost = (int)healthCost;
         healthUpgradeSelected = true;
@@ -124,7 +124,7 @@ public class UpgradeManager : MonoBehaviour
     {
         buy.SetActive(true);
         title.text = recharge_title;
-        info.text = recharge_info + recharge_upgrade_value.ToString() + "% faster";
+        info.text = recharge_info + " " + recharge_upgrade_value.ToString() + "% faster";
         cost.text = rechargeCost.ToString();
         upgradeCost = (int)rechargeCost;
         rechargeUpgradeSelected = true;
@@ -134,7 +134,7 @@ public class UpgradeManager : MonoBehaviour
     {
         buy.SetActive(true);
         title.text = speed_title;
-        info.text = speed_info + speed_upgrade_value.ToString();
+        info.text = speed_info + " " + speed_upgrade_value.ToString();
         cost.text = speedCost.ToString();
         upgradeCost = (int)speedCost;
         speedUpgradeSelected = true;
@@ -153,35 +153,38 @@ public class UpgradeManager : MonoBehaviour
         else if(ScrapManager.instance.GetScrapAmount() >= upgradeCost)
         {
             CheckUpgradeLevel();
+
             StartCoroutine(ShowPurchaseMessage());
             ScrapManager.instance.ChangeScraps(-upgradeCost);
+            
         }
 
     }
 
     private void CheckUpgradeSelected()
     {
+        Debug.Log(healthUpgradeSelected + "_" + rechargeUpgradeSelected + "_" + speedUpgradeSelected);
         if (healthUpgradeSelected)
         {
             rechargeUpgradeSelected = false;
             speedUpgradeSelected = false;
         }
-        else if (rechargeUpgradeSelected)
+        if (rechargeUpgradeSelected)
         {
             healthUpgradeSelected = false;
             speedUpgradeSelected = false;
         }
-        else if (speedUpgradeSelected)
+        if (speedUpgradeSelected)
         {
             healthUpgradeSelected = false;
             rechargeUpgradeSelected = false;
         }
-        else
+/*        else
         {
             healthUpgradeSelected = false;
             rechargeUpgradeSelected = false;
             speedUpgradeSelected = false;
-        }
+        }*/
     }
 
     private void CheckUpgradeLevel()
@@ -189,19 +192,27 @@ public class UpgradeManager : MonoBehaviour
         if (healthUpgradeSelected == true)
         {
             PlayerHealth.instance.SetMaxHealth(health_upgrade_value);
+            healthUpgradeSelected = false;
         }
 
         //recharge 
-        if (rechargeUpgradeSelected == true)
+        else if (rechargeUpgradeSelected == true)
         {
+            Debug.Log("recharge purchased");
             if (recharge_upgrade_level < 5)
             {
                 recharge_upgrade_level++;
                 SlowMotionAbility.instance.SetRecoveryRate(recharge_upgrade_value);
+                rechargeUpgradeSelected = false;
             }
-            else
+        }
+        else if (speedUpgradeSelected == true)
+        {
+            if (speed_upgrade_level < 5)
             {
-                StartCoroutine(ShowStateMessage());
+                speed_upgrade_level++;
+                PlayerMovement.instance.SetSpeedUpgrade(speed_upgrade_value);
+                speedUpgradeSelected = false;
             }
         }
     }
@@ -224,11 +235,8 @@ public class UpgradeManager : MonoBehaviour
         title.text = emptyText;
         info.text = upgradeState;
         cost.text = emptyText;
-        yield return new WaitForSeconds(2f);
-        title.text = initialTitle;
-        info.text = initialInfo;
-        cost.text = initialCost;
         buy.SetActive(true);
+        yield return new WaitForSeconds(2f);
     }
 
     private IEnumerator ShowPurchaseMessage()
