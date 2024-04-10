@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
@@ -240,15 +241,11 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 200
   nextWaypointDistance: 3
-  detectionRange: 10
+  detectionRange: 3
   roamRadius: 10
   spawnCooldown: 5
   enemyPrefabs:
-  - {fileID: 6968639492006474053, guid: 278524ea80ab66645ba5b53eb88b8911, type: 3}
-  - {fileID: 132487763269380018, guid: e0e6cc2b9f38aea4fb972744b5f8b433, type: 3}
   - {fileID: 1108419693085156492, guid: 9c23420868f58d247a30b04eddd63251, type: 3}
-  - {fileID: 6968639492006474053, guid: 6d92f6e93bbfa404fb00c67bd5601e81, type: 3}
-  - {fileID: 6968639492006474053, guid: f0a9220eeda7a6746a6813a76b11d85d, type: 3}
   enemiesToSpawn: 3
 --- !u!1 &7763681317566587395
 GameObject:

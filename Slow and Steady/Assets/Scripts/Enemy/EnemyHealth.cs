@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 1;
-    private int currentHealth;
+    [SerializeField] public int maxHealth = 1;
+    public int currentHealth;
     public SpriteRenderer spriteRenderer; // Assign this in the Inspector to the child's SpriteRenderer
     public Color flashColor = Color.red;
     public float flashDuration = 0.1f;
     public float damageDuration = 0.2f;
+    public delegate void EnemyDefeatedAction();
+    public event EnemyDefeatedAction OnDefeated;
 
     private Color originalColor;
 
@@ -63,7 +65,8 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        enemiesKilled++;
+       // OnDefeated?.Invoke();
+      // enemiesKilled++;
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Shooting Range"))
         {
             scrapManager.ChangeScraps(value);
@@ -74,7 +77,7 @@ public class EnemyHealth : MonoBehaviour
         {
             waveSpawner.spawnedEnemies.Remove(gameObject);
         }
-        // TODO: Add any death effects or animations here
+        
         Destroy(gameObject);
     }
 }
