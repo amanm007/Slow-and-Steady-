@@ -71,18 +71,9 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadLevel("Best Buy2"));
     }
 
-    public void PauseGame()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-    }
-
     public void MainMenu()
     {
+        SaveSystem.instance.SaveData();
         StartCoroutine(LoadLevel("Main Menu"));
     }
 

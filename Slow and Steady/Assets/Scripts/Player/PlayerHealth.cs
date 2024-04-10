@@ -7,41 +7,70 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health;
-    public float maxHealth = 10;
+    public static PlayerHealth instance;
+
+    [HideInInspector] public float maxHealth = 10f;
+    [HideInInspector] public float health;
+
+
     //public GameObject otherObject;
 
-     //public HealthBar healthBar;
+    //public HealthBar healthBar;
     //  public Image[] healthpoints;
     public Image healthbar;
     float lerpSpeed;
     public SpriteRenderer spriteRenderer;
-    public AudioManager audioManager;
+    // AudioManager audioManager;
 
-    [SerializeField] private Animator deathAnim;
+    //[SerializeField] private Animator deathAnim;
     private bool isDead;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Start()
     {
-        health = maxHealth;
+        if (PlayerPrefs.HasKey("maxHealth"))
+        {
+            maxHealth = PlayerPrefs.GetFloat("maxHealth");
+        }
+
+        SetHealth(maxHealth);
         // healthBar.SetMaxHealth(maxHealth);
+        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         isDead = false;
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
+        lerpSpeed = 3f * Time.deltaTime;
+        if (health > maxHealth)
         {
-            lerpSpeed = 3f * Time.deltaTime;
+            health = maxHealth;
+        }
+
+        HealthBarFiller();
+        Debug.Log(maxHealth);
+
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
+        {
+/*            lerpSpeed = 3f * Time.deltaTime;
             if (health > maxHealth)
             {
                 health = maxHealth;
             }
 
-            HealthBarFiller();
+            HealthBarFiller();*/
         }
+
+
     }
 
     void HealthBarFiller()
@@ -65,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        audioManager.PlaySFX(audioManager.playerDamage);
+        //  audioManager.PlaySFX(audioManager.hurt);
 
         StartCoroutine(FlashColor()); // Flash the player sprite
         health = Mathf.Clamp(health, 0, maxHealth);
@@ -98,30 +127,40 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = false;
         Debug.Log("dead");
-        deathAnim.SetTrigger("Start");
+        //deathAnim.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneController.instance.NextLevel("Factory");
         yield return new WaitForSeconds(1f);
-        deathAnim.SetTrigger("End");
+        //deathAnim.SetTrigger("End");
 
         // Destroy the other object if it exists
-        Destroy(gameObject);
+/*        Destroy(gameObject);
         if (transform.childCount > 0)
         {
             Destroy(transform.GetChild(0).gameObject); // Destroy the child object
-        }
+        }*/
     }
     public void IncreaseHealth(float amount)
     {
         health += amount;
         health = Mathf.Clamp(health, 0, maxHealth);
         // Update health bar and other related UI elements if necessary
-        audioManager.PlaySFX(audioManager.healthPickup);
     }
     private void ReloadScene()
     {
         Debug.Log("Reloading scene now");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
+
+    public void SetMaxHealth(float upgradeValue)
+    {
+        maxHealth += upgradeValue;
+        PlayerPrefs.SetFloat("maxHealth", maxHealth);
+    }
+
+    public void SetHealth(float value)
+    {
+        health = value;
     }
 }
