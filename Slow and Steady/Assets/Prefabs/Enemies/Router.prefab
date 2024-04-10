@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032182693, y: 0.24203157}
+  m_Offset: {x: 0.043624878, y: 0.031837463}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8210869, y: 1.2201385}
+  m_Size: {x: 1.6694717, y: 0.9996071}
   m_EdgeRadius: 0
 --- !u!50 &7373620940448435840
 Rigidbody2D:
@@ -172,6 +172,7 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 5
   damageSprite: {fileID: -1664580365, guid: 0a617421a2070a645bf288383c06b08d, type: 3}
 --- !u!212 &6811795507738834695
@@ -241,7 +242,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 200
   nextWaypointDistance: 3
-  detectionRange: 3
+  detectionRange: 500
   roamRadius: 10
   spawnCooldown: 5
   enemyPrefabs:

@@ -185,7 +185,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019634724, y: 0.21460819}
+  m_Offset: {x: 0.0026646852, y: 0.26309347}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -196,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7707, y: 3.0353642}
+  m_Size: {x: 2.1828268, y: 2.1529284}
   m_EdgeRadius: 0
 --- !u!114 &3118703250211999145
 MonoBehaviour:
@@ -270,10 +270,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  currentHealth: 0
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 15
   damageSprite: {fileID: -233007344, guid: 6abc2ce4cd6132a4196bd1914a5d0e6d, type: 3}
 --- !u!212 &4988358016092458594
@@ -341,8 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownRadius: 5
-  playerMovementScript: {fileID: 0}
-  playerh: {fileID: 0}
+  damagePerSecond: 1
 --- !u!1 &6505592799012031739
 GameObject:
   m_ObjectHideFlags: 0

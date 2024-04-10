@@ -669,7 +669,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014322758, y: -0.26194048}
+  m_Offset: {x: 0.014322758, y: 0.10070133}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -680,7 +680,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0954943, y: 0.5618639}
+  m_Size: {x: 1.0954943, y: 0.9623928}
   m_EdgeRadius: 0
 --- !u!114 &3825796750073473109
 MonoBehaviour:
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingRange: 100
   tracerMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  shootingCooldown: 0.35
+  shootingCooldown: 0.55
   aimedShootingCooldown: 0.05
   reloadBar: {fileID: 0}
   audioManager: {fileID: 0}
@@ -741,6 +741,7 @@ MonoBehaviour:
   maxHealth: 10
   healthbar: {fileID: 0}
   spriteRenderer: {fileID: 399455457788135632}
+  audioManager: {fileID: 0}
   deathAnim: {fileID: 1580774028571614305}
 --- !u!114 &615554637232757844
 MonoBehaviour:

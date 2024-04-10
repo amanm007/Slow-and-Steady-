@@ -130,7 +130,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.18387341, y: 0.03712821}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -141,7 +141,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3040986, y: 1.0671849}
   m_EdgeRadius: 0
 --- !u!50 &118166707093595948
 Rigidbody2D:
@@ -183,10 +183,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 10
   damageSprite: {fileID: -849930883, guid: 403b3bea1c7a9334d86a235c1e18f0a2, type: 3}
 --- !u!212 &3060226913619231059
@@ -257,7 +259,7 @@ MonoBehaviour:
   speed: 450
   shootSpeed: 15
   nextWaypointDistance: 3
-  detectionRange: 50
+  detectionRange: 500
   roamRadius: 10
   projectilePrefab: {fileID: 1877321171848591702, guid: 0baa6f494cbb6a1449ba5fd8ef0eb41f, type: 3}
   shootPoint: {fileID: 6410218087721475563}
