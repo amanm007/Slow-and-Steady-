@@ -8,16 +8,19 @@ using UnityEngine.UI;
 public class PlayerAimWeapon : MonoBehaviour
 {
     public float shootingRange = 100f;
-    public LayerMask shootingLayerMask;
     private Camera mainCamera;
     private Transform aimTransform;
     private Transform aimGunEndPointTransform;
     public Material tracerMaterial;
+    int shootingLayerMask;
+    
 
-    public float shootingCooldown = 0.5f; // Cooldown period in seconds
+    public float shootingCooldown, aimedShootingCooldown; // Cooldown period in seconds'
     private bool isCooldown = false; // To track if we are in cooldown
     private float currentCooldownTime = 0f;
     public Image reloadBar;
+
+    public AudioManager audioManager;
 
     /*    private bool aimCooldownBool = false;
         private float aimCooldown = 5000f;
@@ -26,7 +29,8 @@ public class PlayerAimWeapon : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        if(transform.Find("Aim") != null)
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        if (transform.Find("Aim") != null)
         {
             aimTransform = transform.Find("Aim");
             aimGunEndPointTransform = aimTransform.Find("GunEndPointPosition");
@@ -60,9 +64,14 @@ public class PlayerAimWeapon : MonoBehaviour
         isCooldown = true; // Start cooldown
         currentCooldownTime = shootingCooldown;
 
+        audioManager.PlaySFX(audioManager.shot);
+
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 shootingDirection = (mousePosition - aimGunEndPointTransform.position).normalized;
         float distanceToMouse = Vector2.Distance(aimGunEndPointTransform.position, mousePosition);
+
+        shootingLayerMask = 1 << 2;
+        shootingLayerMask = ~shootingLayerMask;
         RaycastHit2D hit = Physics2D.Raycast(aimGunEndPointTransform.position, shootingDirection, 960, shootingLayerMask);
         Ray2D shot = new(aimGunEndPointTransform.position, shootingDirection);
 
@@ -84,38 +93,32 @@ public class PlayerAimWeapon : MonoBehaviour
             //Debug.Log("Raycast did not hit anything.");
         }
 
-        StartCoroutine(ShakeCamera(0.1f, 0.2f));
-
-        if (tracerMaterial != null)
+        if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
         {
-            WeaponTracer.Create(aimGunEndPointTransform.position, shot.GetPoint(960), tracerMaterial);
+            WeaponTracer.Create(aimGunEndPointTransform.position, shot.GetPoint(960), tracerMaterial, 0.05f);
+            yield return new WaitForSeconds(aimedShootingCooldown); // Wait for cooldown period
         }
         else
         {
-            Debug.LogError("Tracer Material is not assigned.");
+            WeaponTracer.Create(aimGunEndPointTransform.position, shot.GetPoint(960), tracerMaterial, 0.4f);
+            StartCoroutine(ShakeCamera(0.1f, 0.2f));
+            yield return new WaitForSeconds(shootingCooldown - 0.45f); // Wait for cooldown period
+            audioManager.PlaySFX(audioManager.rechamber, 0.1f);
+            yield return new WaitForSeconds(0.45f);
         }
-
-        if (SlowMotionAbility.isSlowMotionActive)
-        {
-            yield return new WaitForSeconds(0.1f); // Wait for cooldown period
-        }
-        else
-        {
-            yield return new WaitForSeconds(shootingCooldown); // Wait for cooldown period
-        }
-        yield return new WaitForSeconds(shootingCooldown);
+        
         isCooldown = false; // End cooldown
     }
     private void UpdateReloadBar()
     {
         if (isCooldown)
         {
-            currentCooldownTime -= Time.deltaTime; 
+            currentCooldownTime -= Time.deltaTime; // Decrease cooldown time
             reloadBar.fillAmount = (shootingCooldown - currentCooldownTime) / shootingCooldown;
         }
         else
         {
-            reloadBar.fillAmount = 1; 
+            reloadBar.fillAmount = 1; // Ready to shoot
         }
     }
 

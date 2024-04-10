@@ -27,6 +27,7 @@ public class ShootingEnemyAI : MonoBehaviour
     private float shootingTimer;
     private State state;
 
+    public AudioManager audioManager;
     private SpriteRenderer spriteRenderer;
     private enum State
     {
@@ -36,6 +37,7 @@ public class ShootingEnemyAI : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         projectilePrefab = GameObject.FindGameObjectWithTag("Bullet");
@@ -84,6 +86,7 @@ public class ShootingEnemyAI : MonoBehaviour
                 if (shootingTimer <= 0f && Vector2.Distance(transform.position, target.position) <= shootingRange)
                 {
                     ShootProjectile();
+                    audioManager.PlaySFX(audioManager.noteShot, 0.5f);
                     shootingTimer = shootingCooldown; // Reset the timer
                 }
             }

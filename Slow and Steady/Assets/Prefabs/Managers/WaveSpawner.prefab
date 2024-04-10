@@ -308,9 +308,11 @@ MonoBehaviour:
     cost: 1
   - enemyPrefab: {fileID: 132487763269380018, guid: e0e6cc2b9f38aea4fb972744b5f8b433, type: 3}
     cost: 1
-  - enemyPrefab: {fileID: 6968639492006474053, guid: 278524ea80ab66645ba5b53eb88b8911, type: 3}
+  - enemyPrefab: {fileID: 6968639492006474053, guid: 6d92f6e93bbfa404fb00c67bd5601e81, type: 3}
     cost: 1
   - enemyPrefab: {fileID: 5554338863009728260, guid: 1923b54c7732406449e70a62c1987005, type: 3}
+    cost: 1
+  - enemyPrefab: {fileID: 5554338863009728260, guid: 4e5c84d80f9f0cf41b6c0981e2100df3, type: 3}
     cost: 1
   currWave: -1
   enemiesToSpawn: []
@@ -323,3 +325,4 @@ MonoBehaviour:
   spawnedEnemies: []
   waveAnim: {fileID: 6166362671059563061}
   waveBar: {fileID: 0}
+  audioManager: {fileID: 0}

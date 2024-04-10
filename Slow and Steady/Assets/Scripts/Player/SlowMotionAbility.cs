@@ -10,7 +10,7 @@ public class SlowMotionAbility : MonoBehaviour
     public float zoomSpeed = 10f;
 
     private float normalTimeScale = 1f;
-    public static bool isSlowMotionActive = false;
+    public bool isSlowMotionActive = false;
     private float slowMotionTimer = 0f;
     private float defaultSize;
     private Vector3 defaultPosition;

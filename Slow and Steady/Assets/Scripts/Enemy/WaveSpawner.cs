@@ -22,6 +22,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private Animator waveAnim;
     [SerializeField] private Image waveBar;
     private float lerpSpeed;
+    public AudioManager audioManager;
 
 
     private void Awake()
@@ -34,6 +35,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         NextWave(); // Start the first wave
     }
 
@@ -95,6 +97,10 @@ public class WaveSpawner : MonoBehaviour
         if (currWave < 2)
         {
             waveAnim.SetTrigger("Start");
+            if (currWave != 0)
+            {
+                audioManager.PlaySFX(audioManager.newWave, 0.2f);
+            }
         }
 
         GenerateWave();
