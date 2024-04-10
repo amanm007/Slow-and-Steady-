@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SlowMotionAbility : MonoBehaviour
 {
+    public static SlowMotionAbility instance;
     public float slowMotionFactor = 0.2f;
     public float slowMotionDuration = 5f;
     public Camera playerCamera;
@@ -23,6 +24,14 @@ public class SlowMotionAbility : MonoBehaviour
     private bool mustRecharge = false;
 
     private PlayerAimWeapon playerAimWeapon;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -58,7 +67,7 @@ public class SlowMotionAbility : MonoBehaviour
             currentEnergy -= energyDepletionRate * Time.unscaledDeltaTime; // Deplete energy
             UpdateEnergyBar();
         }
-        else 
+        else
         {
             if (currentEnergy < maxEnergy)
             {
@@ -81,7 +90,7 @@ public class SlowMotionAbility : MonoBehaviour
         else
         {
             playerCamera.orthographicSize = Mathf.Lerp(playerCamera.orthographicSize, defaultSize, Time.unscaledDeltaTime * zoomSpeed);
-          //  playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, defaultPosition, Time.unscaledDeltaTime * zoomSpeed);
+            //  playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, defaultPosition, Time.unscaledDeltaTime * zoomSpeed);
         }
     }
 
@@ -100,7 +109,7 @@ public class SlowMotionAbility : MonoBehaviour
         isSlowMotionActive = false;
         if (currentEnergy <= 0)
         {
-            mustRecharge = true; 
+            mustRecharge = true;
         }
     }
     private void UpdateEnergyBar()
@@ -111,5 +120,10 @@ public class SlowMotionAbility : MonoBehaviour
         }
 
 
+    }
+    public void SetRecoveryRate(float upgradeValue)
+    {
+        energyRecoveryRate += upgradeValue;
+        PlayerPrefs.SetFloat("recharge", energyRecoveryRate);
     }
 }

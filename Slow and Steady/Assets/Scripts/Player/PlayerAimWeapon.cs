@@ -13,7 +13,7 @@ public class PlayerAimWeapon : MonoBehaviour
     private Transform aimGunEndPointTransform;
     public Material tracerMaterial;
     int shootingLayerMask;
-    
+
 
     public float shootingCooldown, aimedShootingCooldown; // Cooldown period in seconds'
     private bool isCooldown = false; // To track if we are in cooldown
@@ -40,7 +40,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
         {
             HandleAiming();
             HandleShooting();
@@ -106,7 +106,7 @@ public class PlayerAimWeapon : MonoBehaviour
             audioManager.PlaySFX(audioManager.rechamber, 0.1f);
             yield return new WaitForSeconds(0.45f);
         }
-        
+
         isCooldown = false; // End cooldown
     }
     private void UpdateReloadBar()

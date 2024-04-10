@@ -28,6 +28,8 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
+        sfxSource.clip = transitionIn;
+        sfxSource.PlayDelayed(2.5f);
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Factory"))
         {
             musicSource.clip = hubMusic;
@@ -44,16 +46,13 @@ public class AudioManager : MonoBehaviour
     }
     public void Update()
     {
-        if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>() != null)
+        if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
         {
-            if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
-            {
-                musicSource.pitch = 0.7f;
-            }
-            else
-            {
-                musicSource.pitch = 1f;
-            }
+            musicSource.pitch = 0.7f;
+        }
+        else
+        {
+            musicSource.pitch = 1f;
         }
     }
 }
