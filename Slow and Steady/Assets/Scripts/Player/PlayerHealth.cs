@@ -18,15 +18,15 @@ public class PlayerHealth : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     // AudioManager audioManager;
 
-
-
+    [SerializeField] private Animator deathAnim;
+    private bool isDead;
 
     void Start()
     {
         health = maxHealth;
-       // healthBar.SetMaxHealth(maxHealth);
+        // healthBar.SetMaxHealth(maxHealth);
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
+        isDead = false;
 
     }
 
@@ -83,20 +83,34 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Die()
     {
+        isDead = true;
         if (healthbar != null)
         {
             healthbar.fillAmount = 0;
         }
+        //Invoke("ReloadScene", 2f);
+        if(isDead == true)
+        {
+            StartCoroutine(DeathScreen());
+        }
+    }
+
+    private IEnumerator DeathScreen()
+    {
+        isDead = false;
+        Debug.Log("dead");
+        deathAnim.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneController.instance.NextLevel("Factory");
+        yield return new WaitForSeconds(1f);
+        deathAnim.SetTrigger("End");
+
         // Destroy the other object if it exists
         Destroy(gameObject);
         if (transform.childCount > 0)
         {
             Destroy(transform.GetChild(0).gameObject); // Destroy the child object
         }
-        //Invoke("ReloadScene", 2f);
-
-        SceneController.instance.NextLevel("Factory");
-
     }
     public void IncreaseHealth(float amount)
     {

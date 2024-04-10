@@ -8,14 +8,16 @@ public class UpgradeUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        upgradeAnim.SetTrigger("Open");
+        upgradeAnim.SetTrigger("Start");
         UpgradeManager.instance.OpenMenu();
-        Cursor.visible = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        upgradeAnim.SetTrigger("Close");
+    }
+
+    public void CloseMenu()
+    {
+        upgradeAnim.SetTrigger("End");
         UpgradeManager.instance.CloseMenu();
-        Cursor.visible = false;
     }
 }

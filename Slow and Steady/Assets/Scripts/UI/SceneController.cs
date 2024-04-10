@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
 
 public class SceneController : MonoBehaviour
 {
 
     public static SceneController instance;
     [SerializeField] private Animator transitionAnim;
-    public bool levelZeroComplete;
+    [HideInInspector] public bool levelZeroComplete;
 
     private void Awake()
     {
-        Cursor.visible = false;
         if(instance == null)
         {
             instance = this;
@@ -31,7 +29,6 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadLevel(string level)
     {
-        Cursor.visible = false;
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level);
@@ -52,6 +49,11 @@ public class SceneController : MonoBehaviour
 
 
     public void PlayGame()
+    {
+        StartCoroutine(LoadLevel("Intro Cutscene"));
+    }
+
+    public void Factory()
     {
         StartCoroutine(LoadLevel("Factory"));
     }
@@ -83,6 +85,7 @@ public class SceneController : MonoBehaviour
 
     public void Quit()
     {
+        SaveSystem.instance.SaveData();
         Application.Quit();
     }
 }

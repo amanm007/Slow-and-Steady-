@@ -50,3 +50,6 @@ TagManager:
   - name: Layer 1
     uniqueID: 1489393793
     locked: 0
+  - name: Cursor
+    uniqueID: 1491221387
+    locked: 0

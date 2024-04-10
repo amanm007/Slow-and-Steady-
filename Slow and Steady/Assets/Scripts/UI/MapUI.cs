@@ -9,18 +9,29 @@ public class MapUI : MonoBehaviour
 {
     public static MapUI instance;
 
-    [SerializeField] private GameObject cityLock, bestbuyLock, houseLock;
-    [SerializeField] private GameObject levelSelectMenu, levelInfoMenu;
+    [Header("Lock Icons")]
+    [SerializeField] private GameObject cityLock;
+    [SerializeField] private GameObject bestbuyLock;
+    [SerializeField] private GameObject houseLock;
 
-    [SerializeField] private string levelOne_title, levelTwo_title;
+    [Header("Menus")]
+    [SerializeField] private Animator mapSelectAnim;
+    [SerializeField] private Animator mapInfoAnim;
 
-    [SerializeField] private GameObject mapDisplay;
-    [SerializeField] private List<Sprite>[] map;
-    private Image mapSelection;
+    [SerializeField] private GameObject levelSelectMenu;
+    [SerializeField] private GameObject levelInfoMenu;
 
-    [SerializeField] private string levelOne_info, levelTwo_info;
-
+    [Header("Menu Info")]
+    [SerializeField] private string levelOne_title;
+    [SerializeField] private string levelTwo_title;
+    [SerializeField] private string levelOne_info;
+    [SerializeField] private string levelTwo_info;
     [SerializeField] private TMP_Text title, info;
+
+    [Header("Menu Icons")]
+    [SerializeField] private GameObject cityIcon;
+    [SerializeField] private GameObject bestbuyIcon;
+    [SerializeField] private GameObject houseIcon;
 
     private string levelSelection;
 
@@ -30,12 +41,8 @@ public class MapUI : MonoBehaviour
         {
             instance = this;
         }
-
-        levelSelectMenu.SetActive(false);
-        levelInfoMenu.SetActive(false);
         cityLock.SetActive(true); bestbuyLock.SetActive(true); houseLock.SetActive(true);
-
-        mapSelection = mapDisplay.GetComponent<Image>();
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
     }
 
     private void Update()
@@ -45,18 +52,11 @@ public class MapUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        levelSelectMenu.SetActive(true);
         Cursor.visible = true;
+        mapSelectAnim.SetTrigger("Start");
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        levelSelectMenu.SetActive(false);
-
-        if(levelInfoMenu.activeSelf == true)
-        {
-            levelInfoMenu.SetActive(false);
-        }
-        Cursor.visible = false;
     }
 
     private void CheckLevelCompletion()
@@ -81,20 +81,38 @@ public class MapUI : MonoBehaviour
 
     public void OpenLevelInfo(string level)
     {
-        levelInfoMenu.SetActive(true);
-        
-        if(level == "Silicon Valley")
+        Cursor.visible = true;
+        mapSelectAnim.SetTrigger("End");
+        mapInfoAnim.SetTrigger("Start");
+        cityIcon.SetActive(false); bestbuyIcon.SetActive(false); houseIcon.SetActive(false);
+
+        if (level == "Silicon Valley")
         {
             title.text = levelOne_title;
             info.text = levelOne_info;
+            cityIcon.SetActive(true);
         }
         else if (level == "Best Buy2")
         {
             title.text = levelTwo_title;
             info.text = levelTwo_info;
+            bestbuyIcon.SetActive(true);
         }
 
         levelSelection = level;
+    }
+
+    public void BackToLevelSelect()
+    {
+        Cursor.visible = true;
+        mapInfoAnim.SetTrigger("End");
+        mapSelectAnim.SetTrigger("Start");
+    }
+
+    public void CloseMenu()
+    {
+        Cursor.visible = false;
+        mapSelectAnim.SetTrigger("End");
     }
     public void PlayLevel()
     {
