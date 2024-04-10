@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3ec331b5360a2458483c49b42b6ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapDisplay: {fileID: 0}
+  scrap: 0
+  scrapDisplayUpgrades: {fileID: 0}
+  scrapDisplayCamos: {fileID: 0}

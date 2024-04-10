@@ -72,7 +72,7 @@ public class ExtractionManager : MonoBehaviour
                 {
                     levelTwoComplete = true;
                 }
-                else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Warehouse") && levelThreeComplete == false)
+                else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse") && levelThreeComplete == false)
                 {
                     levelThreeComplete = true;
                 }

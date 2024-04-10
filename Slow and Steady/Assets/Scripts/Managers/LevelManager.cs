@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
             objectiveDisplay.text = levelOneObjective;
         }
 
-        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2")) {
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse")) {
             if (WaveSpawner.instance.currWave < 3)
             {
                 objectiveDisplay.text = waveObjective;

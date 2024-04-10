@@ -19,7 +19,6 @@ public class ScrapManager : MonoBehaviour
     private void Start()
     {
         scrap = PlayerPrefs.GetInt("scraps");
-        scrap = 999;
     }
 
     private void OnGUI()
