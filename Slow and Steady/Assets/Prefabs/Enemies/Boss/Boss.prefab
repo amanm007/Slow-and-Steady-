@@ -33,8 +33,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -38.72, y: 6.5, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8913446876886392847}
   - {fileID: 7969220840436870721}
@@ -152,12 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb093deb846f864c9727fd57b5a01d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 8
   currentHealth: 0
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 5
   damageSprite: {fileID: -1441128818, guid: 7907f503c6950774b81baaec05ec7ef5, type: 3}
 --- !u!212 &6811795507738834695
@@ -200,7 +201,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 36
+  m_SortingOrder: 110
   m_Sprite: {fileID: 1689516539, guid: 7907f503c6950774b81baaec05ec7ef5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -241,6 +242,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   headlightPositions:
   - {fileID: 8913446876886392847}
   - {fileID: 7969220840436870721}
@@ -248,10 +254,12 @@ MonoBehaviour:
   rotationSpeed: 5
   shootingCooldown: 2
   spawnCooldown: 3
-  health: 100
+  health: 8
   laserSpeed: 25
-  enemiesToSpawnStage2: 3
-  enemiesToSpawnStage3: 5
+  enemiesToSpawnStage2: 2
+  enemiesToSpawnStage3: 3
+  detectionRange: 50
+  roamRadius: 10
 --- !u!95 &4090751699788314264
 Animator:
   serializedVersion: 5
@@ -329,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 7763681317566587395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.97, y: 0.41, z: 0}
+  m_LocalPosition: {x: 1.75, y: 0.35, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
