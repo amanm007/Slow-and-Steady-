@@ -236,13 +236,8 @@ public class WaveSpawner : MonoBehaviour
             switch (currWave)
             {
                 case 0:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
                     AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 1);
-                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 1);
-                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 1);
-                    AddEnemiesToSpawn(enemies[7].enemyPrefab, 1);
                     break;
 
                 case 1:

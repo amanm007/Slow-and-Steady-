@@ -28,6 +28,7 @@ public class LaptopAI : MonoBehaviour
     private State state;
 
     private SpriteRenderer spriteRenderer;
+    AudioManager audioManager;
     private enum State
     {
         Roaming,
@@ -45,6 +46,7 @@ public class LaptopAI : MonoBehaviour
         roamPosition = GetRoamingPosition();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         shootingTimer = shootingCooldown; // Initialize the shooting timer
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void UpdatePath()
@@ -151,5 +153,6 @@ public class LaptopAI : MonoBehaviour
             Destroy(proj, 2f);
 
         }
+        audioManager.PlaySFX(audioManager.keyShot, 0.2f);
     }
 }

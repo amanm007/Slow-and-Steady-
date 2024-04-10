@@ -34,7 +34,7 @@ public class WashingMachineAI : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector3 lockedPosition;
     private Vector3 lockedAimPosition; // For storing locked aim position
-
+    AudioManager audioManager;
 
     private enum State { Roaming, Chasing }
     private State state;
@@ -43,7 +43,7 @@ public class WashingMachineAI : MonoBehaviour
     private void Start()
     {
         InitializeEnemy();
-
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     void InitializeEnemy()
     {
@@ -187,6 +187,7 @@ public class WashingMachineAI : MonoBehaviour
         {
             ShootProjectile(lockedPosition);
             yield return new WaitForSeconds(0.2f); // Wait for 0.2 seconds between shots
+            audioManager.PlaySFX(audioManager.waterShot, 0.12f);
         }
 
         isPreparingToShoot = false;

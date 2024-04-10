@@ -152,12 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb093deb846f864c9727fd57b5a01d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 8
   currentHealth: 0
   spriteRenderer: {fileID: 0}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 5
   damageSprite: {fileID: -1441128818, guid: 7907f503c6950774b81baaec05ec7ef5, type: 3}
 --- !u!212 &6811795507738834695
@@ -248,10 +249,12 @@ MonoBehaviour:
   rotationSpeed: 5
   shootingCooldown: 2
   spawnCooldown: 3
-  health: 100
+  health: 8
   laserSpeed: 25
   enemiesToSpawnStage2: 3
   enemiesToSpawnStage3: 5
+  detectionRange: 500
+  roamRadius: 10
 --- !u!95 &4090751699788314264
 Animator:
   serializedVersion: 5

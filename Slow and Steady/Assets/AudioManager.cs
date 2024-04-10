@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     
 
     public AudioClip shot, rechamber, playerDamage, enemyDamage, enemyDeath, newWave,
-        transitionIn, transitionOut, healthPickup, noteShot, keyShot;
+        transitionIn, transitionOut, healthPickup, noteShot, keyShot, waterShot;
     public AudioClip hubMusic, cityMusic, bestbuyMusic, factoryMusic;
 
     public void PlaySFX(AudioClip clip)
