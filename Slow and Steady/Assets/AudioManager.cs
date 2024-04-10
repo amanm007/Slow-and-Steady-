@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSource;
+    
 
     public AudioClip shot, rechamber, playerDamage, enemyDamage, enemyDeath, newWave,
         transitionIn, transitionOut, healthPickup, noteShot, keyShot;
@@ -29,7 +30,7 @@ public class AudioManager : MonoBehaviour
     public void Start()
     {
         sfxSource.clip = transitionIn;
-        sfxSource.PlayDelayed(2.5f);
+        sfxSource.PlayDelayed(0.5f);
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shooting Range") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Factory"))
         {
             musicSource.clip = hubMusic;
@@ -42,7 +43,11 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = bestbuyMusic;
         }
-        musicSource.PlayDelayed(3.5f);
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Outside Warehouse"))
+        {
+            musicSource.clip = factoryMusic;
+        }
+        musicSource.PlayDelayed(2.5f);
     }
     public void Update()
     {

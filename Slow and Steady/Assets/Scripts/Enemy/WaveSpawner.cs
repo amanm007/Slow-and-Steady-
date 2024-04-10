@@ -39,7 +39,7 @@ public class WaveSpawner : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         //GenerateWave();
-        //NextWave(); // Start the first wave
+        NextWave(); // Start the first wave
     }
 
     void FixedUpdate()
@@ -52,18 +52,15 @@ public class WaveSpawner : MonoBehaviour
         spawnTimer -= Time.fixedDeltaTime;
         waveTimer -= Time.fixedDeltaTime;
 
-        if (WaveZoneController.instance.enteredWaveZone == true)
+        
+        if (waveTimer <= 0)
         {
-            if (waveTimer <= 0)
+            // Check if all enemies are dead and the wave is over
+            if (spawnedEnemies.Count == 0)
             {
-                // Check if all enemies are dead and the wave is over
-                if (spawnedEnemies.Count == 0)
-                {
-                    NextWave();
-                }
+                NextWave();
             }
         }
-        
     }
 
     private void Update()
@@ -100,7 +97,7 @@ public class WaveSpawner : MonoBehaviour
             return; // Uncomment this line to stop spawning
         }
 
-        if (currWave < 2)
+        if (currWave < 3)
         {
             waveAnim.SetTrigger("Start");
             if (currWave != 0)
@@ -124,40 +121,50 @@ public class WaveSpawner : MonoBehaviour
 
         // Depending on the wave number, add specific enemies to the list
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City"))
-        { //manages wave spawn for level 1
+        { //manages wave spawn for level 1 
+            /* 
+            0 = tablet
+            1 = tv
+            2 = laptop
+            3 = fridge
+            4 = oven
+            */
             switch (currWave)
             {
                 case 0:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8); // 2 enemies of type 0
+                    Debug.Log("LEVEL 1 SPAWNS W1");
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
                     AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 1);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 1);
-
                     break;
+
                 case 1:
+                    Debug.Log("LEVEL 1 SPAWNS W2");
                     AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
-                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
-
                     break;
+
                 case 2:
-                    // Mix of all enemy types
+                    Debug.Log("LEVEL 1 SPAWNS W3");
                     AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 3);
                     AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
                     break;
 
                 case 3:
+                    Debug.Log("LEVEL 1 SPAWNS EX");
                     AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
                     AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 3);
                     AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
                     break;
+
                 default:
                     Debug.Log("Undefined wave number.");
                     break;
@@ -165,30 +172,39 @@ public class WaveSpawner : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2"))
         { //manages wave spawn for level 2
+            /* 
+            0 = tablet
+            1 = tv
+            2 = speaker
+            3 = fridge
+            4 = router
+            5 = washing
+            */
             switch (currWave)
             {
                 case 0:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8); // 2 enemies of type 0
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
+                    Debug.Log("LEVEL 2 SPAWNS W1");
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4);
                     AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 1);
-
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 1);
                     break;
+
                 case 1:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4);
                     AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
-                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
-
+                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 2);
                     break;
+
                 case 2:
-                    // Mix of all enemy types
                     AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 5);
                     AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 2);
                     break;
 
                 case 3:
@@ -197,7 +213,9 @@ public class WaveSpawner : MonoBehaviour
                     AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
                     AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 2);
                     break;
+
                 default:
                     Debug.Log("Undefined wave number.");
                     break;
@@ -205,39 +223,54 @@ public class WaveSpawner : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse"))
         { //manages wave spawn for level 3
+            /* 
+             0 = tablet
+             1 = tv
+             2 = speaker
+             3 = fridge
+             4 = laptop
+             5 = oven
+             6 = router
+             7 = washing 
+             */
             switch (currWave)
             {
                 case 0:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8); // 2 enemies of type 0
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
                     AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
                     AddEnemiesToSpawn(enemies[4].enemyPrefab, 1);
-
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[7].enemyPrefab, 1);
                     break;
+
                 case 1:
                     AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 3);
+                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[6].enemyPrefab, 1);
+                    AddEnemiesToSpawn(enemies[7].enemyPrefab, 1);
+                    break;
+
+                case 2:
+                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
+                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4);
                     AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
                     AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
-
-                    break;
-                case 2:
-                    // Mix of all enemy types
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 3);
+                    AddEnemiesToSpawn(enemies[5].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[6].enemyPrefab, 2);
+                    AddEnemiesToSpawn(enemies[7].enemyPrefab, 2);
                     break;
 
                 case 3:
-                    AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
-                    AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
-                    AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
-                    AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
-                    AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+
                     break;
+
                 default:
                     Debug.Log("Undefined wave number.");
                     break;

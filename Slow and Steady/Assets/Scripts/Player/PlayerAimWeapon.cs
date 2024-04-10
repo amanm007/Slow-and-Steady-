@@ -18,7 +18,7 @@ public class PlayerAimWeapon : MonoBehaviour
     public float shootingCooldown, aimedShootingCooldown; // Cooldown period in seconds'
     private bool isCooldown = false; // To track if we are in cooldown
     private float currentCooldownTime = 0f;
-    public Image reloadBar;
+    /*public Image reloadBar;*/
 
     public AudioManager audioManager;
 
@@ -44,7 +44,7 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             HandleAiming();
             HandleShooting();
-            UpdateReloadBar();
+            /*UpdateReloadBar();*/
         }
     }
 
@@ -96,6 +96,7 @@ public class PlayerAimWeapon : MonoBehaviour
         if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
         {
             WeaponTracer.Create(aimGunEndPointTransform.position, shot.GetPoint(960), tracerMaterial, 0.05f);
+            StartCoroutine(ShakeCamera(0.1f, 0.04f));
             yield return new WaitForSeconds(aimedShootingCooldown); // Wait for cooldown period
         }
         else
@@ -109,7 +110,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
         isCooldown = false; // End cooldown
     }
-    private void UpdateReloadBar()
+    /*private void UpdateReloadBar()
     {
         if (isCooldown)
         {
@@ -120,7 +121,7 @@ public class PlayerAimWeapon : MonoBehaviour
         {
             reloadBar.fillAmount = 1; // Ready to shoot
         }
-    }
+    }*/
 
     private void HandleAiming()
     {

@@ -38,7 +38,6 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
-        audioManager.PlaySFX(audioManager.transitionIn, 0.3f);
         transitionAnim.SetTrigger("Start");
     }
 

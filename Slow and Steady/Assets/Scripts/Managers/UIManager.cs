@@ -17,13 +17,15 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2"))
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") 
+            || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2")
+            || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse"))
         {
-            if (WaveSpawner.instance.currWave < 2 && WaveZoneController.instance.enteredWaveZone == true)
+            if (WaveSpawner.instance.currWave < 3)
             {
                 waveUI.SetActive(true);
             }
-            else if (WaveSpawner.instance.currWave == 2)
+            else if (WaveSpawner.instance.currWave == 3)
             {
                 waveUI.SetActive(false);
                 extractionUI.SetActive(true);

@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public Image healthbar;
     float lerpSpeed;
     public SpriteRenderer spriteRenderer;
-    // AudioManager audioManager;
+    AudioManager audioManager;
 
     //[SerializeField] private Animator deathAnim;
     private bool isDead;
@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
 
         SetHealth(maxHealth);
         // healthBar.SetMaxHealth(maxHealth);
-        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         isDead = false;
     }
 
@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        //  audioManager.PlaySFX(audioManager.hurt);
+        audioManager.PlaySFX(audioManager.playerDamage);
 
         StartCoroutine(FlashColor()); // Flash the player sprite
         health = Mathf.Clamp(health, 0, maxHealth);

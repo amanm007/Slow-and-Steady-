@@ -69,12 +69,12 @@ public class LevelManager : MonoBehaviour
         }
 
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2")) {
-            if (WaveSpawner.instance.currWave < 2)
+            if (WaveSpawner.instance.currWave < 3)
             {
                 objectiveDisplay.text = waveObjective;
             }
 
-            else if (WaveSpawner.instance.currWave == 2)
+            else if (WaveSpawner.instance.currWave == 3)
             {
                 objectiveDisplay.text = extractionObjective;
             }
