@@ -132,7 +132,7 @@ public class CybertruckBossAI : MonoBehaviour
         int health = enemyHealth.currentHealth;
         int maxHealth = enemyHealth.maxHealth;
 
-
+        
         if (health <= 0 && currentState != BossState.Dead)
         {
             EnterStageDead();
@@ -151,16 +151,16 @@ public class CybertruckBossAI : MonoBehaviour
             if (distanceToTarget <= detectionRange && currentState != BossState.Chasing)
             {
                 currentState = BossState.Chasing;
-
+                
             }
             else if (distanceToTarget > detectionRange && currentState != BossState.Roaming)
             {
                 currentState = BossState.Roaming;
-
+                
             }
         }
     }
-    void EnterStage2()
+        void EnterStage2()
     {
         currentState = BossState.Stage2;
         shootingCooldown = 1.5f;
@@ -168,7 +168,7 @@ public class CybertruckBossAI : MonoBehaviour
         spawnCooldown = 2f;
         laserSpeed = 35f;
         shouldSpawnEnemies = true;
-        //  animator.SetTrigger("stage1");
+      //  animator.SetTrigger("stage1");
     }
 
     void EnterStage3()
@@ -186,8 +186,8 @@ public class CybertruckBossAI : MonoBehaviour
     {
         currentState = BossState.Dead;
         isDead = true;
-        Destroy(gameObject);
-
+        Destroy(gameObject); 
+        
     }
 
     void HandleShooting()
@@ -207,10 +207,10 @@ public class CybertruckBossAI : MonoBehaviour
 
     void ShootProjectileFrom(Transform shootPoint)
     {
-
+        
         GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
         Vector2 direction = (target.position - shootPoint.position).normalized;
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * laserSpeed;
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * laserSpeed; 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Destroy(projectile, 3f);
@@ -218,7 +218,7 @@ public class CybertruckBossAI : MonoBehaviour
 
     void HandleSpawning()
     {
-
+        
         if (!shouldSpawnEnemies || currentState == BossState.Stage1 || currentState == BossState.Dead) return;
 
         spawnTimer -= Time.deltaTime;
@@ -235,12 +235,12 @@ public class CybertruckBossAI : MonoBehaviour
                 enemiesToSpawn = enemiesToSpawnStage3;
             }
 
-
+            
             if (enemiesToSpawn > 0)
             {
                 SpawnEnemies(enemiesToSpawn);
                 spawnTimer = spawnCooldown;
-                shouldSpawnEnemies = false;
+                shouldSpawnEnemies = false; 
             }
         }
     }
@@ -249,10 +249,10 @@ public class CybertruckBossAI : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            if (spawnPoints.Length == 0) return;
+            if (spawnPoints.Length == 0) return; 
 
-            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            var selectedEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; 
+            var selectedEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]; 
             Instantiate(selectedEnemyPrefab, spawnPoint.position, Quaternion.identity);
         }
     }
