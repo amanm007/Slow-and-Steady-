@@ -32,18 +32,20 @@ public class PauseManager : MonoBehaviour
     public void ResumeGame()
     {
         Cursor.visible = false;
-        Debug.Log("resume");
         transitionAnim.SetTrigger("End");
         Time.timeScale = 1f;
     }
 
     public void MainMenu()
     {
+        Time.timeScale = 1f;
+        //transitionAnim.SetTrigger("End");
         SceneController.instance.NextLevel("Main Menu");
     }
 
     public void Quit()
     {
+        Time.timeScale = 1f;
         SaveSystem.instance.SaveData();
         Application.Quit();
     }

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SlowMotionAbility : MonoBehaviour
 {
+    public static SlowMotionAbility instance;
+
     public float slowMotionFactor = 0.2f;
     public float slowMotionDuration = 5f;
     public Camera playerCamera;
@@ -18,13 +20,23 @@ public class SlowMotionAbility : MonoBehaviour
     public Image energyBar;
     public float maxEnergy = 100f;
     public float energyDepletionRate = 20f; // energy depletion  per second when slow motion is active
-    public float energyRecoveryRate = 10f; //  energy recovery per second when slow motion is not active
+    public float energyRecoveryRate; //  energy recovery per second when slow motion is not active
     private float currentEnergy;
 
     private PlayerAimWeapon playerAimWeapon;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
+        energyRecoveryRate = PlayerPrefs.GetFloat("recharge");
+        energyRecoveryRate = 10f;
 
         if (!playerCamera) playerCamera = Camera.main;
 
@@ -39,7 +51,6 @@ public class SlowMotionAbility : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(1) && !isSlowMotionActive && currentEnergy > 0)
         {
             ActivateSlowMotion();
@@ -97,7 +108,11 @@ public class SlowMotionAbility : MonoBehaviour
         {
             energyBar.fillAmount = currentEnergy / maxEnergy;
         }
+    }
 
-
+    public void SetRecoveryRate(float upgradeValue)
+    {
+        energyRecoveryRate += upgradeValue;
+        PlayerPrefs.SetFloat("recharge", energyRecoveryRate);
     }
 }

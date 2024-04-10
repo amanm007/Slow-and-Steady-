@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,35 +12,44 @@ public class UpgradeManager : MonoBehaviour
     private string emptyText = " ";
     private string initialTitle, initialInfo, initialCost;
 
+/*    [Header("Upgrade Buttons")]
+    [SerializeField] private Button healthButton;
+    [SerializeField] private GameObject rechargeButton;
+    [SerializeField] private GameObject speedButton;*/
+
+
     [Header("Titles")]
     [SerializeField] private string health_title;
     [SerializeField] private string recharge_title;
-    [SerializeField] private string ammo_title;
+    [SerializeField] private string speed_title;
 
     [Header("Info")]
     [SerializeField] private string health_info;
     [SerializeField] private string recharge_info;
-    [SerializeField] private string ammo_info;
+    [SerializeField] private string speed_info;
 
     [Header("Value")]
-    [SerializeField] private float health_upgrade_value;
-    [SerializeField] private float recharge_upgrade_value;
-    [SerializeField] private float ammo_upgrade_value;
+    private float health_upgrade_value;
+    private float recharge_upgrade_value;
+    private float speed_upgrade_value;
 
     [Header("Cost")]
-    [SerializeField] private float health_cost;
-    [SerializeField] private float recharge_cost;
-    [SerializeField] private float ammo_cost;
+    private float healthCost;
+    private float rechargeCost;
+    private float speedCost;
 
     [SerializeField] private TMP_Text title, info, cost;
 
-    private int health_upgrade_level, recharge_upgrade_level, ammo_upgrade_level;
+    private int health_upgrade_level, recharge_upgrade_level, speed_upgrade_level;
+
+    private bool healthUpgradeSelected, rechargeUpgradeSelected, speedUpgradeSelected;
    
 
     private int upgradeCost;
     private string insufficientFunds = "insufficient funds";
     private string upgradePurchased = "enjoy the new upgrade";
     private string selectMessage = "please select an upgrade";
+    private string upgradeState = "maximum upgrades purchased";
 
     [SerializeField] private GameObject buy;
 
@@ -54,11 +64,29 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
+        
         title.text = emptyText;
         info.text = selectMessage;
         cost.text = emptyText;
         buy.SetActive(false);
 
+        health_upgrade_value = 1f;
+        recharge_upgrade_value = 2f;
+        speed_upgrade_value = 1f;
+
+        healthCost = 150f;
+        rechargeCost = 300f;
+        speedCost = 500f;
+
+        healthUpgradeSelected = false;
+        rechargeUpgradeSelected = false;
+        speedUpgradeSelected = false;
+
+    }
+
+    private void Update()
+    {
+        CheckUpgradeSelected();
     }
 
     public void OpenMenu()
@@ -86,27 +114,30 @@ public class UpgradeManager : MonoBehaviour
     {
         buy.SetActive(true);
         title.text = health_title;
-        info.text = health_info + health_upgrade_value.ToString() + "%";
-        cost.text = health_cost.ToString();
-        upgradeCost = (int)health_cost;
+        info.text = health_info + health_upgrade_value.ToString();
+        cost.text = healthCost.ToString();
+        upgradeCost = (int)healthCost;
+        healthUpgradeSelected = true;
     }
 
     public void RechargeUpgrade()
     {
         buy.SetActive(true);
         title.text = recharge_title;
-        info.text = recharge_info + recharge_upgrade_value.ToString() + " seconds";
-        cost.text = recharge_cost.ToString();
-        upgradeCost = (int)recharge_cost;
+        info.text = recharge_info + recharge_upgrade_value.ToString() + "% faster";
+        cost.text = rechargeCost.ToString();
+        upgradeCost = (int)rechargeCost;
+        rechargeUpgradeSelected = true;
     }
 
-    public void AmmoUpgrade()
+    public void SpeedUpgrade()
     {
         buy.SetActive(true);
-        title.text = ammo_title;
-        info.text = ammo_info + ammo_upgrade_value.ToString() + " rounds";
-        cost.text = ammo_cost.ToString();
-        upgradeCost = (int)ammo_cost;
+        title.text = speed_title;
+        info.text = speed_info + speed_upgrade_value.ToString();
+        cost.text = speedCost.ToString();
+        upgradeCost = (int)speedCost;
+        speedUpgradeSelected = true;
     }
 
     public void BuyUpgrade()
@@ -128,51 +159,49 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
+    private void CheckUpgradeSelected()
+    {
+        if (healthUpgradeSelected)
+        {
+            rechargeUpgradeSelected = false;
+            speedUpgradeSelected = false;
+        }
+        else if (rechargeUpgradeSelected)
+        {
+            healthUpgradeSelected = false;
+            speedUpgradeSelected = false;
+        }
+        else if (speedUpgradeSelected)
+        {
+            healthUpgradeSelected = false;
+            rechargeUpgradeSelected = false;
+        }
+        else
+        {
+            healthUpgradeSelected = false;
+            rechargeUpgradeSelected = false;
+            speedUpgradeSelected = false;
+        }
+    }
+
     private void CheckUpgradeLevel()
     {
-        //health
-        if(upgradeCost == health_cost)
+        if (healthUpgradeSelected == true)
         {
-            if (health_upgrade_level == 0)
-            {
-                Debug.Log("health lvl 1");
-                health_upgrade_level++;
-                health_upgrade_value += health_upgrade_value * 0.25f;
-                health_cost += health_cost * 2;
-            }
-            else if (health_upgrade_level == 1)
-            {
-                Debug.Log("health lvl 2");
-                health_upgrade_level++;
-                health_upgrade_value += health_upgrade_value * 0.25f;
-                health_cost += health_cost * 2;
-            }
-            else if (health_upgrade_level == 2)
-            {
-                //health_upgrade++;
-                health_cost += health_cost * 2;
-            }
+            PlayerHealth.instance.SetMaxHealth(health_upgrade_value);
         }
 
         //recharge 
-        else if (upgradeCost == recharge_cost)
+        if (rechargeUpgradeSelected == true)
         {
-            if (recharge_upgrade_level == 0)
+            if (recharge_upgrade_level < 5)
             {
                 recharge_upgrade_level++;
-                recharge_upgrade_value += recharge_upgrade_value * 0.25f;
-                recharge_cost += recharge_cost * 0.25f;
+                SlowMotionAbility.instance.SetRecoveryRate(recharge_upgrade_value);
             }
-            else if (recharge_upgrade_level == 1)
+            else
             {
-                recharge_upgrade_level++;
-                recharge_upgrade_value += recharge_upgrade_value * 0.25f;
-                recharge_cost += recharge_cost * 0.25f;
-            }
-            else if (recharge_upgrade_level == 2)
-            {
-                //health_upgrade++;
-                recharge_cost += recharge_cost * 0.25f;
+                StartCoroutine(ShowStateMessage());
             }
         }
     }
@@ -181,6 +210,19 @@ public class UpgradeManager : MonoBehaviour
         buy.SetActive(false);
         title.text = emptyText;
         info.text = insufficientFunds;
+        cost.text = emptyText;
+        yield return new WaitForSeconds(2f);
+        title.text = initialTitle;
+        info.text = initialInfo;
+        cost.text = initialCost;
+        buy.SetActive(true);
+    }
+
+    private IEnumerator ShowStateMessage()
+    {
+        buy.SetActive(false);
+        title.text = emptyText;
+        info.text = upgradeState;
         cost.text = emptyText;
         yield return new WaitForSeconds(2f);
         title.text = initialTitle;
