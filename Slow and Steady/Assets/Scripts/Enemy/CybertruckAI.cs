@@ -5,6 +5,7 @@ public class CybertruckBossAI : MonoBehaviour
 {
     public Transform target;
     public GameObject projectilePrefab;
+    public GameObject trigger;
     public List<GameObject> enemyPrefabs;
     public Transform[] spawnPoints; 
     public Transform[] headlightPositions; 
@@ -23,6 +24,7 @@ public class CybertruckBossAI : MonoBehaviour
     public int enemiesToSpawnStage2 = 3;
     public int enemiesToSpawnStage3 = 5;
     private bool shouldSpawnEnemies = true;
+    private Animator animator;
 
     private enum BossState { Stage1, Stage2, Stage3, Dead }
     private BossState currentState = BossState.Stage1;
@@ -33,6 +35,8 @@ public class CybertruckBossAI : MonoBehaviour
         shootingTimer = shootingCooldown;
         spawnTimer = spawnCooldown;
         enemyHealth = GetComponent<EnemyHealth>();
+        animator = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -86,14 +90,16 @@ public class CybertruckBossAI : MonoBehaviour
         currentState = BossState.Stage2;
         shootingCooldown *= 1.5f;
         spawnCooldown = 2f;
-        shouldSpawnEnemies = true; 
+        shouldSpawnEnemies = true;
+      //  animator.SetTrigger("stage1");
     }
 
     void EnterStage3()
     {
         currentState = BossState.Stage3;
         spawnCooldown = 1f;
-        shouldSpawnEnemies = true; 
+        shouldSpawnEnemies = true;
+        animator.SetTrigger("stage2");
     }
 
     void EnterStageDead()

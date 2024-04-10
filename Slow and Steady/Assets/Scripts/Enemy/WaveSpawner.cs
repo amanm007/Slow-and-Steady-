@@ -114,29 +114,35 @@ public class WaveSpawner : MonoBehaviour
         switch (currWave)
         {
             case 0:
-                AddEnemiesToSpawn(enemies[0].enemyPrefab, 5); // 2 enemies of type 0
-                AddEnemiesToSpawn(enemies[1].enemyPrefab, 5);
-                AddEnemiesToSpawn(enemies[2].enemyPrefab, 1);
+                AddEnemiesToSpawn(enemies[0].enemyPrefab, 8); // 2 enemies of type 0
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[2].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[4].enemyPrefab, 1);
 
                 break;
             case 1:
-                AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
-                AddEnemiesToSpawn(enemies[1].enemyPrefab, 5); // 2 enemies of type 1
+                AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
                 AddEnemiesToSpawn(enemies[2].enemyPrefab, 4);
-                AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
+                AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
 
                 break;
-/*            case 2:
+            case 2:
                 // Mix of all enemy types
                 AddEnemiesToSpawn(enemies[0].enemyPrefab, 6);
-                AddEnemiesToSpawn(enemies[1].enemyPrefab, 6);
-                AddEnemiesToSpawn(enemies[2].enemyPrefab, 8);
-                AddEnemiesToSpawn(enemies[3].enemyPrefab, 4);
-                break;*/
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
+                AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
+                AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
+                break;
 
             case 3:
-                AddEnemiesToSpawn(enemies[0].enemyPrefab, 1);
-                AddEnemiesToSpawn(enemies[1].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[0].enemyPrefab, 8);
+                AddEnemiesToSpawn(enemies[1].enemyPrefab, 4); // 2 enemies of type 1
+                AddEnemiesToSpawn(enemies[2].enemyPrefab, 6);
+                AddEnemiesToSpawn(enemies[3].enemyPrefab, 2);
+                AddEnemiesToSpawn(enemies[4].enemyPrefab, 2);
                 break;
             default:
                 Debug.Log("Undefined wave number.");
