@@ -520,11 +520,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingRange: 100
-  shootingLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   tracerMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  shootingCooldown: 0.35
+  shootingCooldown: 0.5
+  aimedShootingCooldown: 0.05
+  reloadBar: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!114 &5864820739823749430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +541,7 @@ MonoBehaviour:
   maxHealth: 50
   healthbar: {fileID: 0}
   spriteRenderer: {fileID: 399455457788135632}
+  audioManager: {fileID: 0}
 --- !u!114 &615554637232757844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +559,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   zoomedSize: 9
   zoomSpeed: 10
+  isSlowMotionActive: 0
   energyBar: {fileID: 0}
   maxEnergy: 100
   energyDepletionRate: 20

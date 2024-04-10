@@ -95,7 +95,10 @@ public class WaveSpawner : MonoBehaviour
         if (currWave < 2)
         {
             waveAnim.SetTrigger("Start");
-            audioManager.PlaySFX(audioManager.newWave, 0.2f);
+            if (currWave != 0)
+            {
+                audioManager.PlaySFX(audioManager.newWave, 0.2f);
+            }
         }
 
         GenerateWave();

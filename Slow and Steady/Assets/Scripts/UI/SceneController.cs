@@ -12,6 +12,7 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     [SerializeField] private Animator transitionAnim;
     public bool levelZeroComplete;
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class SceneController : MonoBehaviour
             instance = this;
         }
         levelZeroComplete = false;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     public void NextLevel(string level)
@@ -33,6 +35,7 @@ public class SceneController : MonoBehaviour
     {
         Cursor.visible = false;
         transitionAnim.SetTrigger("End");
+        audioManager.PlaySFX(audioManager.transitionOut, 0.3f);
         yield return new WaitForSeconds(2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level);
         while (!asyncLoad.isDone)
@@ -40,6 +43,7 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         transitionAnim.SetTrigger("Start");
+        audioManager.PlaySFX(audioManager.transitionIn, 0.3f);
     }
 
     private void CheckLevelCompletetion(string level) 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3082664762200479761}
   - component: {fileID: 8496565764754940871}
   - component: {fileID: 5638249645721984424}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Extraction Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,3 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extractionTimer: {fileID: 0}
   extractBar: {fileID: 0}
+  levelOneComplete: 0
+  levelTwoComplete: 0
