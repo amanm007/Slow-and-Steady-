@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 200
+  speed: 300
   shootSpeed: 20
   nextWaypointDistance: 3
   detectionRange: 500
@@ -165,6 +165,7 @@ MonoBehaviour:
   shootPoint: {fileID: 6410218087721475563}
   shootingRange: 50
   shootingCooldown: 1.5
+  audioManager: {fileID: 0}
 --- !u!50 &118166707093595948
 Rigidbody2D:
   serializedVersion: 4
@@ -210,6 +211,7 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   damageDuration: 0.2
+  audioManager: {fileID: 0}
   value: 10
   damageSprite: {fileID: 186065464, guid: 219bf2cf9020d5443b709701ef0dd24d, type: 3}
 --- !u!212 &3060226913619231059

@@ -183,7 +183,7 @@ public class WashingMachineAI : MonoBehaviour
         // Hide aim line
         aimLineRenderer.enabled = false;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             ShootProjectile(lockedPosition);
             yield return new WaitForSeconds(0.2f); // Wait for 0.2 seconds between shots
@@ -217,7 +217,7 @@ public class WashingMachineAI : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Destroy(projectile, .3f); 
+        Destroy(projectile, 3f); 
     }
 
 }
