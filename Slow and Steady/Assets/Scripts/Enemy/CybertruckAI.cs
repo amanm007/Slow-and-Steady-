@@ -40,6 +40,8 @@ public class CybertruckBossAI : MonoBehaviour
     private enum BossState { Roaming, Chasing, Stage1, Stage2, Stage3, Dead }
     private BossState currentState = BossState.Roaming;
 
+    private int addToEnemyCount;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -249,11 +251,12 @@ public class CybertruckBossAI : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            if (spawnPoints.Length == 0) return; 
-
+            if (spawnPoints.Length == 0) return;
+            addToEnemyCount++;
             var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; 
             var selectedEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]; 
             Instantiate(selectedEnemyPrefab, spawnPoint.position, Quaternion.identity);
+            EnemyManager.instance.SetCount(addToEnemyCount);
         }
     }
     public void TakeDamage(int damage)

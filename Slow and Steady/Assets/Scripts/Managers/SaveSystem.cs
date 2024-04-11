@@ -23,6 +23,7 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.SetFloat("maxHealth", PlayerHealth.instance.maxHealth);
         PlayerPrefs.SetFloat("recharge", SlowMotionAbility.instance.energyRecoveryRate);
         PlayerPrefs.SetFloat("speed", PlayerMovement.instance.SPEED);
+        PlayerPrefs.SetString("camo", SniperCamoManager.instance.currentCamoEquipped);
     }
 
     public void LoadData()
@@ -32,6 +33,7 @@ public class SaveSystem : MonoBehaviour
         PlayerHealth.instance.maxHealth = PlayerPrefs.GetFloat("maxHealth");
         SlowMotionAbility.instance.energyRecoveryRate = PlayerPrefs.GetFloat("recharge");
         PlayerMovement.instance.SPEED = PlayerPrefs.GetFloat("speed");
+        SniperCamoManager.instance.currentCamoEquipped = PlayerPrefs.GetString("camo");
     }
 
     public void DeleteData()

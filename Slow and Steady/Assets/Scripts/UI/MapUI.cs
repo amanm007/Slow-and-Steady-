@@ -24,9 +24,9 @@ public class MapUI : MonoBehaviour
     [Header("Menu Info")]
     [SerializeField] private string levelOne_title;
     [SerializeField] private string levelTwo_title;
+    [SerializeField] private string levelThree_title;
     [SerializeField] private string levelOne_info;
     [SerializeField] private string levelTwo_info;
-    [SerializeField] private string levelThree_title;
     [SerializeField] private string levelThree_info;
     [SerializeField] private TMP_Text title, info;
 

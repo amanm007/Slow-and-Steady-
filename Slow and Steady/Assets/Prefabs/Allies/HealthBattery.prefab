@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 29
+  m_SortingOrder: 9
   m_Sprite: {fileID: -243918086, guid: 3229126c05fae584ba23291e8c59c2d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b11463f048df774892648616d3bd7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBoost: 2
+  healthBoost: 4

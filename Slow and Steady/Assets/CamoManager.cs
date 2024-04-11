@@ -38,6 +38,7 @@ public class CamoManager : MonoBehaviour
     [SerializeField] private Sprite greenSniper, redSniper, pinkSniper, goldSniper, invisSniper;
     [SerializeField] private Image sniperCamo;
     private bool greenSelected, redSelected, pinkSelected, goldSelected;
+    public bool greenEquipped, redEquipped, pinkEquipped, goldEquipped;
 
 
     private int camoCost;
@@ -68,6 +69,12 @@ public class CamoManager : MonoBehaviour
         redSelected = false;
         pinkSelected = false;
         goldSelected = false;
+
+        greenEquipped = false;
+        redEquipped = false;
+        pinkEquipped = false;
+        goldEquipped = false;
+
         sniperCamo = GameObject.FindGameObjectWithTag("Camo").GetComponent<Image>();
         sniperCamo.sprite = invisSniper;
     }
@@ -206,23 +213,24 @@ public class CamoManager : MonoBehaviour
     {
         if (greenSelected == true)
         {
-
+            greenEquipped = true;
+            StartCoroutine(ShowStateMessage());
         }
 
         if (redSelected == true)
         {
-            StartCoroutine(ShowStateMessage());
-            
+            redEquipped = true;
+            StartCoroutine(ShowStateMessage());  
         }
         if (pinkSelected == true)
         {
+            pinkEquipped = true;
             StartCoroutine(ShowStateMessage());
-
         }
         if (goldSelected == true)
         {
+            goldEquipped = true;
             StartCoroutine(ShowStateMessage());
-
         }
     }
     private IEnumerator ShowErrorMessage()

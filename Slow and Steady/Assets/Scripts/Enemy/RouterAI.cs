@@ -26,6 +26,8 @@ public class RouterAI : MonoBehaviour
     private State state;
 
     private SpriteRenderer spriteRenderer;
+
+    private int addToEnemyCount;
     private enum State
     {
         Roaming,
@@ -131,12 +133,14 @@ public class RouterAI : MonoBehaviour
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
+            addToEnemyCount++;
             // Choose a random enemy prefab to spawn
             GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
             // Spawn the enemy near the router's position
             Vector3 spawnPos = transform.position + (Random.insideUnitSphere * 4f); // 2f is the radius around the Router
             spawnPos.z = 0; // Ensure it spawns on the same plane
             Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            EnemyManager.instance.SetCount(addToEnemyCount);
         }
     }
 

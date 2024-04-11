@@ -88,7 +88,7 @@ public class WaveSpawner : MonoBehaviour
     void NextWave()
     {
         enemiesInWave = 0;
-        EnemyManager.instance.SetCount(enemiesInWave);
+        //EnemyManager.instance.SetCount(enemiesInWave);
         currWave++; // Increase the wave index
         if (currWave >= enemies.Count) // If all waves are completed, restart or stop spawning
         {

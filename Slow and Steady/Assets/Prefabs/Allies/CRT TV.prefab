@@ -495,6 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SPEED: 15
+  pauseMovement: 0
 --- !u!114 &3435906226881034977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +524,6 @@ MonoBehaviour:
   tracerMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   shootingCooldown: 0.55
   aimedShootingCooldown: 0.05
-  reloadBar: {fileID: 0}
   audioManager: {fileID: 0}
 --- !u!114 &5864820739823749430
 MonoBehaviour:
@@ -573,6 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5869038669629851012}
   - component: {fileID: 9186837397734256144}
+  - component: {fileID: 5461088304130722533}
   m_Layer: 8
   m_Name: Sniper
   m_TagString: Untagged
@@ -647,6 +648,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &5461088304130722533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711831027827449616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18dfac4bff4d224399050204f116dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  greenCamo: {fileID: 21300000, guid: 2da3832b7dd3ffa4db0279252be74da6, type: 3}
+  redCamo: {fileID: 21300000, guid: 373c4e1ff28f7aa44b92007bd7f59a7c, type: 3}
+  pinkCamo: {fileID: 21300000, guid: 0d32dc4ef17efb649a33d5c6d5edcfab, type: 3}
+  goldCamo: {fileID: 21300000, guid: a1042b8479aeed44ca3119ca2e57d497, type: 3}
+  noCamo: {fileID: 21300000, guid: 0a389a0c19a81d74db660e062f288a50, type: 3}
 --- !u!1 &8227241731187298221
 GameObject:
   m_ObjectHideFlags: 0
