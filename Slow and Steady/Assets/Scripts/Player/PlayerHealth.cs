@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
 
-    [HideInInspector] public float maxHealth = 10f;
+    [HideInInspector] public float maxHealth = 20f;
     [HideInInspector] public float health;
 
 
