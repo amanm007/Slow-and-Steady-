@@ -10,11 +10,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public TMP_Text objectiveDisplay;
 
     private string factoryObjective = "Go to the Shooting Range";
-    private string shootingRangeObjective = "Use your sniper to take down the enemies";
+    private string shootingRangeObjective = "Practice your skills and head back to the HUB";
     private string mapSelectObjective = "Select a level on the map";
     private string levelOneObjective = "Kill all the enemies and travel to the next zone";
     private string waveObjective = "Survive 3 Waves";
     private string extractionObjective = "Go to the Extraction Zone";
+    private string warehouseObjective = "Enter the warehouse";
     [HideInInspector] public string whileExtractingObjective = "Wait to be Extracted";
     private string noObjective = "No current objectives";
     [HideInInspector]public int playerLevelCompletion;
@@ -43,7 +44,6 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         UpdateObjective();
-        Debug.Log("Player Level = " + playerLevelCompletion);
     }
 
     private void UpdateObjective()
@@ -66,6 +66,10 @@ public class LevelManager : MonoBehaviour
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Silicon Valley"))
         {
             objectiveDisplay.text = levelOneObjective;
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Outside Warehouse"))
+        {
+            objectiveDisplay.text = warehouseObjective;
         }
 
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Hoard City") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Best Buy2") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Inside Warehouse")) {

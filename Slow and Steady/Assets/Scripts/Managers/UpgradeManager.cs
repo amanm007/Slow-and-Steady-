@@ -163,7 +163,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void CheckUpgradeSelected()
     {
-        Debug.Log(healthUpgradeSelected + "_" + rechargeUpgradeSelected + "_" + speedUpgradeSelected);
         if (healthUpgradeSelected)
         {
             rechargeUpgradeSelected = false;

@@ -23,6 +23,7 @@ public class SniperCamoManager : MonoBehaviour
     {
         camoEquipped = GetComponent<SpriteRenderer>();
         currentCamoEquipped = PlayerPrefs.GetString("camo");
+        currentCamoEquipped = "none";
     }
 
     // Update is called once per frame
@@ -49,6 +50,10 @@ public class SniperCamoManager : MonoBehaviour
         {
             currentCamoEquipped = "gold";
         }
+        else
+        {
+            currentCamoEquipped = "none";
+        }
         PlayerPrefs.SetString("camo", currentCamoEquipped);
 
         SetSniperCamo();
@@ -72,7 +77,13 @@ public class SniperCamoManager : MonoBehaviour
         {
             camoEquipped.sprite = goldCamo;
         }
-
-        Debug.Log(currentCamoEquipped);
+        else if (currentCamoEquipped == "none")
+        {
+            camoEquipped.sprite = noCamo;
+        }
+        else
+        {
+            return;
+        }
     }
 }

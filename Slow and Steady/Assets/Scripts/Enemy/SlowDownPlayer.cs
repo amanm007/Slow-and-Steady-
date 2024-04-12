@@ -34,6 +34,7 @@ public class SlowDownPlayer : MonoBehaviour
 
             if (isPlayerWithinRange)
             {
+                Debug.Log("slow");
                 playerMovementScript.ModifySpeed(0.5f);
                 if (damageCoroutine == null)
                 {
@@ -42,6 +43,7 @@ public class SlowDownPlayer : MonoBehaviour
             }
             else
             {
+                
                 playerMovementScript.ModifySpeed(1f);
                 if (damageCoroutine != null)
                 {

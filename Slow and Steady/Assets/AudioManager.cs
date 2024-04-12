@@ -51,7 +51,9 @@ public class AudioManager : MonoBehaviour
     }
     public void Update()
     {
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu") && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Intro Cutscene"))
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu")
+            && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Intro Cutscene")
+            && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
         {
             if (GameObject.Find("CRT TV").GetComponent<SlowMotionAbility>().isSlowMotionActive)
             {

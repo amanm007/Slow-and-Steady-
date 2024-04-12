@@ -57,7 +57,6 @@ public class PlayerHealth : MonoBehaviour
         }
 
         HealthBarFiller();
-        Debug.Log(maxHealth);
 
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Factory"))
         {

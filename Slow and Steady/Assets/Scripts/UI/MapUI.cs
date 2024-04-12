@@ -37,6 +37,10 @@ public class MapUI : MonoBehaviour
 
     private string levelSelection;
 
+    [SerializeField] private GameObject eToInteract;
+    private bool canInteract, hasInteracted;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -47,16 +51,42 @@ public class MapUI : MonoBehaviour
         cityIcon.SetActive(false); bestbuyIcon.SetActive(false); warehouseIcon.SetActive(false);
     }
 
-    private void Update()
+    private void Start()
     {
-        CheckLevelCompletion();
+        eToInteract.SetActive(false);
+        canInteract = false;
+        hasInteracted = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Cursor.visible = true;
-        mapSelectAnim.SetTrigger("Start");
-        PlayerMovement.instance.pauseMovement = true;
+        eToInteract.SetActive(true);
+        canInteract = true;
+    }
+
+    private void Update()
+    {
+        if (canInteract == true && Input.GetKeyDown(KeyCode.E) && hasInteracted == false)
+        {
+            Debug.Log("e");
+
+            Cursor.visible = true;
+            mapSelectAnim.SetTrigger("Start");
+            PlayerMovement.instance.pauseMovement = true;
+
+            hasInteracted = true;
+            canInteract = false;
+        }
+
+        CheckLevelCompletion();
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        eToInteract.SetActive(false);
+        hasInteracted = false;
+        canInteract = false;
     }
 
     private void CheckLevelCompletion()
@@ -120,6 +150,8 @@ public class MapUI : MonoBehaviour
         Cursor.visible = false;
         mapSelectAnim.SetTrigger("End");
         PlayerMovement.instance.pauseMovement = false;
+        hasInteracted = false;
+        canInteract = true;
     }
     public void PlayLevel()
     {
